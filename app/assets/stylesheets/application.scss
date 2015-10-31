@@ -17,7 +17,7 @@
 @import "bootstrap";
 
 body {
-	background: #E9E9E9;
+	
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -25,7 +25,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 nav {
-	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.0);
 	.navbar-brand {
 		a {
 			color: #BD1E23;
@@ -34,7 +34,13 @@ nav {
 				text-decoration: none;
 			}
 		}
+
+
 	}
+}
+
+nav.navabar.navbar-default {
+	background: none;
 }
 
 #pins {
