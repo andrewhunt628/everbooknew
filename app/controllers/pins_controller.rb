@@ -4,13 +4,14 @@ class PinsController < ApplicationController
 
 	def index
 		@pins = Pin.all.order("created_at DESC")
+		render layout: 'index'
 	end
 
 	def show
 	end
 
 	def new
-		@pin = current_user.pins.build 
+		@pin = current_user.pins.build
 	end
 
 	def edit
