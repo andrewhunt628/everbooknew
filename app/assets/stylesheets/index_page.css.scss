@@ -1,8 +1,32 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-nav.navabar.navbar-everbook {
+nav.navbar.navbar-everbook {
   background: white;
   box-shadow: 0 0 10px black;
   height: 80px;
+  border-radius: 0px;
+  padding: 20px;
+
+  .navbar-brand {
+    height: 40px;
+    padding: 10px;
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 20px;
+    a {
+      color: #f05323;
+    }
+  }
+  .navbar-form {
+    margin: 0px;
+    .form-control{
+      height: 40px;
+      width: 540px;
+    }
+    .input-group-addon{
+      height: 40px;
+      width: 40px;
+    }
+  }
 }
