@@ -1,7 +1,56 @@
 #pins.transitions-enabled
+  .box.wrapper
+    .panel.panel-default
+      .panel-content
+        .panel-body
+          .btn.btn-block.btn-orange UPLOAD YOUR IMAGE
+          .input-group.tag-filter
+            %input.form-control{type: 'text'}
+            %span.input-group-addon.btn.btn-black
+              %span.fa.fa-caret-down
+    .panel.panel-default
+      .panel-content
+        .panel-body
+          %h3 Hashtags
+          .hashtags-container
+            %div.hashtag
+              ="#summer2016vacation"
+              %span.close ×
+            %div.hashtag
+              ="#summer2016"
+              %span.close ×
+            %div.hashtag
+              ="#use"
+              %span.close ×
+            %div.hashtag
+              ="#summerfamily"
+              %span.close ×
+    .panel.panel-default
+      .panel-content
+        .panel-body
+          .pull-right.orange.help view all
+          %h3 Friends
+          - (1..56).each do |friend|
+            %div.friend
   - @pins.each do |pin|
     .box.panel.panel-default
-      = link_to (image_tag pin.image.url(:medium)), pin
-      .panel-body
-        Tags: 
-        = raw pin.tag_list.map { |t| link_to t, tag_path(t) }.join(', ')
+      .panel-content
+        .photo-wrap
+          = link_to (image_tag pin.image.url(:medium), class: "image"), pin
+        .panel-body
+          .description
+            = raw pin.description
+          .hashtags
+            = raw pin.tag_list.map { |t| link_to "##{t}", tag_path(t) }.join('  ')
+          .friends
+            .icon.first
+            .icon.second
+            .icon.other
+        .footer
+          %span.pull-right
+            %span.fa.fa-comments-o
+            23
+            %span.orange (+3)
+          %a
+            %span.avatar-mini
+            %span.author Robin M. Rivers

@@ -4,15 +4,19 @@
     %form.navbar-form.navbar-left{role: 'search'}
       .form-group
         .input-group
-          %span.input-group-addon.btn e
+          %span.input-group-addon.btn
+            %span.orange e
           %input.form-control{type: 'text', placeholder: 'Search'}
-          %span.input-group-addon.btn q
-    - if user_signed_in?
-      %ul.nav.navbar-nav.navbar-right
-        %li= link_to "EXPLORE", '#'
-        %li= link_to "SHOP", '#'
-        %li= link_to "INVITE", '#'
-    - else
-      %ul.nav.navbar-nav.navbar-right
-        %li= link_to "Sign Up", new_user_registration_path
-        %li= link_to "Sign In", new_user_session_path
+          %span.input-group-addon.btn
+            %span.fa.fa-search.orange
+    %ul.nav.navbar-nav.navbar-left
+      %li= link_to "EXPLORE", '#'
+      %li= link_to "SHOP", '#'
+      %li= link_to "INVITE", '#', class: 'orange'
+    %ul.nav.navbar-nav.navbar-right
+      %li.user-menu
+        %a
+          %span.avatar-mini
+          %span.welcome Welcome John
+          %span.caret
+
