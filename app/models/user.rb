@@ -8,6 +8,12 @@ class User < ActiveRecord::Base
   has_many :family_bonds, foreign_key: 'family_member_one_id'
   has_many :family, through: :family_bonds, source: :family_member_two
 
+  def self.not_from_family(user)
+    family_ids = user.family_ids
+    family_ids.push(user.id)
+    all.where.not(id: family_ids)
+  end
+
   def add_family_member(user)
     family_bonds.create! family_member_two: user
   end

@@ -1,0 +1,26 @@
+%h1
+  Adding new member family
+%hr
+= form_for @family_bond do |f|
+  - if @family_bond.errors.any?
+    #errors2
+      %h2
+        = pluralize(@family_bond.errors.count, "error")
+        prevented this from saving
+      %ul
+        - @family_bond.errors.full_messages.each do |msg|
+          %li = msg
+
+  .form-group
+    .row
+      = f.label :family_member_two_id, class: 'col-sm-2 control-label' do
+        Family member
+      .col-sm-3
+        = f.select :family_member_two_id, options_from_collection_for_select(User.not_from_family(current_user), 'id', 'email'), {prompt: 'Find your family'}, class: 'form-control'
+
+  .form-group
+    .row
+      .col-sm-3.col-sm-offset-2
+        .btn-group.actions.pull-right
+          = f.submit "Save", class: 'btn btn-primary'
+          = link_to 'Cancel', :back, class: 'btn btn-default'

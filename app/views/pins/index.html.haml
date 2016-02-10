@@ -1,9 +1,7 @@
 #pins.transitions-enabled
-	- @pins.each do |pin|
-		.box.panel.panel-default
-			= link_to (image_tag pin.image.url(:medium)), pin
-			//.panel-body
-			//	%h2= link_to pin.title, pin
-			//	%p.user
-			//	Subbmited by
-			//	= pin.user.email
+  - @pins.each do |pin|
+    .box.panel.panel-default
+      = link_to (image_tag pin.image.url(:medium)), pin
+      .panel-body
+        Tags: 
+        = raw pin.tag_list.map { |t| link_to t, tag_path(t) }.join(', ')
