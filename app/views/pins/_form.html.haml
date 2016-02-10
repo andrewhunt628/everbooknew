@@ -1,20 +1,58 @@
-= simple_form_for @pin, html: { multipart: true } do |f|
- - if @pin.errors.any?
-  #errors
-   %h2
-    = pluralize(@pin.errors.count, "error")
-    prevented this Pin from saving
-    %ul
-     - @pin.errors.full_messages.each do |msg|
-      %li = msg
-
- .form-group
-  = f.input :image, input_html: { class: 'form-control' } 
+= form_for @pin, html: { multipart: true } do |f|
+  - if @pin.errors.any?
+    #errors
+      %h2
+        = pluralize(@pin.errors.count, "error")
+        prevented this Pin from saving
+      %ul
+        - @pin.errors.full_messages.each do |msg|
+          %li = msg
 
   .form-group
-  = f.input :title, input_html: { class: 'form-control' } 
+    .row
+      = f.label :image, class: 'col-sm-2 control-label' do
+        Image
+      .col-sm-5
+        = f.file_field :image, { class: 'form-control' }
+  .form-group
+    .row
+      = f.label :title, class: 'col-sm-2 control-label' do
+        Title
+      .col-sm-5
+        = f.text_field :title, { class: 'form-control' } 
 
- .form-group
-  = f.input :description, input_html: { class: 'form-control' }
+  .form-group
+    .row
+      = f.label :description, class: 'col-sm-2 control-label' do
+        Description
+      .col-sm-5
+        = f.text_area :description, { class: 'form-control' } 
+        
+
+  %hr
+  .form-group
+    .row
+      = f.label :person_ids, class: 'col-sm-2 control-label' do
+        Family
+      .col-sm-5
+        = f.collection_select :person_ids, User.not_from_family(current_user), :id, :email, {propt: 'Family on photo'}, { class: 'form-control', multiple: true } 
   
- = f.button :submit, class: 'btn btn-primary'
+  .form-group
+    .row
+      = f.label :text_marks, class: 'col-sm-2 control-label' do
+        If somebody not in everbook
+      .col-sm-5
+        = f.text_field :text_marks, { class: 'form-control', value: @pin.text_marks.join(", ") }
+        %p.help-block
+          Use ',' for separating persons
+  .form-group
+    .row
+      .alert.alert-info.col-sm-7
+        'Family' and 'If somebody not in everbook' can be joined via js in one field in the future
+  %hr
+  .form-group
+    .row
+      .col-sm-5.col-sm-offset-2
+        .btn-group.actions.pull-right
+          = f.submit "Save", class: 'btn btn-primary'
+          = link_to 'Cancel', :back, class: 'btn btn-default'
