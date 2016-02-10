@@ -14,6 +14,7 @@
         Image
       .col-sm-5
         = f.file_field :image, { class: 'form-control' }
+
   .form-group
     .row
       = f.label :title, class: 'col-sm-2 control-label' do
@@ -28,6 +29,12 @@
       .col-sm-5
         = f.text_area :description, { class: 'form-control' } 
         
+  .form-group
+    .row
+      = f.label :tag_list, class: 'col-sm-2 control-label' do
+        Tags (Separated by commas)
+      .col-sm-5
+        = f.text_field :tag_list, { class: 'form-control' } 
 
   %hr
   .form-group
@@ -40,11 +47,11 @@
   .form-group
     .row
       = f.label :text_marks, class: 'col-sm-2 control-label' do
-        If somebody not in everbook
+        If somebody not in everbook 
       .col-sm-5
         = f.text_field :text_marks, { class: 'form-control', value: @pin.text_marks.join(", ") }
         %p.help-block
-          Use ',' for separating persons
+          (Separated by commas)
   .form-group
     .row
       .alert.alert-info.col-sm-7
