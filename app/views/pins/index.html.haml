@@ -13,25 +13,25 @@
         .panel-body
           %h3 Hashtags
           .hashtags-container
-            %div.hashtag
+            %a.hashtag{href: "#"}
               ="#summer2016vacation"
               %span.close ×
-            %div.hashtag
+            %a.hashtag{href: "#"}
               ="#summer2016"
               %span.close ×
-            %div.hashtag
+            %a.hashtag{href: "#"}
               ="#use"
               %span.close ×
-            %div.hashtag
+            %a.hashtag{href: "#"}
               ="#summerfamily"
               %span.close ×
     .panel.panel-default
       .panel-content
         .panel-body
-          .pull-right.orange.help view all
+          = link_to "view all", family_bonds_path, class: "pull-right orange help"
           %h3 Friends
-          - (1..56).each do |friend|
-            %div.friend
+          - current_user.family.each do |friend|
+            %div.friend{title: friend.email}
   - @pins.each do |pin|
     .box.panel.panel-default
       .panel-content
