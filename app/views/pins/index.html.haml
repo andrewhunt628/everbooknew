@@ -15,8 +15,9 @@
           .hashtags-container
             - @tags.each do |tag|
               .hashtag{href: "#"}
-                = link_to("##{tag}", tag_path(tag.name))
-                %span.close ×
+                = link_to("##{tag}", get_mark_tag_url(tag))
+                = link_to get_unmark_tag_url(tag) do
+                  %span.close ×
     .panel.panel-default
       .panel-content
         .panel-body

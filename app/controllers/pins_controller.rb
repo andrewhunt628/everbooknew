@@ -1,10 +1,11 @@
 class PinsController < ApplicationController
 	before_action :find_pin, only: [:show, :edit, :update, :destroy]
 	before_filter :authenticate_user!
+	helper_method :tags_list
 
 	def index
-		if params[:tag]
-			@pins = current_user.pins.tagged_with(params[:tag])
+		if tags_list.present?
+			@pins = current_user.pins.tagged_with(tags_list.split("/"))
 		else
 			@pins = current_user.pins
 		end
@@ -48,14 +49,18 @@ class PinsController < ApplicationController
 
 	private
 
-	def pin_params
-		@pin_params = params.require(:pin).permit(:title, :description, :image, :text_marks, :tag_list, :person_ids => [])
-		@pin_params[:text_marks] = @pin_params[:text_marks].to_s.split(",").map(&:squish)
-		@pin_params
-	end
+		def tags_list
+			params[:tags_list].to_s.split("/")
+		end
 
-	def find_pin
-		@pin = current_user.pins.find(params[:id])
-	end
+		def pin_params
+			@pin_params = params.require(:pin).permit(:title, :description, :image, :text_marks, :tag_list, :person_ids => [])
+			@pin_params[:text_marks] = @pin_params[:text_marks].to_s.split(",").map(&:squish)
+			@pin_params
+		end
+
+		def find_pin
+			@pin = current_user.pins.find(params[:id])
+		end
 
 end
