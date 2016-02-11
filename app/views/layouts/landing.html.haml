@@ -1,0 +1,95 @@
+%html
+  %body
+    %meta{:charset => "utf-8"}
+    %title Landing Page
+    %meta{:content => "", :name => "description"}
+    %meta{:content => "noindex", :name => "robots"}
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
+
+    = stylesheet_link_tag 'style', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+
+
+
+    .main
+      .design-back
+        .col-sm-12.banner-text.text-center
+          %h1
+            The
+            %span.text-everbook Everbook
+            Shop is here!
+          %h5 Shop the best of Everbook,right from iPhone or Android
+          %img.hidden-lg.phone{:alt => "phone", :src => "/images/phone.png", :title => "phone"}
+      .signup-pane
+        .signup-form
+          .logo.col-sm-12.text-center
+            %h1 Everbook
+          .social.col-sm-12
+            %button.facebook.btn.btn-primary.btn-block
+              %i.fa.fa-facebook
+              Continue with Facebook
+          .divide-line.col-sm-12
+            %p or
+          .form.col-sm-12
+            .form
+              %form#userInfo
+                .form-group
+                  %input.form-control{:placeholder => "Email", :type => "email", :id => 'email_field', required: true}
+                .form-group
+                  %input.form-control{:placeholder => "Create a password", :type => "password", :id => 'password_field', required: true, pattern: ".{8,}", title: "8 characters minimum"}
+              .form-group
+                = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {id: 'signup'}) do |f|
+                  = f.hidden_field :email
+                  = f.hidden_field :password
+                  = f.hidden_field :password_confirmation
+                  = f.button "Sign up", class: 'btn btn-danger btn-block signup-btn'
+
+              .terms.col-sm-12.text-center
+                %h6 Creating an account means you’re okay with Everbook's
+                = succeed "," do
+                  %a{:href => "#"} Terms of Service
+                %a{:href => "#"} Privacy Policy
+              .form-group
+
+                = form_for(resource, as: resource_name, url: session_path(resource_name), html: {id: 'signin'}) do |f|
+                  = f.hidden_field :email
+                  = f.hidden_field :password
+                  = f.hidden_field :remember_me, value: true
+                  = f.button "Log in", class: 'btn btn-default login-btn'
+
+:coffee
+  $("document").ready ->
+
+    $("form#userInfo").validate(
+      rules = 
+        password_field:
+          required: true
+          minlength: 8
+        email_field: 'required'
+      messages = 
+        password_field:
+          required: 'Password is required'
+          minlength: 'Password needs to be at least length 8'
+        email_field: 'Email is requried'
+    )
+    
+    $("form#userInfo").on 'submit', (e) -> e.preventDefault()
+
+    $("form#signin").on 'submit', (e) ->
+      unless $("#userInfo").valid()
+        e.preventDefault()
+        return
+
+      $("form#signin #user_email").val($("#email_field").val())
+      $("form#signin #user_password").val($("#password_field").val())
+
+    $("form#signup").on 'submit', (e) ->
+      unless $("#userInfo").valid()
+        e.preventDefault()
+        return
+      
+      $("form#signup #user_email").val($("#email_field").val())
+      $("form#signup #user_password").val($("#password_field").val())
+      $("form#signup #user_password_confirmation").val($("#password_field").val())
+
+    
