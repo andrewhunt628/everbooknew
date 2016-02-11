@@ -20,21 +20,21 @@
       = f.label :title, class: 'col-sm-2 control-label' do
         Title
       .col-sm-5
-        = f.text_field :title, { class: 'form-control' } 
+        = f.text_field :title, { class: 'form-control' }
 
   .form-group
     .row
       = f.label :description, class: 'col-sm-2 control-label' do
         Description
       .col-sm-5
-        = f.text_area :description, { class: 'form-control' } 
-        
+        = f.text_area :description, { class: 'form-control' }
+
   .form-group
     .row
       = f.label :tag_list, class: 'col-sm-2 control-label' do
         Tags (Separated by commas)
       .col-sm-5
-        = f.text_field :tag_list, { class: 'form-control' } 
+        = f.text_field :tag_list, { class: 'form-control' }
 
   %hr
   .form-group
@@ -42,12 +42,12 @@
       = f.label :person_ids, class: 'col-sm-2 control-label' do
         Family
       .col-sm-5
-        = f.collection_select :person_ids, User.not_from_family(current_user), :id, :email, {propt: 'Family on photo'}, { class: 'form-control', multiple: true } 
-  
+        = f.collection_select :person_ids, current_user.family, :id, :email, {propt: 'Family on photo'}, { class: 'form-control', multiple: true }
+
   .form-group
     .row
       = f.label :text_marks, class: 'col-sm-2 control-label' do
-        If somebody not in everbook 
+        If somebody not in everbook
       .col-sm-5
         = f.text_field :text_marks, { class: 'form-control', value: @pin.text_marks.join(", ") }
         %p.help-block
