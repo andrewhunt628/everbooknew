@@ -8,7 +8,7 @@ class PinsController < ApplicationController
 		else
 			@pins = current_user.pins
 		end
-		@pins = @pins.order("created_at DESC")
+		@pins = @pins.order("pins.created_at DESC")
 		@tags = @pins.tag_counts_on(:tags)
 		render layout: 'index'
 	end
