@@ -3,7 +3,7 @@
     .panel.panel-default
       .panel-content
         .panel-body
-          .btn.btn-block.btn-orange UPLOAD YOUR IMAGE
+          =link_to "UPLOAD YOUR IMAGE", new_pin_path, class: "btn btn-block btn-orange"
           .input-group.tag-filter
             %input.form-control{type: 'text'}
             %span.input-group-addon.btn.btn-black
@@ -13,25 +13,17 @@
         .panel-body
           %h3 Hashtags
           .hashtags-container
-            %a.hashtag{href: "#"}
-              ="#summer2016vacation"
-              %span.close ×
-            %a.hashtag{href: "#"}
-              ="#summer2016"
-              %span.close ×
-            %a.hashtag{href: "#"}
-              ="#use"
-              %span.close ×
-            %a.hashtag{href: "#"}
-              ="#summerfamily"
-              %span.close ×
+            - @tags.each do |tag|
+              .hashtag{href: "#"}
+                = link_to("##{tag}", tag_path(tag.name))
+                %span.close ×
     .panel.panel-default
       .panel-content
         .panel-body
           = link_to "view all", family_bonds_path, class: "pull-right orange help"
           %h3 Friends
           - current_user.family.each do |friend|
-            %div.friend{title: friend.email}
+            = link_to "", user_path(friend), class: "friend", title: "#{friend.name} #{friend.last_name}"
   - @pins.each do |pin|
     .box.panel.panel-default
       .panel-content
@@ -43,14 +35,14 @@
           .hashtags
             = raw pin.tag_list.map { |t| link_to "##{t}", tag_path(t) }.join('  ')
           .friends
-            .icon.first
-            .icon.second
-            .icon.other
+            %a.icon.first{href: "#"}
+            %a.icon.second{href: "#"}
+            %a.icon.other{href: "#"}
         .footer
           %span.pull-right
             %span.fa.fa-comments-o
             23
             %span.orange (+3)
-          %a
+          %a{href: "#"}
             %span.avatar-mini
             %span.author Robin M. Rivers

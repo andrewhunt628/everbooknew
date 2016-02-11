@@ -4,11 +4,12 @@ class PinsController < ApplicationController
 
 	def index
 		if params[:tag]
-			@pins = Pin.tagged_with(params[:tag])
+			@pins = current_user.pins.tagged_with(params[:tag])
 		else
-			@pins = Pin.all
+			@pins = current_user.pins
 		end
 		@pins = @pins.order("created_at DESC")
+		@tags = @pins.tag_counts_on(:tags)
 		render layout: 'index'
 	end
 

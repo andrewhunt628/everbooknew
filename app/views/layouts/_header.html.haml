@@ -15,8 +15,22 @@
       %li= link_to "INVITE", '#', class: 'orange'
     %ul.nav.navbar-nav.navbar-right
       %li.user-menu
-        %a{href: "#"}
+        %a.dropdown-toggle{href: "#", 'data-toggle' => "dropdown", 'aria-haspopup' => "true", 'aria-expanded' => "false"}
           %span.avatar-mini
-          %span.welcome Welcome John
+          %span.welcome Welcome #{current_user.name}
           %span.caret
-
+        %ul.dropdown-menu
+          %li
+            %a{href: "#"}  Upload
+          %li
+            %a{href: "#"}  Edit Profile
+          %li
+            %a{href: "#"}  Change Password
+          %li
+            %a{href: "#"}  Manage Payment Methods
+          %li
+            %a{href: "#"}  Purchase History
+          %li
+            %a{href: "#"}  Settings
+          %li
+            = link_to "Sign Out", destroy_user_session_path, method: :delete

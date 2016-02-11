@@ -59,7 +59,7 @@ nav.navbar.navbar-everbook {
   }
   .navbar-form {
     margin: 0px;
-    margin-left: 40px;
+    margin-left: 30px;
     .form-control{
       height: 40px;
       width: 430px;
@@ -87,17 +87,19 @@ nav.navbar.navbar-everbook {
       }
     }
   }
-  ul.navbar-nav.navbar-left, ul.navbar-nav.navbar-right {
+  ul.nav.navbar-nav.navbar-left, ul.nav.navbar-nav.navbar-right {
     height: 40px;
     li {
       height: 40px;
       a{
         line-height: 10px;
         color: #616161;
+        padding-left: 10px;
+        padding-right: 10px;
         &.orange{
           color: #f05323;
         }
-        &:hover {
+        &:hover, &:active {
           background-color: #fff;
         }
       }
@@ -105,6 +107,9 @@ nav.navbar.navbar-everbook {
         background-color: #fff;
       }
       &.user-menu {
+        &.open > a, &.open > a:focus {
+          background-color: #fff;
+        }
         a {
           padding-left: 0px;
           .avatar-mini {
@@ -119,6 +124,20 @@ nav.navbar.navbar-everbook {
           .welcome {
             padding-left: 45px;
             font-weight: 700;
+          }
+        }
+        ul.dropdown-menu {
+          box-shadow: 0 4px 6px #cdcdcd;
+          margin-top: 19px;
+          border-top: none;
+          li {
+            padding: 10px 0;
+            height: auto;
+            margin: 0 10px;
+            border-bottom: 1px dotted #4f4f4f;
+            &:last-child {
+              border-bottom: none;
+            }
           }
         }
       }
@@ -163,9 +182,11 @@ body {
             border: 1px solid #e2e2e2;
             border-radius: 2px;
             margin: 5px;
-            color: #777777;
-            &:hover {
-              text-decoration: none;
+            a {
+              color: #777777;
+              &:hover {
+                text-decoration: none;
+              }
             }
             .close {
               margin-left: 5px;
