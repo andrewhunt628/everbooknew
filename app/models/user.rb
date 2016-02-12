@@ -23,12 +23,20 @@ class User < ActiveRecord::Base
     family_bonds.where(family_member_two_id: user.id).destroy_all
   end
 
-  def name
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def first_name
     Forgery::Name.first_name
   end
 
   def last_name
     Forgery::Name.last_name
+  end
+
+  def avatar
+    "/fake_avatars/#{rand(18)}.png"
   end
 
   # get or create new user from facebook
