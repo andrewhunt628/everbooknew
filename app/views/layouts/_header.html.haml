@@ -1,36 +1,63 @@
 %nav.navbar.navbar-everbook
   .container
-    .navbar-brand=link_to "Everbook", root_path
-    %form.navbar-form.navbar-left{role: 'search'}
-      .form-group
-        .input-group
-          %span.input-group-addon.btn.logo
-            %span.orange &nbsp;
-          %input.form-control{type: 'text', placeholder: 'Search'}
-          %span.input-group-addon.btn
-            %span.fa.fa-search.orange
-    %ul.nav.navbar-nav.navbar-left
-      %li= link_to "EXPLORE", '#'
-      %li= link_to "SHOP", '#'
-      %li= link_to "INVITE", '#', class: 'orange'
-    %ul.nav.navbar-nav.navbar-right
-      %li.user-menu
-        %a.dropdown-toggle{href: "#", 'data-toggle' => "dropdown", 'aria-haspopup' => "true", 'aria-expanded' => "false"}
-          %span.avatar-mini
-          %span.welcome Welcome #{current_user.name}
-          %span.caret
-        %ul.dropdown-menu
-          %li
-            %a{href: "#"}  Upload
-          %li
-            %a{href: "#"}  Edit Profile
-          %li
-            %a{href: "#"}  Change Password
-          %li
-            %a{href: "#"}  Manage Payment Methods
-          %li
-            %a{href: "#"}  Purchase History
-          %li
-            %a{href: "#"}  Settings
-          %li
-            = link_to "Sign Out", destroy_user_session_path, method: :delete
+    .navbar-header
+      %button.navbar-toggle{'type'=>"button", 'data-toggle'=>"collapse", 'data-target'=>"#navbar", 'aria-expanded'=>"true", 'aria-controls'=>"navbar"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      .navbar-brand=link_to "Everbook", root_path
+    #navbar.navbar-collapse.collapse
+      %form.navbar-form.navbar-left{role: 'search'}
+        .form-group
+          .input-group
+            %span.input-group-addon.btn.logo
+              %span.orange &nbsp;
+            %input.form-control{type: 'text', placeholder: 'Search'}
+            %span.input-group-addon.btn
+              %span.fa.fa-search.orange
+      %ul.nav.navbar-nav.navbar-left
+        %li.responsive= link_to "EXPLORE", '#'
+        %li.responsive= link_to "SHOP", '#'
+        %li.responsive= link_to "INVITE", '#', class: 'orange'
+        %li.small-screen
+          %a{href: "#"}  UPLOAD
+        %li.small-screen
+          %a{href: "#"}  EDIT PROFILE
+        %li.small-screen
+          %a{href: "#"}  CHANGE PASSWORD
+        %li.small-screen
+          %a{href: "#"}  MANAGE PAYMENT METHODS
+        %li.small-screen
+          %a{href: "#"}  PURCHASE HISTORY
+        %li.small-screen
+          %a{href: "#"}  SETTINGS
+        %li.small-screen
+          = link_to "Sign Out", destroy_user_session_path, method: :delete
+      %ul.nav.navbar-nav.navbar-right
+        %li.user-menu
+          %a.dropdown-toggle{href: "#", 'data-toggle' => "dropdown", 'aria-haspopup' => "true", 'aria-expanded' => "false"}
+            %span.avatar-mini
+            %span.welcome Welcome #{current_user.name}
+            %span.caret
+          %ul.dropdown-menu
+            %li.responsive
+              %a{href: "#"}  Explore
+            %li.responsive
+              %a{href: "#"}  Shop
+            %li.responsive
+              %a.orange{href: "#"}  Invite
+            %li
+              %a{href: "#"}  Upload
+            %li
+              %a{href: "#"}  Edit Profile
+            %li
+              %a{href: "#"}  Change Password
+            %li
+              %a{href: "#"}  Manage Payment Methods
+            %li
+              %a{href: "#"}  Purchase History
+            %li
+              %a{href: "#"}  Settings
+            %li
+              = link_to "Sign Out", destroy_user_session_path, method: :delete
