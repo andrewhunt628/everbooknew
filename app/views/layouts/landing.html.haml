@@ -25,7 +25,7 @@
           .logo.col-sm-12.text-center
             %h1 Everbook
           .social.col-sm-12
-            %button.facebook.btn.btn-primary.btn-block
+            =link_to user_omniauth_authorize_path(:facebook), class: 'facebook btn btn-primary btn-block' do
               %i.fa.fa-facebook
               Continue with Facebook
           .divide-line.col-sm-12
@@ -61,18 +61,18 @@
   $("document").ready ->
 
     $("form#userInfo").validate(
-      rules = 
+      rules =
         password_field:
           required: true
           minlength: 8
         email_field: 'required'
-      messages = 
+      messages =
         password_field:
           required: 'Password is required'
           minlength: 'Password needs to be at least length 8'
         email_field: 'Email is requried'
     )
-    
+
     $("form#userInfo").on 'submit', (e) -> e.preventDefault()
 
     $("form#signin").on 'submit', (e) ->
@@ -87,9 +87,9 @@
       unless $("#userInfo").valid()
         e.preventDefault()
         return
-      
+
       $("form#signup #user_email").val($("#email_field").val())
       $("form#signup #user_password").val($("#password_field").val())
       $("form#signup #user_password_confirmation").val($("#password_field").val())
 
-    
+

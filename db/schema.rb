@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160210053047) do
+ActiveRecord::Schema.define(version: 20160211111926) do
 
   create_table "family_bonds", force: :cascade do |t|
     t.integer  "family_member_one_id"
@@ -73,6 +73,8 @@ ActiveRecord::Schema.define(version: 20160210053047) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
