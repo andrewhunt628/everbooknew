@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160212123658) do
+ActiveRecord::Schema.define(version: 20160212141405) do
 
   create_table "family_bonds", force: :cascade do |t|
     t.integer  "family_member_one_id"

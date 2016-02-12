@@ -24,7 +24,9 @@
           = link_to "view all", family_bonds_path, class: "pull-right orange help"
           %h3 Friends
           - current_user.family.each do |friend|
-            = link_to "", user_path(friend), class: "friend", title: "#{friend.name} #{friend.last_name}"
+            = link_to user_path(friend), class: "friend", title: "#{friend.full_name}" do
+              = image_tag friend.avatar, width: 30, height: 30 
+
   - @pins.each do |pin|
     .box.panel.panel-default
       .panel-content
@@ -46,4 +48,6 @@
             %span.orange (+3)
           %a{href: "#"}
             %span.avatar-mini
-            %span.author Robin M. Rivers
+              = image_tag pin.user.avatar, width: 30, height: 30 
+            %span.author 
+              = pin.user.full_name
