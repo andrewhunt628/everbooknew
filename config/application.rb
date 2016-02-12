@@ -26,6 +26,5 @@ module Everbooknew
       Devise::RegistrationsController.layout 'landing'
       Devise::SessionsController.layout 'landing'
     end
-    config.action_mailer.delivery_method       = :letter_opener
   end
 end

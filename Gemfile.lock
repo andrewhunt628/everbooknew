@@ -38,6 +38,7 @@ GEM
       tzinfo (~> 1.1)
     acts-as-taggable-on (3.5.0)
       activerecord (>= 3.2, < 5)
+    addressable (2.4.0)
     arel (6.0.3)
     autoprefixer-rails (6.0.1)
       execjs
@@ -103,6 +104,10 @@ GEM
       thor (~> 0.14)
     json (1.8.3)
     jwt (1.5.1)
+    launchy (2.4.3)
+      addressable (~> 2.3)
+    letter_opener (1.4.1)
+      launchy (~> 2.2)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -243,6 +248,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-validation-rails
+  letter_opener
   masonry-rails
   omniauth-facebook
   paperclip (~> 4.3)

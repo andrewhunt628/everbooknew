@@ -47,7 +47,8 @@ gem "jquery-validation-rails"
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-
+  gem 'letter_opener'
+  
   gem 'rspec-rails'
   gem 'factory_girl_rails'
 
