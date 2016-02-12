@@ -26,6 +26,7 @@ gem 'haml'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'simple_form'
 gem 'devise'
+gem 'devise_invitable'
 gem 'omniauth-facebook'
 gem "paperclip", "~> 4.3"
 gem 'masonry-rails'
@@ -46,7 +47,8 @@ gem "jquery-validation-rails"
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-
+  gem 'letter_opener'
+  
   gem 'rspec-rails'
   gem 'factory_girl_rails'
 
