@@ -1,7 +1,59 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :registerable, :invitable,
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, :omniauth_providers => [:facebook]
+
   has_many :pins
+  has_many :family_bonds, foreign_key: 'family_member_one_id'
+  has_many :family, through: :family_bonds, source: :family_member_two
+
+  def self.not_from_family(user)
+    family_ids = user.family_ids
+    family_ids.push(user.id)
+    all.where.not(id: family_ids)
+  end
+
+  def add_family_member(user)
+    family_bonds.create! family_member_two: user
+  end
+
+  def delete_family_member(user)
+    family_bonds.where(family_member_two_id: user.id).destroy_all
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def first_name
+    Forgery::Name.first_name
+  end
+
+  def last_name
+    Forgery::Name.last_name
+  end
+
+  def avatar
+    "/fake_avatars/#{rand(18)}.png"
+  end
+
+  # get or create new user from facebook
+  def self.from_omniauth(auth)
+    user = User.find_by(email: auth.info.email)
+    return user if user.present?
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+    end
+  end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+      end
+    end
+  end
 end

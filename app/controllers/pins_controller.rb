@@ -1,16 +1,23 @@
 class PinsController < ApplicationController
 	before_action :find_pin, only: [:show, :edit, :update, :destroy]
 	before_filter :authenticate_user!
+	helper_method :tags_list
 
 	def index
-		@pins = Pin.all.order("created_at DESC")
+		if tags_list.present?
+			@pins = current_user.pins.tagged_with(tags_list.split("/"))
+		else
+			@pins = current_user.pins
+		end
+		@pins = @pins.order("pins.created_at DESC")
+		@tags = @pins.tag_counts_on(:tags)
 	end
 
 	def show
 	end
 
 	def new
-		@pin = current_user.pins.build 
+		@pin = current_user.pins.build
 	end
 
 	def edit
@@ -30,7 +37,7 @@ class PinsController < ApplicationController
 	end
 
 	def create
-		@pin = @pin = current_user.pins.build(pin_params)
+		@pin = current_user.pins.build(pin_params)
 
 		if @pin.save
 			redirect_to @pin, notice: "Successfully created new Pin"
@@ -41,12 +48,18 @@ class PinsController < ApplicationController
 
 	private
 
-	def pin_params
-		params.require(:pin).permit(:title, :description, :image)
-	end
+		def tags_list
+			params[:tags_list].to_s.split("/")
+		end
 
-	def find_pin
-		@pin = Pin.find(params[:id])
-	end
+		def pin_params
+			@pin_params = params.require(:pin).permit(:title, :description, :image, :text_marks, :tag_list, :person_ids => [])
+			@pin_params[:text_marks] = @pin_params[:text_marks].to_s.split(",").map(&:squish)
+			@pin_params
+		end
+
+		def find_pin
+			@pin = current_user.pins.find(params[:id])
+		end
 
 end

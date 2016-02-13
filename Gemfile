@@ -26,8 +26,14 @@ gem 'haml'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'simple_form'
 gem 'devise'
+gem 'devise_invitable'
+gem 'omniauth-facebook'
 gem "paperclip", "~> 4.3"
 gem 'masonry-rails'
+gem "font-awesome-rails"
+gem 'acts-as-taggable-on', '~> 3.4'
+gem "jquery-validation-rails"
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -41,6 +47,12 @@ gem 'masonry-rails'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'letter_opener'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+
+  #Generate humanize random data
+  gem 'forgery'
 end
 
 group :development do

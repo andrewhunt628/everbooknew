@@ -1,33 +1,17 @@
 
 %html
 %head
-	%title Pin Board
-	= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
-	= javascript_include_tag 'application', 'data-turbolinks-track' => true
-	= csrf_meta_tags
+  %title Pin Board
+  = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+  = javascript_include_tag 'application', 'data-turbolinks-track' => true
+  = csrf_meta_tags
 %body
-	%nav.navbar.navbar-default
-		.container
-			.navbar-brand=link_to "Everbook", root_path
-			- if user_signed_in?
-				%ul.nav.navbar-nav
-					%li= link_to "Shop", new_pin_path
-					%li= link_to "Explore", new_pin_path
-				%ul.nav.navbar-nav.navbar-right
-					%li= link_to "New Pin", new_pin_path
-					%li= link_to "Account Settings", edit_user_registration_path
-					%li= link_to "Sign Out", destroy_user_session_path, method: :delete
-			- else
-				%ul.nav.navbar-nav.navbar-right
-					%li= link_to "Sign Up", new_user_registration_path
-					%li= link_to "Sign In", new_user_session_path
+  = render "shared/header"
 
 
 
-	.container
-		- flash.each do |name, msg|
-			= content_tag :div, msg, class: "alert alert-info"
-		= yield
+  .container
+    = yield
 
 
- 
+
