@@ -45,6 +45,8 @@ gem "rails_12factor"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'forgery' #when stop use fake data move this gem into :development, :test section
+
 group :production do
   gem 'pg'
 
@@ -60,7 +62,6 @@ group :development, :test do
   gem 'factory_girl_rails'
 
   #Generate humanize random data
-  gem 'forgery'
 end
 
 group :development do
