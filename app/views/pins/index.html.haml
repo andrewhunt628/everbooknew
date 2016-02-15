@@ -37,10 +37,10 @@
             = raw pin.description
           .hashtags
             = raw pin.tag_list.map { |t| link_to "##{t}", tag_path(t) }.join('  ')
-          .friends
-            %a.icon.first{href: "#"}
-            %a.icon.second{href: "#"}
-            %a.icon.other{href: "#"}
+          / .friends
+          /   %a.icon.first{href: "#"}
+          /   %a.icon.second{href: "#"}
+          /   %a.icon.other{href: "#"}
         .footer
           %span.pull-right
             %span.fa.fa-comments-o
