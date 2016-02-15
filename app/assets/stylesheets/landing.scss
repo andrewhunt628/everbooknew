@@ -51,7 +51,7 @@ span.text-everbook {
 }
 .design-back {
     background-image: url('../images/desktop_back.jpg');
-    background-position: 100% 50%;
+    background-position: 100% 20%;
     background-repeat: no-repeat;
     background-size: cover !important;
     height: 100%;
@@ -172,6 +172,7 @@ span.text-everbook {
 @media (max-width: 1200px) {
     .design-back {
         background-image: url('../images/tablet_back.jpg');
+        background-position: 50% 20%;
     }
 }
 @media (max-width: 767px) {

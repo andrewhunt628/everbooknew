@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   end
 
   def avatar
-    "/fake_avatars/#{rand(18)}.png"
+    "/avatars/avatar#{rand(3)+1}.jpg"
   end
 
   # get or create new user from facebook
