@@ -50,8 +50,8 @@ span.text-everbook {
     display: none;
 }
 .design-back {
-    background-image: url('../images/desktop_back.jpg');
-    background-position: 100% 50%;
+    background-image: url('../images/landing_background.jpg');
+    background-position: 100% 20%;
     background-repeat: no-repeat;
     background-size: cover !important;
     height: 100%;
@@ -171,7 +171,7 @@ span.text-everbook {
 /****** Responsive Style *********/
 @media (max-width: 1200px) {
     .design-back {
-        background-image: url('../images/tablet_back.jpg');
+        background-image: url('../images/landing_background.jpg');
     }
 }
 @media (max-width: 767px) {
