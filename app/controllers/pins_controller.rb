@@ -11,7 +11,6 @@ class PinsController < ApplicationController
 		end
 		@pins = @pins.order("pins.created_at DESC")
 		@tags = @pins.tag_counts_on(:tags)
-		render layout: 'index'
 	end
 
 	def show

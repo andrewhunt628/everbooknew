@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   root "pins#index"
 
-  get '*tags_list' => 'pins#index', as: :tag
+  get '*tags_list' => 'pins#index', as: :tag# this line should be last
 end

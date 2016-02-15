@@ -38,6 +38,7 @@ GEM
       tzinfo (~> 1.1)
     acts-as-taggable-on (3.5.0)
       activerecord (>= 3.2, < 5)
+    addressable (2.4.0)
     arel (6.0.3)
     autoprefixer-rails (6.0.1)
       execjs
@@ -69,6 +70,9 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    devise_invitable (1.5.5)
+      actionmailer (>= 3.2.6, < 5)
+      devise (>= 3.2.0)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.6.0)
@@ -100,6 +104,10 @@ GEM
       thor (~> 0.14)
     json (1.8.3)
     jwt (1.5.1)
+    launchy (2.4.3)
+      addressable (~> 2.3)
+    letter_opener (1.4.1)
+      launchy (~> 2.2)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -232,6 +240,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   devise
+  devise_invitable
   factory_girl_rails
   font-awesome-rails
   forgery
@@ -239,6 +248,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-validation-rails
+  letter_opener
   masonry-rails
   omniauth-facebook
   paperclip (~> 4.3)

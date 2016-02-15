@@ -19,7 +19,8 @@
       %ul.nav.navbar-nav.navbar-left
         %li.responsive= link_to "EXPLORE", '#'
         %li.responsive= link_to "SHOP", '#'
-        %li.responsive= link_to "INVITE", '#', class: 'orange'
+        %li.responsive= link_to "INVITE", new_user_invitation_path, class: 'orange'
+
         %li.small-screen
           %a{href: "#"}  UPLOAD
         %li.small-screen
@@ -38,7 +39,8 @@
         %li.user-menu
           %a.dropdown-toggle{href: "#", 'data-toggle' => "dropdown", 'aria-haspopup' => "true", 'aria-expanded' => "false"}
             %span.avatar-mini
-            %span.welcome Welcome #{current_user.name}
+              = image_tag current_user.avatar, width: 40, height: 40 
+            %span.welcome Welcome #{current_user.first_name}
             %span.caret
           %ul.dropdown-menu
             %li.responsive
@@ -46,7 +48,7 @@
             %li.responsive
               %a{href: "#"}  Shop
             %li.responsive
-              %a.orange{href: "#"}  Invite
+              = link_to "Invite", new_user_invitation_path, class: 'orange'
             %li
               %a{href: "#"}  Upload
             %li
