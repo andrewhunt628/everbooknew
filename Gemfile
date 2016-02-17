@@ -36,6 +36,12 @@ gem "jquery-validation-rails"
 gem "rails_12factor"
 
 
+# Use spine-js as the JavaScript library
+gem "json2-rails"
+gem 'eco'
+gem 'underscore-rails'
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -17,4 +17,5 @@
 //= require jquery.validate
 //= require jquery.validate.additional-methods
 
+//= require app
 //= require_tree .

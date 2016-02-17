@@ -1,0 +1,10 @@
+<span href='#' class='thumbnail'>
+  <img src="<%= @file%>"></img>
+  <span class='text-danger notice-about-deleted'>Removed</span>
+  <a href='#' class='action-img text-success restore'>
+    Reset
+  </a>
+  <a href='#' class='action-img text-danger remove'>
+    Delete
+  </a>
+</span>
