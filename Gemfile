@@ -41,6 +41,8 @@ gem "json2-rails"
 gem 'eco'
 gem 'underscore-rails'
 
+#For js-upload images
+gem "jquery-fileupload-rails"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

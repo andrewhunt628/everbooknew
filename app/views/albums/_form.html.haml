@@ -1,0 +1,64 @@
+.album-form-js
+  = form_for(@album, html: {class: 'form-horizontal', 'data-type' => 'album'}) do |f|
+    - if f.object.errors.any?
+      #errors
+        %h2
+          = pluralize(f.object.errors.count, "error")
+          prevented this Pin from saving
+        %ul
+          - f.object.errors.full_messages.each do |msg|
+            %li = msg
+
+    .form-group
+      .row
+        = f.label :title, class: 'col-sm-2 control-label' do
+          Title
+        .col-sm-5
+          = f.text_field :title, { class: 'form-control', required: 'required' }
+
+    .form-group
+      .row
+        = f.label :description, class: 'col-sm-2 control-label' do
+          Description
+        .col-sm-5
+          = f.text_area :description, { class: 'form-control', cols: 5, rows: 5 }
+
+    .form-group
+      .row
+        = f.label :tag_list, class: 'col-sm-2 control-label' do
+          Tags (Separated by commas)
+        .col-sm-5
+          = f.text_field :tag_list, { value: f.object.tag_list.join(","), class: 'form-control' }
+    
+  = form_for(Pin.new, html: {:multipart => true, class: 'form-horizontal', 'data-type' => 'images'}) do |f|
+    .form-group
+      .hide{'data-type' => 'existing-pins'}
+        - @album.pins.each do |pin|
+          %div{'data-id' =>"#{pin.id}", 'data-type' => 'pin', 'data-url'=>"#{pin.image.try(:thumb).to_s}"}
+      .row
+        %label.col-sm-2.control-label
+          Pins in album
+        .col-sm-5
+          .file-uploader 
+            = f.file_field :image, multiple: true, name: 'pin[image]', 'data-url' => albums_path, class: 'file', accept: "pin/*"
+            .pins-dropzone
+              %span
+                Drag and drop your pins here
+          #preview.row
+          #progress_bar.row.hide
+            .col-sm-12
+              %h5
+                Uploading pins ...
+              .progress
+                .progress-bar{'role' => "progressbar", 'aria-valuenow' => "60", 'aria-valuemin' => "0", 'aria-valuemax' => "100", 'style' => "width: 0%;"}
+                  0%
+
+  .form-group
+    .row
+      .col-sm-5.col-sm-offset-2
+        .btn-group.actions.pull-right
+          = link_to 'Save', '#', class: 'btn btn-primary', 'data-type' => 'submit'
+          = link_to 'Cancel', :back, class: 'btn btn-default'
+
+:coffee
+  new App.AlbumForm el: $(".album-form-js")

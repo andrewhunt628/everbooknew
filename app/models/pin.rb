@@ -1,7 +1,7 @@
-class Pin < ActiveRecord::Base
-  acts_as_taggable
-  
+class Pin < ActiveRecord::Base  
   belongs_to :user
+  belongs_to :album
+  
   has_and_belongs_to_many :people, class_name: 'User'
   
   serialize :text_marks, Array

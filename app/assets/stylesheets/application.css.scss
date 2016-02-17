@@ -3,6 +3,9 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "jquery.fileupload";
+@import "jquery.fileupload-ui";
+@import "dropzone";
 
 @font-face {
   font-family: 'Cantarell';

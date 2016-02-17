@@ -27,20 +27,22 @@
             = link_to user_path(friend), class: "friend", title: "#{friend.full_name}" do
               = image_tag friend.avatar, width: 30, height: 30 
 
-  - @pins.each do |pin|
+  - @albums.each do |album|
     .box.panel.panel-default
       .panel-content
         .photo-wrap
-          = link_to (image_tag pin.image.url(:medium), class: "image"), pin
+          = link_to (image_tag album.cover.image.url(:medium), class: "image"), album
         .panel-body
           .description
-            = raw pin.description
+            = raw album.description
           .hashtags
-            = raw pin.tag_list.map { |t| link_to "##{t}", tag_path(t) }.join('  ')
-          / .friends
-          /   %a.icon.first{href: "#"}
-          /   %a.icon.second{href: "#"}
-          /   %a.icon.other{href: "#"}
+            = raw album.tag_list.map { |t| link_to "##{t}", tag_path(t) }.join('  ')
+            / = album.pins.each do |pin|
+            /   = link_to (image_tag pin.image.url(:medium), class: "image"), album
+          .friends
+            %a.icon.first{href: "#"}
+            %a.icon.second{href: "#"}
+            %a.icon.other{href: "#"}
         .footer
           %span.pull-right
             %span.fa.fa-comments-o

@@ -1,44 +1,44 @@
-class PictureItem extends Spine.Controller
-  className: 'col-xs-3 image-container'
+class PinItem extends Spine.Controller
+  className: 'col-xs-3 pin-container'
   events:
     'click .remove':  'markAsRemoveImg'
     'click .restore': 'restoreImg'
 
   constructor: ->
     super
-    @initAndDisplayPicture()
+    @initAndDisplayPin()
 
-  initAndDisplayPicture: ->
-    if @picture.isUploaded()
-      @html @view("picture_uploader/picture")(file: @picture.url)
+  initAndDisplayPin: ->
+    if @pin.isUploaded()
+      @html @view("pin_uploader/pin")(file: @pin.url)
     else
       reader = new FileReader()
       reader.onload = (e) =>
         if e.target.result.split(';')[0] == 'data:application/pdf'
-          image = "/#{@scope}/img/pdf_icon.png"
+          pin = "/#{@scope}/img/pdf_icon.png"
         else
-          image = e.target.result
+          pin = e.target.result
 
-        @html @view("picture_uploader/picture")(file: image)
+        @html @view("pin_uploader/pin")(file: pin)
 
-      reader.readAsDataURL(@picture.data.files[0])
+      reader.readAsDataURL(@pin.data.files[0])
 
   markAsRemoveImg: (e) ->
     e.preventDefault()
     @el.find(".thumbnail").addClass('was-deleted')
-    @picture._destroy = true
-    @picture.save()
+    @pin._destroy = true
+    @pin.save()
 
   restoreImg: (e) ->
     e.preventDefault()
     @el.find(".thumbnail").removeClass('was-deleted')
-    @picture._destroy = false
-    @picture.save()
+    @pin._destroy = false
+    @pin.save()
 
 ###########################
 ###########################
 
-class App.PictureUploadForm extends Spine.Controller
+class App.PinUploadForm extends Spine.Controller
   @extend Spine.Events
 
   elements:
@@ -50,18 +50,15 @@ class App.PictureUploadForm extends Spine.Controller
     @whiteList = /(\.|\/)(pdf|gif|jpe?g|png)$/i
     @setupFileUploader()
     @amount_of_uploaded_files  = 0
-    @renderExistingPictures()
+    @renderExistingPins()
 
-  renderExistingPictures: ->
-    for container in @el.find("[data-type=picture]")
+  renderExistingPins: ->
+    for container in @el.find("[data-type=pin]")
       do (container) =>
-        if $(container).data('content_type') == 'application/pdf'
-          url = "/#{@el.data('scope')}/img/pdf_icon.png"
-        else
-          url = $(container).data('url')
-        picture = App.Picture.create id: $(container).data('id'), kind: 'uploaded', url: url, _destroy: false
+        url = $(container).data('url')
+        pin = App.Pin.create id: $(container).data('id'), kind: 'uploaded', url: url, _destroy: false
 
-        thumb = new PictureItem picture: picture, scope: @el.data('scope')
+        thumb = new PinItem pin: pin, scope: @el.data('scope')
         @preview.append thumb.el
 
 
@@ -72,15 +69,17 @@ class App.PictureUploadForm extends Spine.Controller
                   add:  @add
 
   done: (e, data) =>
-    App.Picture.create id: data.result.id, kind: 'uploaded', '_destroy': false
+    alert '!!!'
+    App.Pin.create id: data.result.id, kind: 'uploaded', '_destroy': false
     @amount_of_uploaded_files += 1
     @trigger 'allFilesUploads' if @percent() == 100
     percent = "#{@percent()}%"
+    console.log percent
     @progress_bar.width percent
     @progress_bar.html  percent
   
   percent: ->
-    amount_of_files_to_upload = App.Picture.getPicturesForUploading().length
+    amount_of_files_to_upload = App.Pin.getPinsForUploading().length
     parseInt(@amount_of_uploaded_files/amount_of_files_to_upload * 100)
 
   add: (e, data) =>
@@ -88,20 +87,22 @@ class App.PictureUploadForm extends Spine.Controller
       window.displayNotices('Incorrect file format. Use only gif, jpeg, png') 
       return 
 
-    picture = new App.Picture data: data, kind: 'for_uploading', '_destroy': false
-    picture.save()
+    pin = new App.Pin data: data, kind: 'for_uploading', '_destroy': false
+    pin.save()
 
-    thumb = new PictureItem picture: picture, scope: @el.data('scope')
+    thumb = new PinItem pin: pin, scope: @el.data('scope')
     @preview.append thumb.el
 
-  submit: (picture_ids) ->
-    if App.Picture.getPicturesForUploading().length == 0
+  submit: (pin_ids) ->
+    if App.Pin.getPinsForUploading().length == 0
+      alert '0'
       @trigger 'allFilesUploads' 
     else
+      alert '<>0'
       @el.find("#progress_bar").removeClass('hide')
-
-      for picture in App.Picture.getPicturesForUploading()
-        picture.data.submit()
+      window.test = App.Pin.getPinsForUploading()
+      # for pin in App.Pin.getPinsForUploading()
+      #   pin.data.submit()
 
 ##############################
 ##############################

@@ -16,6 +16,8 @@
 //= require masonry/jquery.masonry
 //= require jquery.validate
 //= require jquery.validate.additional-methods
+//= require jquery-fileupload/basic
+//= require underscore
 
 //= require app
 //= require_tree .
