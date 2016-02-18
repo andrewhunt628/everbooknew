@@ -30,17 +30,14 @@
             %p or
           .form.col-sm-12
             .form
-              %form#userInfo
+              = form_for(resource, as: resource_name, url: session_path(resource_name), html: {id: 'signin'}) do |f|
                 .form-group
-                  %input.form-control{:placeholder => "Email", :type => "email", :id => 'email_field', required: true}
+                  = f.text_field :email, {:class => 'form-control', :placeholder => "Email", :type => "email", :id => 'email_field', required: true}
                 .form-group
-                  %input.form-control{:placeholder => "Create a password", :type => "password", :id => 'password_field', required: true, pattern: ".{8,}", title: "8 characters minimum"}
-              .form-group
-                = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {id: 'signup'}) do |f|
-                  = f.hidden_field :email
-                  = f.hidden_field :password
-                  = f.hidden_field :password_confirmation
-                  = f.button "Sign up", class: 'btn btn-danger btn-block signup-btn'
+                  = f.hidden_field :password, {:class => 'form-control', :placeholder => "Password", :type => "password", :id => 'password_field', required: true, pattern: ".{8,}", title: "8 characters minimum"}
+                .form-group
+                  = f.hidden_field :remember_me, value: true
+                  = f.button "Log in", class: 'btn btn-default btn-block login-btn'
 
               .terms.col-sm-12.text-center
                 %h6 Creating an account means you’re okay with Everbook's
@@ -48,46 +45,37 @@
                   %a{:href => "#"} Terms of Service
                 %a{:href => "#"} Privacy Policy
               .form-group
+                %button.btn.btn-danger.signup-btn{'data-toggle'=>"modal", 'data-target'=>"#signUpModal"} Sign up
 
-                = form_for(resource, as: resource_name, url: session_path(resource_name), html: {id: 'signin'}) do |f|
-                  = f.hidden_field :email
-                  = f.hidden_field :password
-                  = f.hidden_field :remember_me, value: true
-                  = f.button "Log in", class: 'btn btn-default login-btn'
+#signUpModal.modal.fade{"aria-labelledby" => "signUpModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {id: 'signup'}) do |f|
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span.text-everbook{"aria-hidden" => "true"} &#215;
+          %h3#signUpModalLabel.modal-title
+            %span Sign up in
+            %span.text-everbook Everbook
+        .modal-body
+          .form-group
+            = f.text_field :email, {:class => 'form-control', :placeholder => "Email", :type => "email", :id => 'email_field', required: true}
+          .form-group
+            = f.password_field :password, {:class => 'form-control', :placeholder => "Password", :type => "password", :id => 'password_field', required: true, pattern: ".{8,}", title: "8 characters minimum"}
+          = f.hidden_field :password_confirmation
+        .modal-footer
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+          = f.button "Sign up", class: 'btn btn-danger signup-btn'
+
 
 :coffee
   $("document").ready ->
 
-    $("form#userInfo").validate(
-      rules =
-        password_field:
-          required: true
-          minlength: 8
-        email_field: 'required'
-      messages =
-        password_field:
-          required: 'Password is required'
-          minlength: 'Password needs to be at least length 8'
-        email_field: 'Email is requried'
-    )
-
-    $("form#userInfo").on 'submit', (e) -> e.preventDefault()
-
-    $("form#signin").on 'submit', (e) ->
-      unless $("#userInfo").valid()
-        e.preventDefault()
-        return
-
-      $("form#signin #user_email").val($("#email_field").val())
-      $("form#signin #user_password").val($("#password_field").val())
-
     $("form#signup").on 'submit', (e) ->
-      unless $("#userInfo").valid()
+      unless $("#signup").valid()
         e.preventDefault()
         return
 
-      $("form#signup #user_email").val($("#email_field").val())
-      $("form#signup #user_password").val($("#password_field").val())
-      $("form#signup #user_password_confirmation").val($("#password_field").val())
+      $("form#signup #user_password_confirmation").val($(e.target).find("#password_field").val())
 
 
