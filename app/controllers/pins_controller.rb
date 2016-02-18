@@ -2,21 +2,6 @@ class PinsController < ApplicationController
 	before_action :find_pin, only: [:show, :edit, :update, :destroy]
 	before_filter :authenticate_user!
 
-	def index
-		@pins = current_user.pins
-		@pins = @pins.order("pins.created_at DESC")
-	end
-
-	def show
-	end
-
-	def new
-		@pin = current_user.pins.build
-	end
-
-	def edit
-	end
-
 	def destroy
 		@pin.destroy
 		redirect_to root_path
@@ -31,7 +16,7 @@ class PinsController < ApplicationController
 	end
 
 	def create
-		@pin = current_user.pins.build(pin_params)
+		@pin = Pin.new(pin_params)
 
     respond_to do |format|
       if @pin.save
@@ -45,13 +30,13 @@ class PinsController < ApplicationController
 	private
 
 		def pin_params
-			@pin_params = params.require(:pin).permit(:title, :description, :image, :text_marks, :tag_list, :person_ids => [])
+			@pin_params = params.require(:pin).permit(:title, :description, :image, :text_marks, :tag_list, :album_id, :person_ids => [])
 			@pin_params[:text_marks] = @pin_params[:text_marks].to_s.split(",").map(&:squish)
 			@pin_params
 		end
 
 		def find_pin
-			@pin = current_user.pins.find(params[:id])
+			@pin = Pin.all.find(params[:id])
 		end
 
 end
