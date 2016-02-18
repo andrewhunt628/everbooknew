@@ -43,9 +43,15 @@ RSpec.describe Pin, type: :model do
       pin.save!
     end
 
-    it '=' do
+    it '=Array' do
       pin.text_marks = ["Jhon", "Andrew", "Pitter", "Leonard"]
       pin.save
+    end
+
+    it '=String' do
+      pin.text_marks = "Jhon,     Andrew    ,       Pitter,      Leonard"
+      pin.save
+      expect(pin.text_marks).to eq(["Jhon", "Andrew", "Pitter", "Leonard"])
     end
 
     it '' do

@@ -11,4 +11,9 @@ class Pin < ActiveRecord::Base
 
   validates :image, presence: true
 
+  def text_marks=(value)
+    value = value.to_s.split(",").map(&:squish).uniq unless value.instance_of?(Array)
+    super(value)
+  end
+
 end

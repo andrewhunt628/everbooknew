@@ -64,6 +64,27 @@
 
       .form-group
         .row
+          = pins_fields.label :person_ids, class: 'col-sm-2 control-label' do
+            Family
+          .col-sm-5
+            = pins_fields.collection_select :person_ids, current_user.family, :id, :email, {propt: 'Family on photo'}, { class: 'form-control', multiple: true }
+
+      .form-group
+        .row
+          = pins_fields.label :text_marks, class: 'col-sm-2 control-label' do
+            If somebody not in everbook
+          .col-sm-5
+            = pins_fields.text_field :text_marks, { class: 'form-control', value: pins_fields.object.text_marks.join(", ") }
+            %p.help-block
+              (Separated by commas)
+      .form-group
+        .row
+          .alert.alert-info.col-sm-7
+            'Family' and 'If somebody not in everbook' can be joined via js in one field in the future
+
+
+      .form-group
+        .row
           .col-sm-7
             = pins_fields.link_to_remove "Remove this pin", class: 'btn btn-xs btn-danger pull-right'
 
