@@ -1,36 +1,3 @@
-#pins.transitions-enabled
-  .box.wrapper
-    .panel.panel-default
-      .panel-content
-        .panel-body
-          =link_to "UPLOAD YOUR IMAGE", new_album_path, class: "btn btn-block btn-orange"
-          .input-group.tag-filter
-            %input.form-control{type: 'text'}
-            %span.input-group-addon.btn.btn-black
-              %span.fa.fa-caret-down
-    .panel.panel-default
-      .panel-content
-        .panel-body
-          %h3 Hashtags
-          .hashtags-container
-            - @tags.each do |tag|
-              .hashtag{href: "#"}
-                = link_to("##{tag}", get_mark_tag_url(tag))
-                = link_to get_unmark_tag_url(tag) do
-                  %span.close ×
-    .panel.panel-default
-      .panel-content
-        .panel-body
-          = link_to "view all", family_bonds_path, class: "pull-right orange help"
-          %h3 Friends
-          - current_user.family.each do |friend|
-            = link_to user_path(friend), class: "friend", title: "#{friend.full_name}" do
-              = image_tag friend.avatar, width: 30, height: 30 
-
-  - @albums.each do |album|
-    = render 'content', album: album
-
-
 #pinModal.modal.fade{"aria-labelledby" => "signUpModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog.modal-lg
     .modal-content

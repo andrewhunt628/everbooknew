@@ -5,7 +5,7 @@ module AlbumsHelper
     result = ''.html_safe
     limit = (pins.count / 3).to_i >= 2 ? 6 : 3
     while (iteration < limit && iteration < pins.count) do
-      result += link_to album do 
+      result += link_to album, 'data-toggle' => "modal", 'data-target'=>"#pinModal" do 
                   content_tag :div, style: "background-image: url('#{pins[iteration].image.url(:thumb)}');", class: 'icon' do
                   end
                 end

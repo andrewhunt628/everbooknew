@@ -13,7 +13,7 @@
         .panel-body
           %h3 Hashtags
           .hashtags-container
-            - @tags.each do |tag|
+            - @album.tags.each do |tag|
               .hashtag{href: "#"}
                 = link_to("##{tag}", get_mark_tag_url(tag))
                 = link_to get_unmark_tag_url(tag) do
@@ -25,9 +25,8 @@
           %h3 Friends
           - current_user.family.each do |friend|
             = link_to user_path(friend), class: "friend", title: "#{friend.full_name}" do
-              = image_tag friend.avatar, width: 30, height: 30
-
-  - @pins.each do |pin|
+              = image_tag friend.avatar, width: 30, height: 30 
+  - @album.pins.each do |pin|
     .box.panel.panel-default
       .panel-content
         .photo-wrap
@@ -35,12 +34,8 @@
         .panel-body
           .description
             = raw pin.description
-          .hashtags
-            = raw pin.tag_list.map { |t| link_to "##{t}", tag_path(t) }.join('  ')
-          / .friends
-          /   %a.icon.first{href: "#"}
-          /   %a.icon.second{href: "#"}
-          /   %a.icon.other{href: "#"}
+          / .hashtags
+          /   = raw pin.tag_list.map { |t| link_to "##{t}", tag_path(t) }.join('  ')
         .footer
           %span.pull-right
             %span.fa.fa-comments-o
