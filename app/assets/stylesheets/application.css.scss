@@ -362,6 +362,63 @@ body {
 
 }
 
+
+.modal{
+  .modal-dialog{
+    margin-top: 111px;
+    .close{
+      text-shadow: none;
+      color: white;
+      opacity: 0.9;
+    }
+    .modal-content{
+      border-radius: 0px;
+      border: none;
+      .modal-body{
+        padding: 0px;
+        .row{
+          margin-left: 0px;
+          margin-right: 0px;
+          .modal-picture{
+            padding: 10px;
+          }
+          .modal-panel{
+            padding: 0px;
+            .modal-description{
+              padding: 10px;
+              background-color: #f05323;
+              color: white;
+              p{
+                margin: 0px;
+              }
+            }
+            .modal-comments{
+              padding: 10px;
+              .comment{
+                color: #898989;
+                border-bottom: 1px dotted #ddd;
+                width: 100%;
+                .icon{
+                  vertical-align: top;
+                }
+                .message{
+                  padding-left: 5px;
+                  line-height: 14px;
+                  font-size: 13px;
+                  .info{
+                    font-size: 10px;
+                    margin-top: 5px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 @media (min-width: 768px){
   nav.navbar.navbar-everbook{
     .navbar-form{
