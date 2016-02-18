@@ -40,7 +40,7 @@
 body {
     font-family: 'cantarell', sans-serif;
 }
-span.text-everbook {
+.text-everbook {
     color: #f05323;
     font-family: 'cantarell-bold', sans-serif;
     font-weight: 700;
@@ -166,6 +166,11 @@ span.text-everbook {
 }
 .btn.signup-btn {
     background: linear-gradient(#e3262e, #ab171e);
+}
+#signUpModal{
+    .modal-dialog{
+        margin-top: 150px;
+    }
 }
 
 /****** Responsive Style *********/
