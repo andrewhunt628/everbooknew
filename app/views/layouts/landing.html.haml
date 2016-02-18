@@ -34,7 +34,7 @@
                 .form-group
                   = f.text_field :email, {:class => 'form-control', :placeholder => "Email", :type => "email", :id => 'email_field', required: true}
                 .form-group
-                  = f.hidden_field :password, {:class => 'form-control', :placeholder => "Password", :type => "password", :id => 'password_field', required: true, pattern: ".{8,}", title: "8 characters minimum"}
+                  = f.hidden_field :password, {:class => 'form-control', :placeholder => "Password", :type => "password", :id => 'password_field', required: true, title: "8 characters minimum"}
                 .form-group
                   = f.hidden_field :remember_me, value: true
                   = f.button "Log in", class: 'btn btn-default btn-block login-btn'

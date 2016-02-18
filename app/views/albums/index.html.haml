@@ -37,12 +37,9 @@
             = raw album.description
           .hashtags
             = raw album.tag_list.map { |t| link_to "##{t}", tag_path(t) }.join('  ')
-            / = album.pins.each do |pin|
-            /   = link_to (image_tag pin.image.url(:medium), class: "image"), album
-          .friends
-            %a.icon.first{href: "#"}
-            %a.icon.second{href: "#"}
-            %a.icon.other{href: "#"}
+          .pins
+            = display_album_pins(album)
+
         .footer
           %span.pull-right
             %span.fa.fa-comments-o
@@ -50,6 +47,6 @@
             %span.orange (+3)
           %a{href: "#"}
             %span.avatar-mini
-              = image_tag pin.user.avatar, width: 30, height: 30 
+              = image_tag album.user.avatar, width: 30, height: 30 
             %span.author 
-              = pin.user.full_name
+              = album.user.full_name

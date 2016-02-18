@@ -69,7 +69,6 @@ class App.PinUploadForm extends Spine.Controller
                   add:  @add
 
   done: (e, data) =>
-    alert '!!!'
     App.Pin.create id: data.result.id, kind: 'uploaded', '_destroy': false
     @amount_of_uploaded_files += 1
     @trigger 'allFilesUploads' if @percent() == 100
@@ -95,14 +94,11 @@ class App.PinUploadForm extends Spine.Controller
 
   submit: (pin_ids) ->
     if App.Pin.getPinsForUploading().length == 0
-      alert '0'
       @trigger 'allFilesUploads' 
     else
-      alert '<>0'
       @el.find("#progress_bar").removeClass('hide')
-      window.test = App.Pin.getPinsForUploading()
-      # for pin in App.Pin.getPinsForUploading()
-      #   pin.data.submit()
+      for pin in App.Pin.getPinsForUploading()
+        pin.data.submit()
 
 ##############################
 ##############################

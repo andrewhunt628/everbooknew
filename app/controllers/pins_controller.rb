@@ -1,16 +1,10 @@
 class PinsController < ApplicationController
 	before_action :find_pin, only: [:show, :edit, :update, :destroy]
 	before_filter :authenticate_user!
-	helper_method :tags_list
 
 	def index
-		if tags_list.present?
-			@pins = current_user.pins.tagged_with(tags_list.split("/"))
-		else
-			@pins = current_user.pins
-		end
+		@pins = current_user.pins
 		@pins = @pins.order("pins.created_at DESC")
-		@tags = @pins.tag_counts_on(:tags)
 	end
 
 	def show
@@ -49,10 +43,6 @@ class PinsController < ApplicationController
 	end
 
 	private
-
-		def tags_list
-			params[:tags_list].to_s.split("/")
-		end
 
 		def pin_params
 			@pin_params = params.require(:pin).permit(:title, :description, :image, :text_marks, :tag_list, :person_ids => [])

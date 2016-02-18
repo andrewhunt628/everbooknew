@@ -1,5 +1,5 @@
 .album-form-js
-  = form_for(@album, html: {class: 'form-horizontal', 'data-type' => 'album'}) do |f|
+  = nested_form_for(@album, html: {class: 'form-horizontal', 'data-type' => 'album'}) do |f|
     - if f.object.errors.any?
       #errors
         %h2
@@ -7,7 +7,8 @@
           prevented this Pin from saving
         %ul
           - f.object.errors.full_messages.each do |msg|
-            %li = msg
+            %li 
+              = msg
 
     .form-group
       .row
@@ -29,29 +30,45 @@
           Tags (Separated by commas)
         .col-sm-5
           = f.text_field :tag_list, { value: f.object.tag_list.join(","), class: 'form-control' }
+
+    %hr    
+    %hr    
     
-  = form_for(Pin.new, html: {:multipart => true, class: 'form-horizontal', 'data-type' => 'images'}) do |f|
-    .form-group
-      .hide{'data-type' => 'existing-pins'}
-        - @album.pins.each do |pin|
-          %div{'data-id' =>"#{pin.id}", 'data-type' => 'pin', 'data-url'=>"#{pin.image.try(:thumb).to_s}"}
-      .row
-        %label.col-sm-2.control-label
-          Pins in album
-        .col-sm-5
-          .file-uploader 
-            = f.file_field :image, multiple: true, name: 'pin[image]', 'data-url' => albums_path, class: 'file', accept: "pin/*"
-            .pins-dropzone
-              %span
-                Drag and drop your pins here
-          #preview.row
-          #progress_bar.row.hide
-            .col-sm-12
-              %h5
-                Uploading pins ...
-              .progress
-                .progress-bar{'role' => "progressbar", 'aria-valuenow' => "60", 'aria-valuemin' => "0", 'aria-valuemax' => "100", 'style' => "width: 0%;"}
-                  0%
+    = f.fields_for :pins do |pins_fields|
+
+      .form-group
+        .row
+          = pins_fields.label :image, class: 'col-sm-2 control-label' do
+            Image
+          .col-sm-5
+            = pins_fields.hidden_field :image_cache, :value => pins_fields.object.image 
+            = pins_fields.file_field :image
+            %br
+            - if pins_fields.object.image.to_s.present?
+              %img{height: "100", width: "100", src: "#{pins_fields.object.image.to_s}"}
+
+
+      .form-group
+        .row
+          = pins_fields.label :title, class: 'col-sm-2 control-label' do
+            Title
+          .col-sm-5
+            = pins_fields.text_field :title, { class: 'form-control' }
+
+      .form-group
+        .row
+          = pins_fields.label :description, class: 'col-sm-2 control-label' do
+            Description
+          .col-sm-5
+            = pins_fields.text_area :description, { class: 'form-control' }
+
+      .form-group
+        .row
+          .col-sm-7
+            = pins_fields.link_to_remove "Remove this pin", class: 'btn btn-xs btn-danger pull-right'
+
+    = f.link_to_add "Add new pin", :pins, class: 'btn btn-xs btn-success pull'
+
 
   .form-group
     .row

@@ -237,17 +237,24 @@ body {
             color: black;
           }
         }
-        .friends {
+        .pins {
           margin-top: 10px;
-          .icon {
-            display: inline-block;
-            margin-right: 3px;
-            width: 70px;
-            height: 70px;
-            background-color: $icon-background-color;
-            // background-color: #f05323;
-            border-radius: 4px;
-            &:last-child {
+
+          a {
+            margin-right: 7px;
+            .icon {
+              margin-bottom: 5px; 
+              display: inline-block;
+              width: 70px;
+              height: 70px;
+              // background-color: $icon-background-color;
+              background-color: #f05323;
+              border-radius: 4px;
+              background-position: center; 
+              background-size: cover; 
+              background-repeat: no-repeat;
+            }
+            &:nth-child(3n) {
               margin-right: 0px;
             }
           }

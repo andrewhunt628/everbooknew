@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :pin do     
-    association :user, factory: :user
+    association :album, factory: :album
     after(:build) do |pin|
       pin.image = File.new(Rails.root + 'spec/fixtures/images/example1.jpg')
 

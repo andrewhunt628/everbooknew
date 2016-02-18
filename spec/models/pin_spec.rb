@@ -15,10 +15,6 @@ RSpec.describe Pin, type: :model do
       expect(pin.save).to eq(false)
     end
 
-    it 'has blank user' do
-      pin.user = nil
-    end
-
     it 'has blank image' do
       pin.image = nil
     end

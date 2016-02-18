@@ -44,6 +44,9 @@ gem 'underscore-rails'
 #For js-upload images
 gem "jquery-fileupload-rails"
 
+gem "nested_form"
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
