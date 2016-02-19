@@ -304,6 +304,9 @@ body {
       text-shadow: none;
       color: white;
       opacity: 0.9;
+      span {
+        font-weight: 100;
+      }
     }
     .modal-content{
       border-radius: 0px;
@@ -331,6 +334,7 @@ body {
               }
               .hashtags{
                 a{
+                  font-size: 12px;
                   color: white;
                 }
               }
