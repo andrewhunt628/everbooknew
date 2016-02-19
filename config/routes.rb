@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
+  resources :albums
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
-  resources :pins
+  resources :pins, only: [:create, :destroy]
 
   resources :family_bonds, only: [:index, :new, :create, :destroy]
   resources :users, only: [:show]
-  root "pins#index"
+  root "albums#index"
 
-  get '*tags_list' => 'pins#index', as: :tag# this line should be last
+  get '*tags_list' => 'albums#index', as: :tag# this line should be last
 end

@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
          :omniauthable, :omniauth_providers => [:facebook]
 
   has_many :pins
+  has_many :albums
   has_many :family_bonds, foreign_key: 'family_member_one_id'
   has_many :family, through: :family_bonds, source: :family_member_two
 

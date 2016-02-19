@@ -15,10 +15,6 @@ RSpec.describe Pin, type: :model do
       expect(pin.save).to eq(false)
     end
 
-    it 'has blank user' do
-      pin.user = nil
-    end
-
     it 'has blank image' do
       pin.image = nil
     end
@@ -47,9 +43,15 @@ RSpec.describe Pin, type: :model do
       pin.save!
     end
 
-    it '=' do
+    it '=Array' do
       pin.text_marks = ["Jhon", "Andrew", "Pitter", "Leonard"]
       pin.save
+    end
+
+    it '=String' do
+      pin.text_marks = "Jhon,     Andrew    ,       Pitter,      Leonard"
+      pin.save
+      expect(pin.text_marks).to eq(["Jhon", "Andrew", "Pitter", "Leonard"])
     end
 
     it '' do
