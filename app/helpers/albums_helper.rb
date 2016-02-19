@@ -5,11 +5,17 @@ module AlbumsHelper
     limit  = get_limit_for_album(album)
     while (iteration < limit) do
       pin     = album.pins_for_displaying[iteration]
-      result += link_to pin, 'data-toggle' => "modal", 'data-target'=>"#pin#{pin.id}" do 
-                  content_tag :div, style: "background-image: url('#{pin.image.url(:thumb)}');", class: 'icon' do
+      iteration += 1
+      result += content_tag :div, class: 'icon' do
+                  res = link_to pin, style: "background-image: url('#{pin.image.url(:thumb)}');", 'data-toggle' => "modal", 'data-target'=>"#pin#{pin.id}" do
+                  end
+                  res += if iteration == limit && get_remaining_pins_quantity(album) > 0
+                    content_tag :div, class: 'album-counter' do
+                      counter = content_tag :h4, get_remaining_pins_quantity(album)
+                      counter += content_tag :h5, 'more'
+                    end
                   end
                 end
-      iteration += 1
     end
     result
   end

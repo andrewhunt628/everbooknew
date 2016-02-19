@@ -240,19 +240,49 @@ body {
         .pins {
           margin-top: 10px;
 
-          a {
+          .icon {
             margin-right: 7px;
-            .icon {
+            display: inline-block;
+            position: relative;
+            width: 70px;
+            height: 70px;
+            a {
+              position: absolute;
+              width: 100%;
+              height: 100%;
               margin-bottom: 5px;
-              display: inline-block;
-              width: 70px;
-              height: 70px;
+              display: block;
               // background-color: $icon-background-color;
               background-color: #f05323;
               border-radius: 4px;
               background-position: center;
               background-size: cover;
               background-repeat: no-repeat;
+            }
+            .album-counter {
+              top: 0px;
+              left: 0px;
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              background-color: rgba(0,0,0,0.5);
+              border-radius: 4px;
+              h4{
+                color: white;
+                text-align: center;
+                margin-bottom: 0px;
+                margin-top: 15px;
+                font-size: 20px;
+                font-weight: 700;
+              }
+              h5{
+                color: white;
+                text-align: center;
+                margin-bottom: 0px;
+                margin-top: 0px;
+                line-height: 5px;
+                font-size: 18px;
+              }
             }
             &:nth-child(3n) {
               margin-right: 0px;
