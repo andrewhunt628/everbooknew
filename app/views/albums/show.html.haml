@@ -1,31 +1,8 @@
+%div
+  = link_to 'Edit album', edit_album_path(@album), class: 'btn btn-default'
+  = link_to 'Delete album', album_path(@album), class: 'btn btn-danger', method: :delete, data: {confitm: "Are you sure?"}
 #pins.transitions-enabled
-  .box.wrapper
-    .panel.panel-default
-      .panel-content
-        .panel-body
-          =link_to "UPLOAD YOUR IMAGE", new_album_path, class: "btn btn-block btn-orange"
-          .input-group.tag-filter
-            %input.form-control{type: 'text'}
-            %span.input-group-addon.btn.btn-black
-              %span.fa.fa-caret-down
-    .panel.panel-default
-      .panel-content
-        .panel-body
-          %h3 Hashtags
-          .hashtags-container
-            - @album.tags.each do |tag|
-              .hashtag{href: "#"}
-                = link_to("##{tag}", get_mark_tag_url(tag))
-                = link_to get_unmark_tag_url(tag) do
-                  %span.close ×
-    .panel.panel-default
-      .panel-content
-        .panel-body
-          = link_to "view all", family_bonds_path, class: "pull-right orange help"
-          %h3 Friends
-          - current_user.family.each do |friend|
-            = link_to user_path(friend), class: "friend", title: "#{friend.full_name}" do
-              = image_tag friend.avatar, width: 30, height: 30 
+
   - @album.pins.each do |pin|
     .box.panel.panel-default
       .panel-content
@@ -34,17 +11,3 @@
         .panel-body
           .description
             = raw pin.description
-          / .hashtags
-          /   = raw pin.tag_list.map { |t| link_to "##{t}", tag_path(t) }.join('  ')
-        .footer
-          %span.pull-right
-            %span.fa.fa-comments-o
-            23
-            %span.orange (+3)
-          %a{href: "#"}
-            %span.avatar-mini
-              = image_tag pin.user.avatar, width: 30, height: 30
-            %span.author
-              = pin.user.full_name
-
-
