@@ -1,22 +1,26 @@
 class PinsController < ApplicationController
-	before_action :find_pin, only: [:show, :edit, :update, :destroy]
-	before_filter :authenticate_user!
+  before_action :find_pin, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
 
-	def destroy
-		@pin.destroy
-		redirect_to root_path
-	end
+  def show
+    render :show, layout: false 
+  end
 
-	def update
-		if @pin.update(pin_params)
-			redirect_to @pin, notice: "Pin was Successfully updated!"
-		else
-			render 'edit'
-		end
-	end
+  def destroy
+    @pin.destroy
+    redirect_to root_path
+  end
 
-	def create
-		@pin = Pin.new(pin_params)
+  def update
+    if @pin.update(pin_params)
+      redirect_to @pin, notice: "Pin was Successfully updated!"
+    else
+      render 'edit'
+    end
+  end
+
+  def create
+    @pin = Pin.new(pin_params)
 
     respond_to do |format|
       if @pin.save
@@ -25,18 +29,18 @@ class PinsController < ApplicationController
         format.json { render json: @pin.errors, status: :unprocessable_entity }
       end
     end
-	end
+  end
 
-	private
+  private
 
-		def pin_params
-			@pin_params = params.require(:pin).permit(:title, :description, :image, :text_marks, :tag_list, :album_id, :person_ids => [])
-			@pin_params[:text_marks] = @pin_params[:text_marks].to_s.split(",").map(&:squish)
-			@pin_params
-		end
+    def pin_params
+      @pin_params = params.require(:pin).permit(:title, :description, :image, :text_marks, :tag_list, :album_id, :person_ids => [])
+      @pin_params[:text_marks] = @pin_params[:text_marks].to_s.split(",").map(&:squish)
+      @pin_params
+    end
 
-		def find_pin
-			@pin = Pin.all.find(params[:id])
-		end
+    def find_pin
+      @pin = Pin.all.find(params[:id])
+    end
 
 end

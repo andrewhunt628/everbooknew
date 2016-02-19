@@ -1,0 +1,38 @@
+.modal-body
+  .row
+    .modal-picture.col-md-7
+      = image_tag @pin.image.url(:original), style: "max-width: 100%"
+    .modal-panel.col-md-5
+      .modal-description
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} X
+        %p
+          = @pin.description
+      .modal-comments
+        .modal-messages
+          %table.comment
+            %tr
+              %td.icon
+                = image_tag @pin.user.avatar, width: 30, height: 30
+              %td.message
+                Lorem ipsum dolor sit amet, consectetur adipis cing elit ipsum dolor sit amet, consectetur
+                %p.info
+                  17 Feb 2016 7.30pm
+          %table.comment
+            %tr
+              %td.icon
+                = image_tag @pin.user.avatar, width: 30, height: 30
+              %td.message
+                Lorem ipsum dolor sit amet, consectetur adipis cing elit ipsum dolor sit amet, consectetur
+                %p.info
+                  17 Feb 2016 7.30pm
+          %table.comment
+            %tr
+              %td.icon
+                = image_tag @pin.user.avatar, width: 30, height: 30
+              %td.message
+                Lorem ipsum dolor sit amet, consectetur adipis cing elit ipsum dolor sit amet, consectetur
+                %p.info
+                  17 Feb 2016 7.30pm
+        .modal-input
+          %textarea
