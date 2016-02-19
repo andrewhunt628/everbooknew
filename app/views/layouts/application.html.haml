@@ -1,17 +1,17 @@
-
 %html
-%head
-  %title Pin Board
-  = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
-  = javascript_include_tag 'application', 'data-turbolinks-track' => true
-  = csrf_meta_tags
-%body
-  = render "shared/header"
+  %head
+    %title Pin Board
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    %meta(name='viewport' content='initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width')
+  %body
+    = render "shared/header"
 
-  .container
-    = yield
+    .container
+      = yield
 
-  = render 'pins/modal'
+    = render 'pins/modal'
 
 
 

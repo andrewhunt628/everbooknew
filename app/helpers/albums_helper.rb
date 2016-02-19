@@ -35,4 +35,15 @@ module AlbumsHelper
       [limit, album.pins_for_displaying.count].min
     end
 
+    def get_remaining_pins_quantity(album)
+      pins_count = album.pins_for_displaying.count
+      if pins_count > 6
+        pins_count - 6
+      elsif pins_count > 3 && pins_count < 6
+        pins_count - 3
+      else
+        0
+      end
+
+    end
 end
