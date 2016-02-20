@@ -34,6 +34,7 @@ gem "font-awesome-rails"
 gem 'acts-as-taggable-on', '~> 3.4'
 gem "jquery-validation-rails"
 gem "rails_12factor"
+gem 'momentjs-rails'
 
 
 # Use spine-js as the JavaScript library

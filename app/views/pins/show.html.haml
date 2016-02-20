@@ -46,7 +46,7 @@
         commentText.val('')
         commentItem = modalWindow.find("#commentTemplate table.comment").clone();
         commentItem.find(".content").html(text);
-        commentItem.find(".info").html(new Date);
+        commentItem.find(".info").html(moment().format('D MMM YYYY hh:mma'));
         if(commentsBlock.find("table.comment").length == 0){
           commentsBlock.html(commentItem);
         }
