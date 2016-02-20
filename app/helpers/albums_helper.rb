@@ -27,7 +27,7 @@ module AlbumsHelper
     result    = ''.html_safe
     limit     = get_limit_for_album(album)
     iteration = 0
-    album.pins_for_displaying.each do |pin|
+    album.pins.each do |pin|
       result += content_tag :div, class: 'modal fade', id: "pin#{pin.id}", "aria-labelledby" => "signUpModalLabel", :role => "dialog", :tabindex => "-1" do
         content_tag :div, class: 'modal-dialog modal-lg' do
           content_tag :div, '', class: 'modal-content'
