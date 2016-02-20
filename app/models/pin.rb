@@ -1,7 +1,8 @@
 class Pin < ActiveRecord::Base  
-  belongs_to :album
-  has_one :user, through: :album
   
+  belongs_to :album
+  has_many :comments
+  has_one :user, through: :album
   has_and_belongs_to_many :people, class_name: 'User'
   
   serialize :text_marks, Array
