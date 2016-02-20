@@ -378,6 +378,7 @@ body {
               .modal-messages{
                 overflow-y: auto;
                 padding: 10px;
+                height: 200px;
                 .comment{
                   color: #898989;
                   border-bottom: 1px dotted #ddd;
@@ -402,6 +403,7 @@ body {
               .modal-input{
                 padding: 10px 10px 10px 0px;
                 textarea.form-control{
+                  resize: none;
                   width: 100%;
                   height: 65px;
                   border: 2px solid #ddd;
