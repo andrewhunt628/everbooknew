@@ -5,10 +5,9 @@ class AlbumsController < ApplicationController
   # GET /albums
   # GET /albums.json
   def index
+    @albums = Album.where(user_id: current_user.family_ids + [current_user.id])
     if tags_list.present?
-      @albums = current_user.albums.tagged_with(tags_list.split("/"))
-    else
-      @albums = current_user.albums
+      @albums = @albums.tagged_with(tags_list.split("/"))
     end
     @albums = @albums.order("albums.created_at DESC")
     @tags = @albums.tag_counts_on(:tags)
