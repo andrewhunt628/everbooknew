@@ -17,7 +17,7 @@
       .modal-comments
         .modal-messages
           - if @pin.comments.count.zero?
-            There are no any comments...
+            You comment will be first...
           - else
             - @pin.comments.each do |comment|
               = render 'comments/comment', user: comment.user, comment: comment
@@ -25,7 +25,6 @@
           = form_for Comment.new, remote: true, html: {'data-type' => 'commentForm', id: "comment_for_pin#{@pin.id}"} do |f|
             = f.hidden_field :pin_id, value: @pin.id
             = f.text_area :text, class: 'form-control'
-            = f.button :submit
 
 .hide#commentTemplate
   = render 'comments/comment', user: current_user, comment: nil
