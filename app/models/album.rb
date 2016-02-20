@@ -9,7 +9,7 @@ class Album < ActiveRecord::Base
   accepts_nested_attributes_for :pins, allow_destroy: true, reject_if: proc { |attributes| attributes['image'].blank? }
 
   def cover
-    pins.first
+    pins.sample
   end
 
   def pins_for_displaying
