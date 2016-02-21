@@ -13,7 +13,7 @@
             %span.fa.fa-clock-o
             17 Feb 2016 7.30pm
           .hashtags
-            = raw @pin.album.tag_list.map { |t| link_to "##{t}", tag_path(t) }.join('  ')
+            = raw @pin.tag_list.map { |t| link_to "##{t}", tag_path(t) }.join('  ')
       .modal-comments
         .modal-messages
           - if @pin.comments.count.zero?

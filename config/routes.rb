@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :albums
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
-  resources :pins, only: [:show, :create, :destroy]
+  resources :pins
   resources :comments, only: [:create]
 
   resources :family_bonds, only: [:index, :new, :create, :destroy]

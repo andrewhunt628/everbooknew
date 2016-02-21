@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160220165005) do
+ActiveRecord::Schema.define(version: 20160222151151) do
 
   create_table "albums", force: :cascade do |t|
     t.string   "title"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20160220165005) do
     t.datetime "image_updated_at"
     t.text     "text_marks"
     t.integer  "album_id"
+    t.integer  "user_id"
   end
 
   create_table "pins_users", force: :cascade do |t|

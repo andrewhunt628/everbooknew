@@ -1,6 +1,5 @@
 class AlbumsController < ApplicationController
   before_action :set_album, only: [:show, :edit, :update, :destroy]
-  helper_method :tags_list
 
   # GET /albums
   # GET /albums.json
@@ -69,10 +68,6 @@ class AlbumsController < ApplicationController
   end
 
   private
-    def tags_list
-      params[:tags_list].to_s.split("/")
-    end
-
     # Use callbacks to share common setup or constraints between actions.
     def set_album
       @album = current_user.albums.find(params[:id])
