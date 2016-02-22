@@ -4,7 +4,7 @@ class Album < ActiveRecord::Base
   belongs_to :user
   has_many :pins
   
-  validates :title, presence: true
+  validates :title, :pins, presence: true
 
   accepts_nested_attributes_for :pins, allow_destroy: true, reject_if: proc { |attributes| attributes['image'].blank? }
 

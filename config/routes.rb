@@ -7,6 +7,9 @@ Rails.application.routes.draw do
 
   resources :family_bonds, only: [:index, :new, :create, :destroy]
   resources :users, only: [:show]
+
+  get "uploading" => "pins#uploading", as: :uploading
+
   root "albums#index"
 
   get '*tags_list' => 'albums#index', as: :tag# this line should be last

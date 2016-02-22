@@ -28,7 +28,7 @@ class PinsController < ApplicationController
 
   def update
     if @pin.update(pin_params)
-      redirect_to @pin, notice: "Pin was Successfully updated!"
+      redirect_to pins_path, notice: "Pin was Successfully updated!"
     else
       render 'edit'
     end
@@ -36,6 +36,10 @@ class PinsController < ApplicationController
 
   def new
     @pin = current_user.pins.build
+  end
+
+  def uploading#tmp method for demostration
+    
   end
 
   def create
