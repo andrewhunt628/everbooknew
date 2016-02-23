@@ -6,7 +6,8 @@
     = csrf_meta_tags
     %meta(name='viewport' content='initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width')
   %body
-    = render "shared/header"
+    - if user_signed_in?
+      = render "shared/header"
 
     .container
       = yield

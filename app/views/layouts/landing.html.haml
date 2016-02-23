@@ -30,14 +30,22 @@
             %p or
           .form.col-sm-12
             .form
+              - if flash.count > 0
+                - class_list = 'has-error'
+
               = form_for(resource, as: resource_name, url: session_path(resource_name), html: {id: 'signin'}) do |f|
-                .form-group
+                %div{class: "form-group #{class_list}"}
                   = f.text_field :email, {:class => 'form-control', :placeholder => "Email", :type => "email", :id => 'email_field', required: true}
-                .form-group
+                  %span.help-block
+                    - flash.each do |key, value|
+                      = value
+
+                %div{class: "form-group #{class_list}"}
                   = f.hidden_field :password, {:class => 'form-control', :placeholder => "Password", :type => "password", :id => 'password_field', required: true, title: "8 characters minimum"}
                 .form-group
                   = f.hidden_field :remember_me, value: true
                   = f.button "Log in", class: 'btn btn-default btn-block login-btn'
+                = link_to "Forgot your password?", new_password_path(resource_name)
 
               .terms.col-sm-12.text-center
                 %h6 Creating an account means you’re okay with Everbook's
