@@ -61,15 +61,15 @@ gem 'forgery' #when stop use fake data move this gem into :development, :test se
 
 group :production do
   gem 'pg'
-
 end
+
+gem 'letter_opener' #move to :development, :test section before first relase
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'sqlite3'
 
   gem 'byebug'
-  gem 'letter_opener'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
 
