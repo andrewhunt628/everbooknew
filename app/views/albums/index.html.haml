@@ -3,7 +3,16 @@
     .panel.panel-default
       .panel-content
         .panel-body
-          =link_to "UPLOAD YOUR IMAGE", uploading_path, class: "btn btn-block btn-orange"
+          %div.btn-group{style: 'width: 100%'}
+            %button{:type =>"button", :class => "btn btn-orange dropdown-toggle", 'data-toggle' => "dropdown", 'aria-haspopup' => "true", 'aria-expanded' => "false", style: 'width: 100%'}
+              %span{style: "margin-right: 67px"}
+                UPLOAD YOUR IMAGE
+              %span.caret
+            %ul.dropdown-menu
+              %li 
+                = link_to "New album", new_album_path
+              %li 
+                = link_to "New Pin", new_pin_path
           .input-group.tag-filter
             %input.form-control{type: 'text'}
             %span.input-group-addon.btn.btn-black
