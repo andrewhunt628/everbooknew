@@ -1,20 +1,58 @@
-#pin_show.row	
-	.col-md-8.col-md-offset-2
-		.panel.panel-default
-			.panel-heading.pin-image
-				= image_tag @pin.image.url(:thumb)
-			.panel-body
-				%h1= @pin.title
-				%p.description= @pin.description
-			.panel-footer
-				.row
-					.col-md-6
-						%p.user
-						Submitted by
-						= @pin.user.email
-					.col-md-6
-						.btn-group.pull-right
+.modal-body
+  .row
+    .modal-picture.col-md-7
+      = image_tag @pin.image.url(:original), style: "width: 100%"
+    .modal-panel.col-md-5
+      .modal-description
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} X
+        .description
+          %p
+            = @pin.description
+          %p.info
+            %span.fa.fa-clock-o
+            17 Feb 2016 7.30pm
+          .hashtags
+            = raw @pin.tag_list.map { |t| link_to "##{t}", tag_path(t) }.join('  ')
+      .modal-comments
+        .modal-messages
+          - if @pin.comments.count.zero?
+            You comment will be first...
+          - else
+            - @pin.comments.each do |comment|
+              = render 'comments/comment', user: comment.user, comment: comment
+        .modal-input
+          = form_for Comment.new, remote: true, html: {'data-type' => 'commentForm', id: "comment_for_pin#{@pin.id}"} do |f|
+            = f.hidden_field :pin_id, value: @pin.id
+            = f.text_area :text, class: 'form-control'
 
-							= link_to "Back", root_path, class: "btn btn-default"
-							= link_to "Edit", edit_pin_path, class: "btn btn-default"
-							= link_to "Delete", pin_path, method: :delete, data: { confirm: "Are you sure?"}, class: "btn btn-default"
+.hide#commentTemplate
+  = render 'comments/comment', user: current_user, comment: nil
+  
+
+
+:javascript  
+  commentForm = $("form#comment_for_pin#{@pin.id}")
+  commentText = commentForm.find("textarea")
+  modalWindow = $("#pin#{@pin.id}")
+  commentsBlock = modalWindow.find(".modal-messages")
+
+  commentText.on('keydown', (function(event) {
+    if (event.which == 13) {
+        event.preventDefault();
+        commentForm.submit();
+        text = commentText.val();
+        
+        commentText.val('')
+        commentItem = modalWindow.find("#commentTemplate table.comment").clone();
+        commentItem.find(".content").html(text);
+        commentItem.find(".info").html(moment().format('D MMM YYYY hh:mma'));
+        if(commentsBlock.find("table.comment").length == 0){
+          commentsBlock.html(commentItem);
+        }
+        else {
+         commentsBlock.append(commentItem); 
+        }
+
+    }
+  }));

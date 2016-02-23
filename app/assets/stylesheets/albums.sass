@@ -1,0 +1,47 @@
+#preview
+  margin-left: 0px
+  margin-right: 0px
+  margin-top: 10px
+  .image-container
+    margin-bottom: 5px
+    padding: 5px
+    text-align: center
+    height: 130px
+    .thumbnail
+      margin-bottom: 0
+
+      img
+        width: 80px
+        height: 80px
+
+      .action-img
+        display: none
+
+      .notice-about-deleted
+        display: none
+
+      &:hover
+        cursor: pointer
+        img
+          opacity: 0.5
+        .action-img
+          &.restore
+            display: none
+          &.remove
+            display: inline-block
+
+      &.was-deleted
+        img
+          opacity: 0.2
+        .notice-about-deleted
+          display: inline-block
+
+        &:hover
+          img
+            opacity: 0.5
+        
+          .action-img
+            &.restore
+              display: inline-block
+            &.remove
+              display: none

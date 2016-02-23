@@ -1,0 +1,12 @@
+[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[33m*[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m
+
+Pending: (Failures listed here are expected and do not affect your suite's status)
+[33m
+  1) AlbumsHelper add some examples to (or delete) /Users/valexl/workspace/UPWORK/everbooknew/spec/helpers/albums_helper_spec.rb[0m
+     [36m# Not yet implemented[0m
+[36m     # ./spec/helpers/albums_helper_spec.rb:14
+[0m
+
+Finished in 3.14 seconds (files took 2.64 seconds to load)
+[33m40 examples, 0 failures, 1 pending[0m
+

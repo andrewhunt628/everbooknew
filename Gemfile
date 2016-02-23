@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -33,6 +33,19 @@ gem 'masonry-rails'
 gem "font-awesome-rails"
 gem 'acts-as-taggable-on', '~> 3.4'
 gem "jquery-validation-rails"
+gem "rails_12factor"
+gem 'momentjs-rails'
+
+
+# Use spine-js as the JavaScript library
+gem "json2-rails"
+gem 'eco'
+gem 'underscore-rails'
+
+#For js-upload images
+gem "jquery-fileupload-rails"
+
+gem "nested_form"
 
 
 # Use ActiveModel has_secure_password
@@ -44,15 +57,23 @@ gem "jquery-validation-rails"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'forgery' #when stop use fake data move this gem into :development, :test section
+
+group :production do
+  gem 'pg'
+end
+
+gem 'letter_opener' #move to :development, :test section before first relase
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'sqlite3'
+
   gem 'byebug'
-  gem 'letter_opener'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
 
   #Generate humanize random data
-  gem 'forgery'
 end
 
 group :development do

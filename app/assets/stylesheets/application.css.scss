@@ -3,6 +3,9 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "jquery.fileupload";
+@import "jquery.fileupload-ui";
+@import "dropzone";
 
 @font-face {
   font-family: 'Cantarell';
@@ -38,6 +41,11 @@
 
 $icon-background-color: white;
 // $icon-background-color: #f05323;
+
+
+.hide {
+  display: none;
+}
 
 .orange{
   color: #f05323;
@@ -234,16 +242,54 @@ body {
             color: black;
           }
         }
-        .friends {
+        .pins {
           margin-top: 10px;
+
           .icon {
+            margin-right: 7px;
             display: inline-block;
-            margin-right: 3px;
+            position: relative;
             width: 70px;
             height: 70px;
-            background-color: $icon-background-color;
-            border-radius: 4px;
-            &:last-child {
+            margin-bottom: 7px;
+            a {
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              display: block;
+              // background-color: $icon-background-color;
+              background-color: #f05323;
+              border-radius: 4px;
+              background-position: center;
+              background-size: cover;
+              background-repeat: no-repeat;
+            }
+            .album-counter {
+              top: 0px;
+              left: 0px;
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              background-color: rgba(0,0,0,0.5);
+              border-radius: 4px;
+              h4{
+                color: white;
+                text-align: center;
+                margin-bottom: 0px;
+                margin-top: 15px;
+                font-size: 20px;
+                font-weight: 700;
+              }
+              h5{
+                color: white;
+                text-align: center;
+                margin-bottom: 0px;
+                margin-top: 0px;
+                line-height: 5px;
+                font-size: 18px;
+              }
+            }
+            &:nth-child(3n) {
               margin-right: 0px;
             }
           }
@@ -282,6 +328,103 @@ body {
     background-color: #4f4f4f;
     color: #ffffff;
     font-size: 11px;
+  }
+}
+
+
+.modal{
+  .modal-dialog{
+    margin-top: 111px;
+    .close{
+      text-shadow: none;
+      color: white;
+      opacity: 0.9;
+      span {
+        font-weight: 100;
+      }
+    }
+    .modal-content{
+      border-radius: 0px;
+      border: none;
+      .modal-body{
+        padding: 0px;
+        .row{
+          margin-left: 0px;
+          margin-right: 0px;
+          .modal-picture{
+            padding: 10px;
+          }
+          .modal-panel{
+            padding: 0px;
+            .modal-description{
+              padding: 10px;
+              background-color: #f05323;
+              color: white;
+              .description{
+                margin-top: 10px;
+                margin-right: 20px;
+                p{
+                  font-size: 13px;
+                  margin: 0px;
+                  &.info{
+                    font-size: 10px;
+                    margin-top: 5px;
+                  }
+                }
+                .hashtags{
+                  a{
+                    font-size: 12px;
+                    color: white;
+                  }
+                }
+              }
+            }
+            .modal-comments{
+              hr{
+                margin-top: 10px;
+                margin-bottom: 10px;
+              }
+              .modal-messages{
+                overflow-y: auto;
+                padding: 10px;
+                padding-left: 0px;
+                height: 200px;
+                .comment{
+                  color: #898989;
+                  width: 100%;
+                  .icon{
+                    vertical-align: top;
+                    width: 30px;
+                  }
+                  .message{
+                    padding-left: 5px;
+                    line-height: 14px;
+                    font-size: 13px;
+                    .info{
+                      font-size: 10px;
+                      margin-top: 5px;
+                    }
+                  }
+                  &:last-child{
+                    border-bottom: none;
+                  }
+                }
+              }
+              .modal-input{
+                padding: 10px 10px 10px 0px;
+                textarea.form-control{
+                  resize: none;
+                  width: 100%;
+                  height: 65px;
+                  border: 2px solid #ddd;
+                  border-radius: 0px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 

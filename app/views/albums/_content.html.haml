@@ -1,0 +1,23 @@
+.box.panel.panel-default
+  .panel-content
+    .photo-wrap
+      = link_to album.cover, 'data-toggle' => "modal", 'data-target'=>"#pin#{album.cover.id}" do
+        = image_tag album.cover.image.url(:medium), class: "image"
+    .panel-body
+      .description
+        = raw album.description
+      .hashtags
+        = raw album.tag_list.map { |t| link_to "##{t}", tag_path(t) }.join('  ')
+      .pins
+        = display_album_pins(album)
+
+    .footer
+      %span.pull-right
+        %span.fa.fa-comments-o
+        23
+        %span.orange (+3)
+      %a{href: "#"}
+        %span.avatar-mini
+          = image_tag album.user.avatar, width: 30, height: 30 
+        %span.author 
+          = album.user.full_name

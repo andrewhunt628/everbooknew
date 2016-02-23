@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
          :omniauthable, :omniauth_providers => [:facebook]
 
   has_many :pins
+  has_many :albums
+  has_many :comments
   has_many :family_bonds, foreign_key: 'family_member_one_id'
   has_many :family, through: :family_bonds, source: :family_member_two
 
@@ -36,7 +38,7 @@ class User < ActiveRecord::Base
   end
 
   def avatar
-    "/fake_avatars/#{rand(18)}.png"
+    "/avatars/avatar#{rand(3)+1}.jpg"
   end
 
   # get or create new user from facebook

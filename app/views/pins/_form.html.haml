@@ -34,7 +34,15 @@
       = f.label :tag_list, class: 'col-sm-2 control-label' do
         Tags (Separated by commas)
       .col-sm-5
-        = f.text_field :tag_list, { class: 'form-control' }
+        = f.text_field :tag_list, { value: f.object.tag_list.join(","), class: 'form-control' }
+
+  .form-group
+    .row
+      = f.label :album, class: 'col-sm-2 control-label' do
+        Album
+      .col-sm-5
+        = f.select :album_id, options_for_select(current_user.albums.collect{|u| [u.title, u.id]}), {prompt: 'Select album for current pin'}, class: 'form-control'
+
 
   %hr
   .form-group

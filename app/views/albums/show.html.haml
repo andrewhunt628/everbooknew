@@ -1,0 +1,13 @@
+%div
+  = link_to 'Edit album', edit_album_path(@album), class: 'btn btn-default'
+  = link_to 'Delete album', album_path(@album), class: 'btn btn-danger', method: :delete, data: {confitm: "Are you sure?"}
+#pins.transitions-enabled
+
+  - @album.pins.each do |pin|
+    .box.panel.panel-default
+      .panel-content
+        .photo-wrap
+          = image_tag pin.image.url(:medium), class: "image", 'data-toggle'=>"modal", 'data-target'=>"#pinModal"
+        .panel-body
+          .description
+            = raw pin.description

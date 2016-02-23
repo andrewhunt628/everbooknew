@@ -40,7 +40,7 @@
 body {
     font-family: 'cantarell', sans-serif;
 }
-span.text-everbook {
+.text-everbook {
     color: #f05323;
     font-family: 'cantarell-bold', sans-serif;
     font-weight: 700;
@@ -51,7 +51,7 @@ span.text-everbook {
 }
 .design-back {
     background-image: url('../images/desktop_back.jpg');
-    background-position: 100% 50%;
+    background-position: 100% 20%;
     background-repeat: no-repeat;
     background-size: cover !important;
     height: 100%;
@@ -89,6 +89,7 @@ span.text-everbook {
     right: 0;
     bottom: 0;
     margin: auto;
+    margin-top: 20px;
     width: 100%;
     padding: 0 20px;
     height: 431px;
@@ -167,11 +168,17 @@ span.text-everbook {
 .btn.signup-btn {
     background: linear-gradient(#e3262e, #ab171e);
 }
+#signUpModal{
+    .modal-dialog{
+        margin-top: 150px;
+    }
+}
 
 /****** Responsive Style *********/
 @media (max-width: 1200px) {
     .design-back {
         background-image: url('../images/tablet_back.jpg');
+        background-position: 50% 20%;
     }
 }
 @media (max-width: 767px) {

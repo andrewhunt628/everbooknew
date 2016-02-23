@@ -1,0 +1,10 @@
+%table.comment
+  %tr
+    %td.icon
+      = image_tag user.avatar, width: 30, height: 30
+    %td.message
+      %span.content
+        = comment.try(:text)
+      %p.info
+        = comment.try(:created_at).try(:to_time)
+%hr

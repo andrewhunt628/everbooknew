@@ -1,0 +1,16 @@
+#pinModal.modal.fade{"aria-labelledby" => "signUpModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+
+:javascript
+  $(function(){
+    $('.modal').on('shown.bs.modal', function (e) {
+      modal = $(this);
+      picture = modal.find('.modal-picture');
+      description = modal.find('.modal-description');
+      input = modal.find('.modal-input');
+      new_height = picture.height()-description.outerHeight()-input.outerHeight()
+
+      modal.find('.modal-messages').outerHeight(new_height>200 ? new_height + 20 : 200);
+    })
+  })

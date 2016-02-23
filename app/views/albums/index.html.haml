@@ -1,0 +1,44 @@
+#pins.transitions-enabled
+  .box.wrapper
+    .panel.panel-default
+      .panel-content
+        .panel-body
+          %div.btn-group{style: 'width: 100%'}
+            %button{:type =>"button", :class => "btn btn-orange dropdown-toggle", 'data-toggle' => "dropdown", 'aria-haspopup' => "true", 'aria-expanded' => "false", style: 'width: 100%'}
+              %span{style: "margin-right: 67px"}
+                UPLOAD YOUR IMAGE
+              %span.caret
+            %ul.dropdown-menu
+              %li 
+                = link_to "New album", new_album_path
+              %li 
+                = link_to "New Pin", new_pin_path
+              %li 
+                = link_to "Add exist pin to album", uploading_path
+
+          .input-group.tag-filter
+            %input.form-control{type: 'text'}
+            %span.input-group-addon.btn.btn-black
+              %span.fa.fa-caret-down
+    .panel.panel-default
+      .panel-content
+        .panel-body
+          %h3 Hashtags
+          .hashtags-container
+            - @tags.each do |tag|
+              .hashtag{href: "#"}
+                = link_to("##{tag}", get_mark_tag_url(tag))
+                = link_to get_unmark_tag_url(tag) do
+                  %span.close ×
+    .panel.panel-default
+      .panel-content
+        .panel-body
+          = link_to "view all", family_bonds_path, class: "pull-right orange help"
+          %h3 Friends
+          - current_user.family.each do |friend|
+            = link_to user_path(friend), class: "friend", title: "#{friend.full_name}" do
+              = image_tag friend.avatar, width: 30, height: 30 
+
+  - @albums.each do |album|
+    = render 'content', album: album
+    = display_modal_windows_for_album_pins(album)

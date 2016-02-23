@@ -1,0 +1,102 @@
+.album-form-js
+  = nested_form_for(@album, html: {class: 'form-horizontal', 'data-type' => 'album'}) do |f|
+    - if f.object.errors.any?
+      #errors
+        %h2
+          = pluralize(f.object.errors.count, "error")
+          prevented this Pin from saving
+        %ul
+          - f.object.errors.full_messages.each do |msg|
+            %li 
+              = msg
+
+    .form-group
+      .row
+        = f.label :title, class: 'col-sm-2 control-label' do
+          Title
+        .col-sm-5
+          = f.text_field :title, { class: 'form-control', required: 'required' }
+
+    .form-group
+      .row
+        = f.label :description, class: 'col-sm-2 control-label' do
+          Description
+        .col-sm-5
+          = f.text_area :description, { class: 'form-control', cols: 5, rows: 5 }
+
+    .form-group
+      .row
+        = f.label :tag_list, class: 'col-sm-2 control-label' do
+          Tags (Separated by commas)
+        .col-sm-5
+          = f.text_field :tag_list, { value: f.object.tag_list.join(","), class: 'form-control' }
+
+    %hr    
+    %hr    
+    
+    = f.fields_for :pins do |pins_fields|
+
+      .form-group
+        .row
+          = pins_fields.label :image, class: 'col-sm-2 control-label' do
+            Image
+          .col-sm-5
+            = pins_fields.hidden_field :image_cache, :value => pins_fields.object.image 
+            = pins_fields.file_field :image
+            %br
+            - if pins_fields.object.image.to_s.present?
+              %img{height: "100", width: "100", src: "#{pins_fields.object.image.to_s}"}
+
+
+      .form-group
+        .row
+          = pins_fields.label :title, class: 'col-sm-2 control-label' do
+            Title
+          .col-sm-5
+            = pins_fields.text_field :title, { class: 'form-control' }
+
+      .form-group
+        .row
+          = pins_fields.label :description, class: 'col-sm-2 control-label' do
+            Description
+          .col-sm-5
+            = pins_fields.text_area :description, { class: 'form-control' }
+
+      .form-group
+        .row
+          = pins_fields.label :person_ids, class: 'col-sm-2 control-label' do
+            Family
+          .col-sm-5
+            = pins_fields.collection_select :person_ids, current_user.family, :id, :email, {propt: 'Family on photo'}, { class: 'form-control', multiple: true }
+
+      .form-group
+        .row
+          = pins_fields.label :text_marks, class: 'col-sm-2 control-label' do
+            If somebody not in everbook
+          .col-sm-5
+            = pins_fields.text_field :text_marks, { class: 'form-control', value: pins_fields.object.text_marks.join(", ") }
+            %p.help-block
+              (Separated by commas)
+      .form-group
+        .row
+          .alert.alert-info.col-sm-7
+            'Family' and 'If somebody not in everbook' can be joined via js in one field in the future
+
+
+      .form-group
+        .row
+          .col-sm-7
+            = pins_fields.link_to_remove "Remove this pin", class: 'btn btn-xs btn-danger pull-right'
+
+    = f.link_to_add "Add new pin", :pins, class: 'btn btn-xs btn-success pull'
+
+
+  .form-group
+    .row
+      .col-sm-5.col-sm-offset-2
+        .btn-group.actions.pull-right
+          = link_to 'Save', '#', class: 'btn btn-primary', 'data-type' => 'submit'
+          = link_to 'Cancel', :back, class: 'btn btn-default'
+
+:coffee
+  new App.AlbumForm el: $(".album-form-js")
