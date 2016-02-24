@@ -3,9 +3,9 @@
     .panel.panel-default
       .panel-content
         .panel-body
-          %div.btn-group{style: 'width: 100%'}
-            %button{:type =>"button", :class => "btn btn-orange dropdown-toggle", 'data-toggle' => "dropdown", 'aria-haspopup' => "true", 'aria-expanded' => "false", style: 'width: 100%'}
-              %span{style: "margin-right: 67px"}
+          %div.btn-group.upload-group
+            %button{:type =>"button", :class => "btn btn-orange upload-btn dropdown-toggle", 'data-toggle' => "dropdown", 'aria-haspopup' => "true", 'aria-expanded' => "false"}
+              %span.text
                 UPLOAD YOUR IMAGE
               %span.caret
             %ul.dropdown-menu
@@ -16,10 +16,6 @@
               %li 
                 = link_to "Add exist pin to album", uploading_path
 
-          .input-group.tag-filter
-            %input.form-control{type: 'text'}
-            %span.input-group-addon.btn.btn-black
-              %span.fa.fa-caret-down
     .panel.panel-default
       .panel-content
         .panel-body

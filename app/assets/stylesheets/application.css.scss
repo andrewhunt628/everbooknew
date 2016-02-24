@@ -329,6 +329,23 @@ body {
     color: #ffffff;
     font-size: 11px;
   }
+
+  .upload-group {
+    width: 100%;
+  
+    .upload-btn {
+      width: 100%;
+      span.text {
+        margin-left: 30px;
+      }
+      span.caret {
+        margin-left: 30px;
+      }
+
+    }
+    
+  }
+
 }
 
 
