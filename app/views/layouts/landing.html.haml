@@ -23,9 +23,9 @@
           .logo.col-sm-12.text-center
             %h1 Everbook
           .social.col-sm-12
-            =link_to user_omniauth_authorize_path(:facebook), class: 'facebook btn btn-primary btn-block' do
-              %i.fa.fa-facebook
-              Continue with Facebook
+            =link_to user_omniauth_authorize_path(:google_oauth2), class: 'google btn btn-primary btn-block' do
+              %i.fa.fa-google
+              Continue with Google
           .divide-line.col-sm-12
             %p or
           .form.col-sm-12

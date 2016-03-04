@@ -151,9 +151,10 @@ body {
 .social .btn {
     padding-left: 55px;
     position: relative;
+    margin-top: 10px;
 }
-.social .btn.facebook {
-    background: rgba(0, 0, 0, 0) linear-gradient(#5676bc, #31497b) repeat scroll 0 0;
+.social .btn.google {
+    background: rgba(0, 0, 0, 0) linear-gradient(#DD4B39, #d14836) repeat scroll 0 0;
     line-height: 1.8;
 }
 .form .terms {
