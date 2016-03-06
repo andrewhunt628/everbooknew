@@ -12,9 +12,8 @@ Rails.application.routes.draw do
   # default response format for Api is JSON
   namespace :api, {defaults: {format: "json"}} do
     namespace :v1 do
-      resources :users do
-
-      end
+      # devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+      resources :users, only: :index
     end
   end
 
