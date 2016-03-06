@@ -4,7 +4,7 @@ module Api
     class UsersController < Api::BaseController
       skip_before_filter :authenticate_user!, only: :index
 
-      def index
+      def index 
         @users    = User.all
       end
 
