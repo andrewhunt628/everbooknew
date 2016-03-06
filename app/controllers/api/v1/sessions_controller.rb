@@ -10,10 +10,13 @@ module Api
         user = User.find_by_email(params[:email])
 
         if user && user.valid_password?(params[:password])
-          api_key = user.api_key
+          sign_in(user, store: false)
+          # create api_key
+          user.create_apikey
+          @api_key = user.api_key
 
         else
-
+          render json: {message: I18n.t("devise.failure.not_found_in_database", authentication_keys: "email"), status: 401}
         end
       end
 
