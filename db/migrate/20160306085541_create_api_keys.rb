@@ -1,7 +1,7 @@
 class CreateApiKeys < ActiveRecord::Migration
   def up
     create_table :api_keys do |t|
-      t.string :key,  null: false
+      t.string :apikey,  null: false
       t.date :expired_date, null: false
       t.timestamps null: false
     end
