@@ -8,6 +8,19 @@ Rails.application.routes.draw do
   resources :family_bonds, only: [:index, :new, :create, :destroy]
   resources :users, only: [:show]
 
+  # routes for Api
+  # default response format for Api is JSON
+  namespace :api, {defaults: {format: "json"}} do
+    namespace :v1 do
+      # devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+      resources :users, only: :index
+
+      # handling log in, log out and sign up
+      post "users/sign_in", to: "sessions#create"
+      delete "users/sign_out", to: "sessions#destroy"
+    end
+  end
+
   get "uploading" => "pins#uploading", as: :uploading
 
   root "albums#index"
