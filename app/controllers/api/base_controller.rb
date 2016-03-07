@@ -16,7 +16,6 @@ module Api
         valid = authenticate_or_request_with_http_token do |token, options|
           @api_key   = ApiKey.find_by_apikey(token)
         end
-
         # do early return if :apikey not valid
         render json: {message: I18n.t("failure.apikey.invalid")}, status: :unauthorized and return if not valid
         # do early return if :apikey already expired 
