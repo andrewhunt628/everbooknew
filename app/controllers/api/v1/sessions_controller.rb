@@ -26,7 +26,7 @@ module Api
       def destroy
         @user     = @api_key.user
         # do early return if user not found with current :apikey
-        render json: {message: "User not found."}, status: :unprocessable_entity and return if @user.blank?
+        render json: {message: I18n.t("failure.user.not_found")}, status: :unprocessable_entity and return if @user.blank?
         # make user sign out
         sign_out @user
         # destroy token, make sure it's not re-used

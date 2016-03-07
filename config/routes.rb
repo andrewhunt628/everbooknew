@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       # handling log in, log out and sign up
       post "users/sign_in", to: "sessions#create"
       delete "users/sign_out", to: "sessions#destroy"
+      post "users/sign_up", to: "registrations#create"
     end
   end
 

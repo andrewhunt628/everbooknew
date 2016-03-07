@@ -12,11 +12,15 @@ module Api
     protected
 
       def authenticate_token
+        # token sent from HTTP Headers
         valid = authenticate_or_request_with_http_token do |token, options|
           @api_key   = ApiKey.find_by_apikey(token)
         end
 
-        render json: {}, status: :unauthorized and return if not valid
+        # do early return if :apikey not valid
+        render json: {message: I18n.t("failure.apikey.invalid")}, status: :unauthorized and return if not valid
+        # do early return if :apikey already expired 
+        render json: {message: I18n.t("failure.apikey.expired")}, status: :unprocessable_entity and return if @api_key.is_expired?
         # make sign_in
         sign_in @api_key.user
       end
