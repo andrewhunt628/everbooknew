@@ -22,7 +22,15 @@ Rails.application.routes.draw do
       # because registrations Api inherit from Devise Registrations
       # we must tell Devise to custom their routes
       devise_scope :user do
+        # for sign up
         post "/users/sign_up", to: "registrations#create"
+        # for invitation purpose
+        get "/users/invitation/accept", to: "invitations#edit"
+        get "/users/invitation/remove", to: "invitations#destroy"
+        post "/users/invitation", to: "invitations#create"
+        patch "/users/invitation", to: "invitations#update"
+        put "/users/invitation", to: "invitations#update"
+
       end    
     end
   end

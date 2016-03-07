@@ -21,6 +21,6 @@ module Api
         end
       end
 
-    end
+    end # RegistrationsController
   end # V1
 end # Api

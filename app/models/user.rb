@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  # include Devise invitable module helper
+  include DeviseInvitable::Inviter
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :invitable,
