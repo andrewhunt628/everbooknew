@@ -28,3 +28,9 @@ en:
   time:
     formats:
       default: "%d %h %Y %I:%M%p"
+  failure:
+    apikey:
+      expired: "This token already expired. Please re-sign in to create new token."
+      invalid: "This token was invalid."
+    user:
+      not_found: "User was not found."
