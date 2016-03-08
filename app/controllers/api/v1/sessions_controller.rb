@@ -3,8 +3,8 @@ module Api
     # inherit from Api::BaseController
     class SessionsController < Api::BaseController
       # skip authentication when sign_in process
-      skip_before_filter :authenticate_token, only: :create
-      skip_before_filter :authenticate_user!, only: :create
+      skip_before_action :authenticate_token, only: :create
+      skip_before_action :authenticate_user!, only: :create
 
       # POST /api/v1/users/sign_in 
       def create

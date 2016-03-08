@@ -23,17 +23,15 @@ Rails.application.routes.draw do
       devise_scope :user do
         # for sign up
         post "/users/sign_up", to: "registrations#create"
-        # for invitation purpose
-        get "/users/invitation/accept", to: "invitations#edit"
-        get "/users/invitation/remove", to: "invitations#destroy"
+        # for invitation 
         post "/users/invitation", to: "invitations#create"
-        patch "/users/invitation", to: "invitations#update"
-        put "/users/invitation", to: "invitations#update"
 
         # for passwords
         post "/users/password", to: "passwords#create"
         put "/users/password", to: "passwords#update"
-      end    
+      end
+
+      resources :pins, except: :edit
     end
   end
   

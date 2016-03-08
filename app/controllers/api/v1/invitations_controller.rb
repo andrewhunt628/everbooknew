@@ -2,7 +2,7 @@ module Api
   module V1
     # class InvitationsController < Devise::InvitationsController
     class InvitationsController < Api::BaseController
-      
+      # POST /api/v1/users/invitation
       def create
         @user     = @api_key.user
 
