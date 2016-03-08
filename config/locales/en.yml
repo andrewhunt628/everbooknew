@@ -34,3 +34,15 @@ en:
       invalid: "This token was invalid."
     user:
       not_found: "User was not found."
+    invite:
+      email_missing: "Please input email first."
+  success:
+    pin:
+      destroy: "Successfully destroy pin"
+      create: "Successfully created pin"
+      updated: "Pin was Successfully updated!"
+    album:
+      create: "Album was Successfully created!"
+      updated: "Album was Successfully updated!"
+      destroy: "Album was Successfully destroyed!"
+
