@@ -33,7 +33,9 @@ module Api
 
       # DELETE /api/v1/pins/:id
       def destroy
-        @pin.destroy
+        render json: {message: @pin.errors.full_messages}, 
+          status: :unprocessable_entity and return if not @pin.destroy
+        
       end
 
       private

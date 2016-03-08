@@ -31,7 +31,8 @@ Rails.application.routes.draw do
         put "/users/password", to: "passwords#update"
       end
 
-      resources :pins, except: :edit
+      resources :pins, except: [:edit, :new]
+      resources :albums, except: [:edit, :new]
     end
   end
   
