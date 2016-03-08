@@ -19,7 +19,6 @@ Rails.application.routes.draw do
       post "users/sign_in", to: "sessions#create"
       delete "users/sign_out", to: "sessions#destroy"
       
-      # because registrations Api inherit from Devise Registrations
       # we must tell Devise to custom their routes
       devise_scope :user do
         # for sign up
@@ -31,6 +30,9 @@ Rails.application.routes.draw do
         patch "/users/invitation", to: "invitations#update"
         put "/users/invitation", to: "invitations#update"
 
+        # for passwords
+        post "/users/password", to: "passwords#create"
+        put "/users/password", to: "passwords#update"
       end    
     end
   end

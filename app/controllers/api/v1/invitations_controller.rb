@@ -2,8 +2,6 @@ module Api
   module V1
     # class InvitationsController < Devise::InvitationsController
     class InvitationsController < Api::BaseController
-      # setup value to :null_session for Api
-      protect_from_forgery with: :null_session, :if => Proc.new { |c| c.request.format == 'application/json' }
       
       def create
         @user     = @api_key.user

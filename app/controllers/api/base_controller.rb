@@ -21,7 +21,7 @@ module Api
         # do early return if :apikey already expired 
         render json: {message: I18n.t("failure.apikey.expired")}, status: :unprocessable_entity and return if @api_key.is_expired?
         # make sign_in
-        sign_in @api_key.user
+        sign_in @api_key.user, store: false
       end
 
   end # BaseController
