@@ -4,7 +4,13 @@ require 'rails_helper'
 RSpec.describe AlbumsController, type: :controller do
 
   let(:valid_attributes) { FactoryGirl.attributes_for(:album) }
+  
+  let(:file) { file = fixture_file_upload('/images/example1.jpg', 'image/jpeg') }
 
+  let(:create_album) do
+    Album.create! valid_attributes.merge(user_id: controller.current_user.id, pins_attributes: [{image: file}])
+  end
+  
   let(:invalid_attributes) do
     {
       title: nil,
@@ -16,10 +22,9 @@ RSpec.describe AlbumsController, type: :controller do
 
   login_user
 
-
   describe "GET #index" do
     it "assigns all albums as @albums" do
-      album = Album.create! valid_attributes.merge(user_id: controller.current_user.id)
+      album = create_album  
       get :index, {}, valid_session
       expect(assigns(:albums)).to eq([album])
     end
@@ -35,7 +40,7 @@ RSpec.describe AlbumsController, type: :controller do
 
   describe "GET #edit" do
     it "assigns the requested album as @album" do
-      album = Album.create! valid_attributes.merge(user_id: controller.current_user.id)
+      album = create_album
       get :edit, {:id => album.to_param}, valid_session
       expect(assigns(:album)).to eq(album)
     end
@@ -45,18 +50,18 @@ RSpec.describe AlbumsController, type: :controller do
     context "with valid params" do
       it "creates a new Album" do
         expect {
-          post :create, {:album => valid_attributes}, valid_session
+          post :create, {:album => valid_attributes.merge(user_id: controller.current_user.id, pins_attributes: [{image: file}])}, valid_session
         }.to change(Album, :count).by(1)
       end
 
       it "assigns a newly created album as @album" do
-        post :create, {:album => valid_attributes}, valid_session
-        expect(assigns(:album)).to be_a(Album)
-        expect(assigns(:album)).to be_persisted
+        post :create, {:album => valid_attributes.merge(user_id: controller.current_user.id, pins_attributes: [{image: file}])}, 
+          valid_session
+        expect(assigns(:album)).to be_a(Album).and be_persisted
       end
 
       it "redirects to the created album" do
-        post :create, {:album => valid_attributes}, valid_session
+        post :create, {:album => valid_attributes.merge(user_id: controller.current_user.id, pins_attributes: [{image: file}])}, valid_session
         expect(response).to redirect_to(Album.last)
       end
     end
@@ -81,20 +86,20 @@ RSpec.describe AlbumsController, type: :controller do
       }
 
       it "updates the requested album" do
-        album_was = Album.create! valid_attributes.merge(user_id: controller.current_user.id)
+        album_was = create_album
         put :update, {:id => album_was.to_param, :album => new_attributes}, valid_session
         album = Album.find(album_was)
         expect(album.attributes).to_not eq(album_was.attributes)
       end
 
       it "assigns the requested album as @album" do
-        album = Album.create! valid_attributes.merge(user_id: controller.current_user.id)
+        album = create_album
         put :update, {:id => album.to_param, :album => valid_attributes}, valid_session
         expect(assigns(:album)).to eq(album)
       end
 
       it "redirects to the album" do
-        album = Album.create! valid_attributes.merge(user_id: controller.current_user.id)
+        album = create_album
         put :update, {:id => album.to_param, :album => valid_attributes}, valid_session
         expect(response).to redirect_to(album)
       end
@@ -102,13 +107,13 @@ RSpec.describe AlbumsController, type: :controller do
 
     context "with invalid params" do
       it "assigns the album as @album" do
-        album = Album.create! valid_attributes.merge(user_id: controller.current_user.id)
+        album = create_album
         put :update, {:id => album.to_param, :album => invalid_attributes}, valid_session
         expect(assigns(:album)).to eq(album)
       end
 
       it "re-renders the 'edit' template" do
-        album = Album.create! valid_attributes.merge(user_id: controller.current_user.id)
+        album = create_album
         put :update, {:id => album.to_param, :album => invalid_attributes}, valid_session
         expect(response).to render_template("edit")
       end
@@ -117,14 +122,14 @@ RSpec.describe AlbumsController, type: :controller do
 
   describe "DELETE #destroy" do
     it "destroys the requested album" do
-      album = Album.create! valid_attributes.merge(user_id: controller.current_user.id)
+      album = create_album
       expect {
         delete :destroy, {:id => album.to_param}, valid_session
       }.to change(Album, :count).by(-1)
     end
 
     it "redirects to the albums list" do
-      album = Album.create! valid_attributes.merge(user_id: controller.current_user.id)
+      album = create_album
       delete :destroy, {:id => album.to_param}, valid_session
       expect(response).to redirect_to(albums_url)
     end
