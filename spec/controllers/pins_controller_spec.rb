@@ -11,7 +11,7 @@ RSpec.describe PinsController, type: :controller do
       post :create, :pin => {image: file} , format: :json
       pin = Pin.find(assigns(:pin).id) #get from database
 
-      expect(pin.image.path).to eq(expected_file_path)
+      expect(pin.image.path).to eq("#{Rails.root}/public/system/pins/images/#{id_partition(pin.id)}/original/example1.jpg")
     end
 
     it 'will return 201 http status' do
