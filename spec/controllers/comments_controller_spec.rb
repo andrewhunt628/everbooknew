@@ -10,11 +10,7 @@ RSpec.describe CommentsController, type: :controller do
   end
 
   let(:file) { file = fixture_file_upload('/images/example1.jpg', 'image/jpeg')}
-  # let(:album) {Album.create! valid_attributes.merge(user_id: controller.current_user.id, pins_attributes: [{image: file}])}
-  # let(:pin) { FactoryGirl.create(:pin) }
-  # let(:pin) {Album.create!( valid_attributes.merge(user_id: controller.current_user.id, pins_attributes: [{image: file}])).pins.first}
   let(:valid_attributes) { FactoryGirl.attributes_for(:comment).merge(pin_id: @pin.id, user_id: controller.current_user.id) }
-  # let(:valid_attributes) { FactoryGirl.attributes_for(:comment) }
 
   describe "POST #create" do
     context 'valid_attributes' do
