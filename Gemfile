@@ -33,7 +33,7 @@ gem 'masonry-rails'
 gem "font-awesome-rails"
 gem 'acts-as-taggable-on', '~> 3.4'
 gem "jquery-validation-rails"
-gem "rails_12factor"
+
 gem 'momentjs-rails'
 
 
@@ -60,19 +60,22 @@ gem "nested_form"
 gem 'forgery' #when stop use fake data move this gem into :development, :test section
 
 group :production do
-  gem 'pg'
+  gem "rails_12factor"
 end
 
 gem 'letter_opener' #move to :development, :test section before first relase
 
 group :development, :test do
+  gem 'pg'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'sqlite3'
 
   gem 'byebug'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-
+  # automate rspec testing
+  gem 'guard'
+  gem 'guard-rspec', require: false
   #Generate humanize random data
 end
 
