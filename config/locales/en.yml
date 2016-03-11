@@ -45,4 +45,6 @@ en:
       create: "Album was Successfully created!"
       updated: "Album was Successfully updated!"
       destroy: "Album was Successfully destroyed!"
-
+    comment:
+      create: "Comment was Successfully created!"
+      destroy: "Comment was Successfully destroyed!"

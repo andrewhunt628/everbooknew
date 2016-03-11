@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 
       resources :pins, except: [:edit, :new]
       resources :albums, except: [:edit, :new]
+      resources :comments,only: :create
     end
   end
   

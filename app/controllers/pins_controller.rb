@@ -51,7 +51,7 @@ class PinsController < ApplicationController
         format.html { redirect_to pins_path }
       else
         format.json { render json: @pin.errors, status: :unprocessable_entity }
-        format.json { render :new }
+        format.html { render :new }
       end
     end
   end
