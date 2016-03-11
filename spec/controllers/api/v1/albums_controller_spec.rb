@@ -93,4 +93,49 @@ RSpec.describe Api::V1::AlbumsController, type: :controller do
       end
     end
   end
+
+  describe "PUT #update" do
+
+    before(:each) do
+      @album = create_album
+    end
+    
+    context "when params valid" do
+      it "will success update album" do
+        put :update, {album: FactoryGirl.attributes_for(:album).merge(title: "test_update"), id: @album.id, format: :json}
+
+        expect(assigns(:album).title).to eq("test_update")
+      end
+
+      it "return 200 response" do
+        put :update, {album: FactoryGirl.attributes_for(:album).merge(title: "test_update"), id: @album.id, format: :json}
+
+        expect(response).to be_success
+      end
+    end
+
+    context "when params invalid" do
+      it "return 422 response" do
+        album = create_album
+        put :update, {album: invalid_attributes, id: album.id, format: :json}
+        expect(response.code.to_i).to eq(422)
+      end
+    end
+  end
+
+  describe "DELETE #destroy" do
+
+    it "destroy requested Album" do
+      album = create_album
+      expect {
+        delete :destroy, {id: album.id, format: :json}
+      }.to change(Album, :count).by(-1)
+    end
+
+    it "return 200 response" do
+      album = create_album
+      delete :destroy, {id: album.id, format: :json}
+      expect(response).to be_success
+    end
+  end
 end
