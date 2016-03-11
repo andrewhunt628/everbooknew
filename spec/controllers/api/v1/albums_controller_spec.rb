@@ -9,9 +9,17 @@ RSpec.describe Api::V1::AlbumsController, type: :controller do
   login_user
 
   let(:file) { file = fixture_file_upload('/images/example1.jpg', 'image/jpeg') }
+  let(:valid_attributes) { FactoryGirl.attributes_for(:album) }
 
   let(:create_album) do
     Album.create! FactoryGirl.attributes_for(:album).merge(user_id: controller.current_user.id, pins_attributes: [{image: file}])
+  end
+
+  let(:invalid_attributes) do
+    {
+      title: nil,
+      description: nil
+    }
   end
 
   render_views
@@ -47,6 +55,42 @@ RSpec.describe Api::V1::AlbumsController, type: :controller do
 
       res = jresponse
       expect(res.keys).to contain_exactly("album", "pins", "user", "api_key")
+    end
+  end
+
+  describe "POST #create" do
+    let(:req_create_invalid){post :create, {album: invalid_attributes, format: :json}}
+    let(:req_create) {post :create, {album: valid_attributes.merge(user_id: subject.current_user.id, pins_attributes: [{image: file}]), format: :json}}
+
+    context "when params valid" do
+      it "will create new Album" do
+        req_create
+        res = jresponse
+        expect(assigns(:album)).not_to be_nil
+      end
+
+      it "return 200 response" do
+        req_create
+        expect(response).to be_success
+      end
+
+      it "return valid json result" do
+        req_create
+        res = jresponse
+        expect(res.keys).to contain_exactly("message","album","user", "api_key")
+      end
+    end
+
+    context "when params invalid" do
+      it "don't create new Album" do
+        req_create_invalid
+        expect(assigns(:album).id).to be_nil
+      end
+
+      it "return 422 response" do
+        req_create_invalid
+        expect(response.code.to_i).to eq(422)
+      end
     end
   end
 end
