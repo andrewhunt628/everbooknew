@@ -1,10 +1,5 @@
 Rails.application.routes.draw do
 
-  # routes to handle errors in json format
-  # get "/404" => "errors#not_found"
-  # get "/500" => "errors#exception"
-  # get "/401" => "errors#unauthorized"
-  
   resources :albums
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
@@ -19,7 +14,6 @@ Rails.application.routes.draw do
   # default response format for Api is JSON
   namespace :api, {defaults: {format: "json"}} do
     namespace :v1 do
-      # devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
       resources :users, only: :index
       # handling log in, log out and sign up
       post "users/sign_in", to: "sessions#create"
@@ -39,6 +33,10 @@ Rails.application.routes.draw do
 
       resources :pins, except: [:edit, :new]
       resources :albums, except: [:edit, :new]
+      resources :comments,only: :create
+      resources :family_bonds, only: [:index,:create, :destroy]
+
+      post "/user/oauth_verification/google", to: "user/oauth_verifications#verify_google_token"
     end
   end
   

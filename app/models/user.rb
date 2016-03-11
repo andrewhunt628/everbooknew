@@ -63,6 +63,15 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.find_for_verify_google_token(userprofile, uid = "", provider = "")
+    user = User.find_by(email: userprofile[:email])
+    return user if user.present?
+    where(provider: provider, uid: uid).first_or_create do |user|
+      user.email = userprofile[:email]
+      user.password = Devise.friendly_token[0,20]
+    end
+  end
+
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]

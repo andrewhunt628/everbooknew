@@ -36,6 +36,8 @@ en:
       not_found: "User was not found."
     invite:
       email_missing: "Please input email first."
+    oauth:
+      token_missing: "Action forbidden. Token was missing."
   success:
     pin:
       destroy: "Successfully destroy pin"
@@ -45,4 +47,11 @@ en:
       create: "Album was Successfully created!"
       updated: "Album was Successfully updated!"
       destroy: "Album was Successfully destroyed!"
-
+    comment:
+      create: "Comment was Successfully created!"
+      destroy: "Comment was Successfully destroyed!"
+    family_bond:
+      create: "Family was Successfully created!"
+      destroy: "Family was Successfully destroyed!"
+    oauth:
+      sign_in: "Signed in Successfully."
