@@ -36,6 +36,8 @@ en:
       not_found: "User was not found."
     invite:
       email_missing: "Please input email first."
+    oauth:
+      token_missing: "Action forbidden. Token was missing."
   success:
     pin:
       destroy: "Successfully destroy pin"

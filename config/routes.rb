@@ -36,7 +36,7 @@ Rails.application.routes.draw do
       resources :comments,only: :create
       resources :family_bonds, only: [:index,:create, :destroy]
 
-      post "/user/oauth_verfication/google", to: "user/oauth_verfications#verify_google_token"
+      post "/user/oauth_verification/google", to: "user/oauth_verifications#verify_google_token"
     end
   end
   

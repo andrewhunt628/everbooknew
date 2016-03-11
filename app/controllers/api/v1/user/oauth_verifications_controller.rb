@@ -24,15 +24,17 @@ module Api
           # article references: http://blog.jachobsen.com/2013/08/10/google-oauth2-in-android-with-rails-backend/#oauth-part
 
           token     = params[:token]
+          uid       = params[:uid]
+          provider  = params[:provider]
           # do early return if params token missing
-          render json: {message: }, status: :forbidden and return unless token
+          render json: {message: I18n.t("failure.oauth.token_missing")}, status: :forbidden and return unless token
 
           response = HTTParty.get("https://www.googleapis.com/oauth2/v2/userinfo",
             headers: {"Access_token" => token, "Authorization" => "OAuth #{token}"})
 
           if response.code.eql? 200
             data = JSON.parse(response.body)
-            @user = User.find_for_verify_google_token(data.symbolize_keys, uid, provider)
+            @user = ::User.find_for_verify_google_token(data.symbolize_keys, uid, provider)
           end
         end
 
