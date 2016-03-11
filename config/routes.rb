@@ -35,6 +35,8 @@ Rails.application.routes.draw do
       resources :albums, except: [:edit, :new]
       resources :comments,only: :create
       resources :family_bonds, only: [:index,:create, :destroy]
+
+      post "/user/oauth_verfication/google", to: "user/oauth_verfications#verify_google_token"
     end
   end
   

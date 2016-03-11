@@ -51,3 +51,5 @@ en:
     family_bond:
       create: "Family was Successfully created!"
       destroy: "Family was Successfully destroyed!"
+    oauth:
+      sign_in: "Signed in Successfully."
