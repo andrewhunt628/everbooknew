@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+
+  # routes to handle errors in json format
+  # get "/404" => "errors#not_found"
+  # get "/500" => "errors#exception"
+  # get "/401" => "errors#unauthorized"
+  
   resources :albums
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
