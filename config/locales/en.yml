@@ -48,3 +48,6 @@ en:
     comment:
       create: "Comment was Successfully created!"
       destroy: "Comment was Successfully destroyed!"
+    family_bond:
+      create: "Family was Successfully created!"
+      destroy: "Family was Successfully destroyed!"
