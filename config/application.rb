@@ -26,5 +26,8 @@ module Everbooknew
       Devise::RegistrationsController.layout 'landing'
       Devise::SessionsController.layout 'landing'
     end
+
+    # for handling errors in json format
+    # config.exceptions_apps = self.routes
   end
 end

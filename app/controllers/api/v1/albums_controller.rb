@@ -1,6 +1,8 @@
 module Api
   module V1
     class AlbumsController < Api::BaseController
+      before_action :set_album, only: [:show, :edit, :update, :destroy]
+      
       # GET /api/v1/albums
       def index
         @albums = Album.where(user_id: current_user.family_ids + [current_user.id])

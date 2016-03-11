@@ -9,4 +9,8 @@ module EverbookTestHelper
       nil
     end
   end
+
+  def jresponse
+    JSON.parse(response.body)
+  end
 end

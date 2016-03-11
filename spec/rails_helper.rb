@@ -21,5 +21,6 @@ RSpec.configure do |config|
   config.include EverbookTestHelper
   config.extend ControllerMacros, :type => :controller
   config.extend ControllerMacros, :type => :view
+  config.extend ControllerMacros, :type => :request
 
 end
