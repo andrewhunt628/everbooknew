@@ -142,11 +142,13 @@ RSpec.describe Api::V1::PinsController, type: :controller do
       end
     end
 
-    context "when pin not found" do
+    context "when get response 404" do
       it "will raise ActiveRecord::RecordNotFound" do
-        expect {
-          delete :destroy, {id: 1, format: :json}
-        }.to raise_error(ActiveRecord::RecordNotFound)
+        delete :destroy, {id: 1, format: :json}
+        expect(response.code.to_i).to eq(404)
+        # expect {
+        #   delete :destroy, {id: 1, format: :json}
+        # }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end

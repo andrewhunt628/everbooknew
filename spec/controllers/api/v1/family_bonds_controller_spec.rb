@@ -88,10 +88,12 @@ RSpec.describe Api::V1::FamilyBondsController, type: :controller do
     end
 
     context "when family_bond not found" do
-      it "will raise ActiveRecord::RecordNotFound " do
-        expect {
-          delete :destroy, {id: 1, format: :json}
-        }.to raise_error(ActiveRecord::RecordNotFound)
+      it "will get response 404 " do
+        delete :destroy, {id: 1, format: :json}
+        expect(response.code.to_i).to eq(404)
+        # expect {
+        #   delete :destroy, {id: 1, format: :json}
+        # }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end

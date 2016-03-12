@@ -65,8 +65,9 @@ end
 
 gem 'letter_opener' #move to :development, :test section before first relase
 
+# use 'postgresql' in any environment
+gem 'pg'
 group :development, :test do
-  gem 'pg'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'sqlite3'
 
@@ -87,3 +88,4 @@ group :development do
   gem 'spring'
 end
 
+gem 'httparty' # for http request
