@@ -11,7 +11,12 @@ Rails.application.routes.draw do
   resources :comments, only: [:create]
 
   resources :family_bonds, only: [:index, :new, :create, :destroy]
-  resources :users, only: [:show]
+  resources :users, only: [:show] do
+    member do
+      get "/security/change_password/", to: "users#form_change_password"
+      patch :change_password
+    end
+  end
 
   # routes for Api
   # default response format for Api is JSON
