@@ -13,4 +13,8 @@ module EverbookTestHelper
   def jresponse
     JSON.parse(response.body)
   end
+  
+  def emails_test
+    ActionMailer::Base.deliveries
+  end
 end

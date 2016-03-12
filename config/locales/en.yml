@@ -55,3 +55,5 @@ en:
       destroy: "Family was Successfully destroyed!"
     oauth:
       sign_in: "Signed in Successfully."
+    invitation:
+      success: "Successfully inviting people."

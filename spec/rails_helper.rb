@@ -23,4 +23,8 @@ RSpec.configure do |config|
   config.extend ControllerMacros, :type => :view
   config.extend ControllerMacros, :type => :request
 
+  # always clean Array ActionMailer after each test
+  config.after(:each) do
+    ActionMailer::Base.deliveries.clear
+  end
 end
