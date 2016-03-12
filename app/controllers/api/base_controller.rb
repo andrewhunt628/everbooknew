@@ -9,9 +9,15 @@ module Api
     # authenticate by Devise
     before_action :authenticate_user!
 
+    rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
+
     private
       def tags_list
         params[:tags_list].to_s.split("/")
+      end
+
+      def record_not_found(error)
+        render json: {error: error.message}, status: :not_found and return
       end
 
     protected

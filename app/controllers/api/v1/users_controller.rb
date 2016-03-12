@@ -4,8 +4,14 @@ module Api
     class UsersController < Api::BaseController
       skip_before_action :authenticate_user!, only: :index
 
+      # GET /api/v1/users
       def index 
         @users    = User.all
+      end
+
+      # GET /api/v1/users/:id
+      def show
+        @user     = User.find(params[:id])
       end
 
     end # UsersController

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   # default response format for Api is JSON
   namespace :api, {defaults: {format: "json"}} do
     namespace :v1 do
-      resources :users, only: :index
+      resources :users, only: [:index, :show]
       # handling log in, log out and sign up
       post "users/sign_in", to: "sessions#create"
       delete "users/sign_out", to: "sessions#destroy"
