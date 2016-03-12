@@ -1,3 +1,6 @@
+# load class ApiConstraint
+require "api_constraint"
+
 Rails.application.routes.draw do
 
   resources :albums
@@ -13,7 +16,9 @@ Rails.application.routes.draw do
   # routes for Api
   # default response format for Api is JSON
   namespace :api, {defaults: {format: "json"}} do
-    namespace :v1 do
+    # make Api Version 1 as default Api
+    # class ApiConstraint is inside lib/api_constraint.rb
+    scope module: :v1, constraints: ApiConstraint.new(version: 1, default: true) do
       resources :users, only: [:index, :show]
       # handling log in, log out and sign up
       post "users/sign_in", to: "sessions#create"
