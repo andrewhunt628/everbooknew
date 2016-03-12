@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
 
   def change_password
-    if @user.update(user_params)
+    if @user.update_with_password(user_params)
       # to bypass validation
       sign_in @user, bypass: true
       redirect_to root_url
@@ -23,6 +23,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:password, :password_confirmation)
+      params.require(:user).permit(:password, :password_confirmation, :current_password)
     end
 end
