@@ -87,3 +87,4 @@ group :development do
   gem 'spring'
 end
 
+gem 'httparty' # for http request
