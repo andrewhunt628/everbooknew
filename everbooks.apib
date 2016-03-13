@@ -388,6 +388,7 @@ List of Api inside ```UsersController```
 + Request (application/json)
 
     + Headers
+    
             Authorization: Token token=validtokenapikey
 
     + Body
@@ -428,3 +429,270 @@ List of Api inside ```UsersController```
           }
         }
 
+## Group Albums Controller
+
+List of Api inside ```AlbumsController```
+
+## Album URL without ID [/api/albums]
+
+### Get List Index [GET]
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Token token=validtokenapikey
+
++ Response 200 (application/json)
+    
+        {
+          "albums": [
+            {
+              "id": 3,
+              "title": "test",
+              "created_at": "2016-03-13T04:46:56.685Z",
+              "updated_at": "2016-03-13T04:46:56.685Z",
+              "description": "asdiasd",
+              "user_id": 1
+            }
+          ],
+          "tags": [],
+          "user": {
+            "id": 1,
+            "email": "opan.neutron@gmail.com",
+            "created_at": "2016-03-05T15:21:44.535Z",
+            "updated_at": "2016-03-13T05:15:26.827Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          },
+          "api_key": {
+            "id": 24,
+            "apikey": "e294b3919ba2012bbf8aabff16a271474a2881a1916cf833893a3ac894078f19",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T05:15:20.969Z",
+            "updated_at": "2016-03-13T05:15:20.969Z",
+            "user_id": 1
+          }
+        }
+
+
+
+### Create Album [POST]
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Token token=validtokenapikey
+
+    + Body
+
+            {
+                "album":{
+                    "title": "title",
+                    "pins_attributes": [
+                        {
+                            "title": "pintitle",
+                            "image": "fileimage.png"
+                        }
+                    ]
+                }
+            }
+
++ Response 200 (application/json)
+
+    
+        {
+          "message": "Album was Successfully created!",
+          "album": {
+              "id": 3,
+              "title": "test",
+              "created_at": "2016-03-13T04:46:56.685Z",
+              "updated_at": "2016-03-13T04:46:56.685Z",
+              "description": "asdiasd",
+              "user_id": 1
+          },
+          "user": {
+            "id": 1,
+            "email": "opan.neutron@gmail.com",
+            "created_at": "2016-03-05T15:21:44.535Z",
+            "updated_at": "2016-03-13T04:40:16.539Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          },
+          "api_key": {
+            "id": 23,
+            "apikey": "b65dcf95d53f8746513e1558bd394d3c74490d004b4f53ac1862844e27f28e5b",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T04:16:44.498Z",
+            "updated_at": "2016-03-13T04:16:44.498Z",
+            "user_id": 1
+          }
+        }
+
+## Album URL with ID [/api/albums/{id}]
+
+### Get Album [GET]
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Token token=validtokenapikey
+
++ Parameters
+
+    + id (required, integer) - Album ID
+
+
++ Response 200 (application/json)
+
+        {
+          "album": {
+            "id": 4,
+            "title": "opan",
+            "created_at": "2016-03-13T05:28:12.180Z",
+            "updated_at": "2016-03-13T05:28:12.180Z",
+            "description": null,
+            "user_id": 1
+          },
+          "pins": [
+            {
+              "id": 13,
+              "title": "test",
+              "description": null,
+              "created_at": "2016-03-13T05:28:12.184Z",
+              "updated_at": "2016-03-13T05:28:12.184Z",
+              "image_file_name": "3.png",
+              "image_content_type": "image/png",
+              "image_file_size": 2752,
+              "image_updated_at": "2016-03-13T05:28:11.916Z",
+              "text_marks": [],
+              "album_id": 4,
+              "user_id": null
+            }
+          ],
+          "user": null,
+          "api_key": {
+            "id": 24,
+            "apikey": "e294b3919ba2012bbf8aabff16a271474a2881a1916cf833893a3ac894078f19",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T05:15:20.969Z",
+            "updated_at": "2016-03-13T05:15:20.969Z",
+            "user_id": 1
+          }
+        }
+
+
+### Update Album using method put or patch [PATCH]
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Token token=validtokenapikey
+
++ Parameters
+
+    + id (required, integer) - Album ID
+
+
++ Response 200 (application/json)
+
+        {
+          "message": "Album was Successfully updated!",
+          "album": {
+              "id": 3,
+              "title": "test",
+              "created_at": "2016-03-13T04:46:56.685Z",
+              "updated_at": "2016-03-13T04:46:56.685Z",
+              "description": "asdiasd",
+              "user_id": 1
+          },
+          "user": {
+            "id": 1,
+            "email": "opan.neutron@gmail.com",
+            "created_at": "2016-03-05T15:21:44.535Z",
+            "updated_at": "2016-03-13T04:40:16.539Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          },
+          "api_key": {
+            "id": 23,
+            "apikey": "b65dcf95d53f8746513e1558bd394d3c74490d004b4f53ac1862844e27f28e5b",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T04:16:44.498Z",
+            "updated_at": "2016-03-13T04:16:44.498Z",
+            "user_id": 1
+          }
+        }
+
+### Delete Album [DELETE]
+
++ Request (application/json)
+    
+    + Headers
+
+            Authorization: Token token=validtokenapikey
+
++ Parameters
+    
+    + id (required, integer) - Album ID
+
++ Response 200 (application/json)
+
+        {
+          "message": "Album was Successfully deleted!",
+          "album": {
+            "id": 4,
+            "title": "opan",
+            "created_at": "2016-03-13T05:28:12.180Z",
+            "updated_at": "2016-03-13T05:28:12.180Z",
+            "description": null,
+            "user_id": 1
+          },
+          "user": {
+            "id": 1,
+            "email": "opan.neutron@gmail.com",
+            "created_at": "2016-03-05T15:21:44.535Z",
+            "updated_at": "2016-03-13T05:28:11.813Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          },
+          "api_key": {
+            "id": 24,
+            "apikey": "e294b3919ba2012bbf8aabff16a271474a2881a1916cf833893a3ac894078f19",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T05:15:20.969Z",
+            "updated_at": "2016-03-13T05:15:20.969Z",
+            "user_id": 1
+          }
+        }
