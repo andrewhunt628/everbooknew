@@ -1,8 +1,13 @@
 FactoryGirl.define do
   factory :identity do
-    user nil
-provider "MyString"
-uid "MyString"
+    association :user
+    provider "MyString"
+    uid "MyString"
+  end
+
+  factory :identity_invalid, parent: :identity do
+    provider nil
+    uid nil
   end
 
 end

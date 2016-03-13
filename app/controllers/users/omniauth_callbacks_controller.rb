@@ -16,6 +16,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     RUBY
   end
 
+  # https://graph.facebook.com/me?fields=email&access_token=CAAX0jh39x60BADIy5ZAUwHc7azx3iIDRc8D4Vw0Op2WMoVDuM7EfG5uPyRJVWHbV6T4EZBHMvEMBdA7ZAE0BmvJCEXlj1ZAutPF9KpKoReSi6iQHnvxsUs9ZC0QaCbHKDow2mzBbSJz3ZBxNtEtHs7rymSQjtzyzNvWmobNza7epMlXm1UC09sARtcKGXohIIZD
   # temporary comment
   # def google_oauth2
   #   # You need to implement the method below in your model (e.g. app/models/user.rb)

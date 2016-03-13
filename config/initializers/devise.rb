@@ -243,7 +243,7 @@ Devise.setup do |config|
     :scope => "email,profile,userinfo.profile"
   }
   # Facebook OAuth
-  config.omniauth :facebook, ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_APP_SECRET"]
+  config.omniauth :facebook, ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_APP_SECRET"], scope: "email,user_about_me", info_fields: "email,id,verified,name"
 
   
   # For Devise Invitable Module
