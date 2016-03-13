@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   resources :comments, only: [:create]
 
   resources :family_bonds, only: [:index, :new, :create, :destroy]
-  resources :users, only: [:show] do
+
+  match "/users/:id/finish_signup", to: "users#finish_signup", via: [:get, :patch], as: :finish_signup
+  resources :users, only: [:show, :update, :destroy] do
     member do
       get "/security/change_password/", to: "users#form_change_password"
       patch :change_password

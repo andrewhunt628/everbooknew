@@ -3,7 +3,8 @@ HOST: http://everbooks.herokuapp.com/
 
 # Everbooks
 
-This is a list of Everbook REST Apis.
+This is a list of Everbook REST Apis. Everbook Api support versioning system. By default, this Api currently choose version 1 (v1), but if you want to use other version of this Api, just send this ```Accept: application/vnd.everbook.v{Api version}``` into request headers.
+
 
 ## Group Sessions Controller 
 
@@ -78,7 +79,7 @@ List of Api inside ```OauthVerificationsController```
 
 ## Google Oauth sign in [/api/user/oauth_verification/google]
 
-For writing this Api, i'm following this [scenario](http://blog.jachobsen.com/2013/08/10/google-oauth2-in-android-with-rails-backend/#oauth-part). So basically, main process is, mobile devise (client) will authenticate by it self and get the token. When the token is saved, then mobile device will make a request into this Api, to re-authenticate using scope ```userinfo.profile``` Google Api. Once its valid, then this Api will return Everbook ```apikey``` then use this for every next request until sign out. You can found example response from Google OAuth in [here](https://github.com/zquestz/omniauth-google-oauth2#auth-hash). Just make you sent ```token``` key, not ```refresh_token``` inside ```credentials``` object.
+For writing this Api, i'm following this [scenario](http://blog.jachobsen.com/2013/08/10/google-oauth2-in-android-with-rails-backend/#oauth-part). So basically, the main process is, mobile device (client) will authenticate by it self and get the ```authentication token```. When you get the ```token``` (which is authentication was valid, and maybe you want to keep it on ```local storage```),  then mobile device will make a request into this Api, to re-authenticate using scope ```userinfo.profile``` Google Api. Once its valid, then this Api will return Everbook ```apikey``` then use this for each request until user sign out. You can found example response from Google OAuth right [here](https://github.com/zquestz/omniauth-google-oauth2#auth-hash). Just make sure you're sending ```token``` key, not ```refresh_token``` inside ```credentials``` object.
 
 ## verify_google_token [POST]
 
@@ -1065,7 +1066,7 @@ List of Api inside ```CommentsController```
 
 List of Api inside ```FamilyBondsController```
 
-## Family bond withou ID [/api/family_bonds]
+## Family bond without ID [/api/family_bonds]
 
 ### Get list Family bond [GET]
 
