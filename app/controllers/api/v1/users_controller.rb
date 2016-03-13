@@ -3,8 +3,8 @@ module Api
     # all Api Controller inherit from Api::BaseController
     class UsersController < Api::BaseController
       # allow random people access list of users ??
-      skip_before_action :authenticate_user!, only: :index
-      skip_before_action :authenticate_token, only: :index
+      # skip_before_action :authenticate_user!, only: :index
+      # skip_before_action :authenticate_token, only: :index
 
       before_action :set_user, only: [:show, :change_password]
 
@@ -13,7 +13,7 @@ module Api
         @users    = ::User.all
       end
       
-      # GET /api/v1/users/:id
+      # GET /api/v1/users
       def show
       end
 

@@ -24,12 +24,10 @@ Rails.application.routes.draw do
     # make Api Version 1 as default Api
     # class ApiConstraint is inside lib/api_constraint.rb
     scope module: :v1, constraints: ApiConstraint.new(version: 1, default: true) do
-      resources :users, only: [:index] do
-        collection do
-          get :show
-          patch "/security/change_password", to: "users#change_password"
-        end
-      end
+      get "/users", to: "users#show"
+      get "/users/list", to: "users#index"
+      patch "/users/security/change_password", to: "users#change_password"
+      
       # handling log in, log out and sign up
       post "users/sign_in", to: "sessions#create"
       delete "users/sign_out", to: "sessions#destroy"

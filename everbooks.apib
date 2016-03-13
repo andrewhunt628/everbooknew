@@ -1,0 +1,430 @@
+FORMAT: 1A
+HOST: http://everbooks.herokuapp.com/
+
+# Everbooks
+
+This is a list of Everbook REST Apis.
+
+## Group Sessions Controller 
+
+List of Api inside ```SessionsController```
+
+## Sign In [/api/users/sign_in]
+
+For User sign in
+
+### create [POST]
+
++ Request (application/json)   
+    
+    + Body
+    
+            {
+                "email": "opan.neutron@gmail.com",
+                "password": "11223344"
+            }
+
++ Response 200 (application/json)
+
+        {
+          "message": "Signed in successfully.",
+          "user": {
+            "id": 1,
+            "email": "opan.neutron@gmail.com",
+            "created_at": "2016-03-05T15:21:44.535Z",
+            "updated_at": "2016-03-13T03:04:21.769Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          },
+          "api_key": {
+            "id": 21,
+            "apikey": "9a45f8b83800a550db0d18d10ad06944af5109fb4af8fd29a5cf6e1aeb84c79c",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T03:04:21.785Z",
+            "updated_at": "2016-03-13T03:04:21.785Z",
+            "user_id": 1
+          }
+        }
+
+## Sign Out [/api/users/sign_out]
+
+For User sign out
+
+## destroy [DELETE]
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Token token=9a45f8b83800a550db0d18d10ad06944af5109fb4af8fd29a5cf6e1aeb84c79c
+
++ Response 200 (application/json)
+
+        {
+          "message": "Signed out successfully."
+        }
+
+
+## Group Oauth Verifications Controller
+
+List of Api inside ```OauthVerificationsController``` 
+
+## Google Oauth sign in [/api/user/oauth_verification/google]
+
+For writing this Api, i'm following this [scenario](http://blog.jachobsen.com/2013/08/10/google-oauth2-in-android-with-rails-backend/#oauth-part). So basically, main process is, mobile devise (client) will authenticate by it self and get the token. When the token is saved, then mobile device will make a request into this Api, to re-authenticate using scope ```userinfo.profile``` Google Api. Once its valid, then this Api will return Everbook ```apikey``` then use this for every next request until sign out. You can found example response from Google OAuth in [here](https://github.com/zquestz/omniauth-google-oauth2#auth-hash). Just make you sent ```token``` key, not ```refresh_token``` inside ```credentials``` object.
+
+## verify_google_token [POST]
+
++ Request (application/json)
+
+    + Body
+
+            {
+                "token": "tokenfromgoogleauth"
+            }
+
++ Response 200 (application/json)
+
+        {
+          "message": "Signed in Successfully.",
+          "user": {
+            "id": 1,
+            "email": "opan.neutron@gmail.com",
+            "created_at": "2016-03-05T15:21:44.535Z",
+            "updated_at": "2016-03-13T03:31:48.702Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          },
+          "api_key": {
+            "id": 20,
+            "apikey": "b44677a372b33a315f6d14bcc50f6d07f6221ba74c05500a8e5ff98035f1bbb4",
+            "expired_date": "2016-03-13",
+            "created_at": "2016-03-12T16:00:54.655Z",
+            "updated_at": "2016-03-12T16:00:54.655Z",
+            "user_id": 1
+          }
+        }
+
+## Group Registrations Controller
+
+List of Api inside ```RegistrationsController```
+
+## Sign Up [/api/users/sign_up]
+
+### create [POST]
+
++ Request (application/json)
+
+    + Body 
+
+            {
+                "user": {
+                    "email": "opan.neutron@gmail.com",
+                    "password":"11223344"
+                }
+            }
+
++ Response 200 (application/json)
+
+        {
+          "message": "Welcome! You have signed up successfully.",
+          "user": {
+            "id": 14,
+            "email": "super@email.com",
+            "created_at": "2016-03-13T03:45:32.076Z",
+            "updated_at": "2016-03-13T03:45:32.341Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          },
+          "api_key": {
+            "id": 22,
+            "apikey": "9d99bb2a0bb6d521058cad9a1f0d6952715111f09441941ef04be74e181bb040",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T03:45:32.118Z",
+            "updated_at": "2016-03-13T03:45:32.118Z",
+            "user_id": 14
+          }
+        }
+
+## Group Passwords Controller
+
+List of Api inside ```PasswordsController```
+
+## password [/api/users/password]
+
+### Request Instruction Forgot Password [POST]
+
++ Request (application/json)
+
+    + Body
+
+            {
+                "user": {
+                    "email": "opan.neutron@gmail.com"
+                }
+            }
+
++ Response 200 (application/json)
+
+        {
+            "message":"You will receive an email with instructions on how to reset your password in a few minutes."
+        }
+
+
+### Update Password [PUT]
+
++ Request (application/json)
+
+    + Body
+
+            {
+                "user": {
+                    "password":"11223344",
+                    "password_confirmation": "22334455",
+                    "reset_password_token":"abcasdasdiuh"
+                }
+            }
+
++ Response 200 (application/json)
+
+        {
+            "message":"Your password has been changed successfully. You are now signed in."
+        }
+
+## Group Invitations Controller
+
+List of Api inside ```InvitationsController```
+
+## invitation [/api/users/invitation]
+
+### Send Invitation [POST]
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Token token=apikeyvaluetoken
+
+    + Body
+
+            {
+                "email": "userinvite@email.com"
+            }
+
++ Response 200 (application/json)
+
+        {
+          "message": "Successfully inviting people.",
+          "user": {
+            "id": 14,
+            "email": "super@email.com",
+            "created_at": "2016-03-13T03:45:32.076Z",
+            "updated_at": "2016-03-13T03:45:32.341Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          },
+          "api_key": {
+            "id": 22,
+            "apikey": "9d99bb2a0bb6d521058cad9a1f0d6952715111f09441941ef04be74e181bb040",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T03:45:32.118Z",
+            "updated_at": "2016-03-13T03:45:32.118Z",
+            "user_id": 14
+          }
+        }
+
+## Group Users Controller
+
+List of Api inside ```UsersController```
+
+## Get List Users [/api/users/list]
+
+### index [GET]
+
++ Request (application/json)
+
+    + Headers 
+
+            Authorization: Token token=tokenvalidapikey
+
++ Response 200 (application/json)
+
+        {
+          "users": [
+            {
+              "id": 14,
+              "email": "super@email.com",
+              "created_at": "2016-03-13T03:45:32.076Z",
+              "updated_at": "2016-03-13T03:45:32.341Z",
+              "provider": null,
+              "uid": null,
+              "invitation_token": null,
+              "invitation_created_at": null,
+              "invitation_sent_at": null,
+              "invitation_accepted_at": null,
+              "invitation_limit": null,
+              "invited_by_id": null,
+              "invited_by_type": null
+            },
+            {
+              "id": 1,
+              "email": "opan.neutron@gmail.com",
+              "created_at": "2016-03-05T15:21:44.535Z",
+              "updated_at": "2016-03-13T04:19:23.338Z",
+              "provider": null,
+              "uid": null,
+              "invitation_token": null,
+              "invitation_created_at": null,
+              "invitation_sent_at": null,
+              "invitation_accepted_at": null,
+              "invitation_limit": null,
+              "invited_by_id": null,
+              "invited_by_type": null
+            },
+            {
+              "id": 13,
+              "email": "neutron_opan@yahoo.co.id",
+              "created_at": "2016-03-07T16:51:08.480Z",
+              "updated_at": "2016-03-12T09:51:36.629Z",
+              "provider": null,
+              "uid": null,
+              "invitation_token": "d4bbeb00aa89527f3d99a8f1f8ce5e90c990e913305624970ce51a4a521595cc",
+              "invitation_created_at": "2016-03-12T09:51:36.625Z",
+              "invitation_sent_at": "2016-03-12T09:51:36.625Z",
+              "invitation_accepted_at": null,
+              "invitation_limit": null,
+              "invited_by_id": 1,
+              "invited_by_type": "User"
+            }
+          ],
+          "total": 3
+        }
+
+## Get User [/api/users]
+
+### show [GET]
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Token token=tokenvalidapikey
+
++ Response 200 (application/json)
+
+        {
+          "user": {
+            "id": 1,
+            "email": "opan.neutron@gmail.com",
+            "created_at": "2016-03-05T15:21:44.535Z",
+            "updated_at": "2016-03-13T04:28:18.997Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          },
+          "api_key": {
+            "id": 23,
+            "apikey": "b65dcf95d53f8746513e1558bd394d3c74490d004b4f53ac1862844e27f28e5b",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T04:16:44.498Z",
+            "updated_at": "2016-03-13T04:16:44.498Z",
+            "user_id": 1
+          },
+          "user_found": {
+            "id": 1,
+            "email": "opan.neutron@gmail.com",
+            "created_at": "2016-03-05T15:21:44.535Z",
+            "updated_at": "2016-03-13T04:28:18.997Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          }
+        }
+
+## Change Password [/api/users/security/change_password]
+
+### change_password [PATCH]
+
++ Request (application/json)
+
+    + Headers
+            Authorization: Token token=validtokenapikey
+
+    + Body
+
+            {
+                "user":{
+                    "password": "1235678",
+                    "password_confirmation": "12345678",
+                    "current_password": "1234567"
+                }
+            }
+
++ Response 200 (application/json)
+
+        {
+          "api_key": {
+            "id": 23,
+            "apikey": "b65dcf95d53f8746513e1558bd394d3c74490d004b4f53ac1862844e27f28e5b",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T04:16:44.498Z",
+            "updated_at": "2016-03-13T04:16:44.498Z",
+            "user_id": 1
+          },
+          "user": {
+            "id": 1,
+            "email": "opan.neutron@gmail.com",
+            "created_at": "2016-03-05T15:21:44.535Z",
+            "updated_at": "2016-03-13T04:34:48.321Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          }
+        }
+
