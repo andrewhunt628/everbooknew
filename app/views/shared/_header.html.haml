@@ -22,17 +22,17 @@
         %li.responsive= link_to "INVITE", new_user_invitation_path, class: 'orange'
 
         %li.small-screen
-          %a{href: "#"}  UPLOAD
+          = link_to "UPLOAD", "#"
         %li.small-screen
-          %a{href: "#"}  EDIT PROFILE
+          = link_to "EDIT PROFILE", "#"
         %li.small-screen
-          %a{href: "#"}  CHANGE PASSWORD
+          = link_to "CHANGE PASSWORD", security_change_password_user_path(current_user)
         %li.small-screen
-          %a{href: "#"}  MANAGE PAYMENT METHODS
+          = link_to "MANAGE PAYMENT METHODS", "#"
         %li.small-screen
-          %a{href: "#"}  PURCHASE HISTORY
+          = link_to "PURCHASE HISTORY", "#"
         %li.small-screen
-          %a{href: "#"}  SETTINGS
+          = link_to "SETTINGS", "#"
         %li.small-screen
           = link_to "Sign Out", destroy_user_session_path, method: :delete
       %ul.nav.navbar-nav.navbar-right
@@ -50,16 +50,16 @@
             %li.responsive
               = link_to "Invite", new_user_invitation_path, class: 'orange'
             %li
-              %a{href: "#"}  Upload
+              = link_to "Upload", "#"
             %li
-              %a{href: "#"}  Edit Profile
+              = link_to "Edit Profile", "#"
             %li
-              %a{href: "#"}  Change Password
+              = link_to "Change Password", security_change_password_user_path(current_user)
             %li
-              %a{href: "#"}  Manage Payment Methods
+              = link_to "Manage Payment Methods", "#"
             %li
-              %a{href: "#"}  Purchase History
+              = link_to "Purchase History", "#"
             %li
-              %a{href: "#"}  Settings
+              = link_to "Settings", "#"
             %li
               = link_to "Sign Out", destroy_user_session_path, method: :delete

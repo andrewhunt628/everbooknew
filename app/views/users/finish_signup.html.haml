@@ -1,0 +1,20 @@
+= form_for current_user, as: :user, url: finish_signup_path(current_user), html: {class: "form-horizontal", role: "form"} do |f|
+  - if @user.errors.any?
+    #errors
+      %h2
+        = pluralize(@user.errors.count, "error")
+        prevented this Pin from saving
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
+
+  .form-group
+    .row
+      = f.label :email, "Email", class: "col-md-2 control-label"
+      .col-md-5
+        = f.email_field :email, class: "form-control", autofocus: true, placeholder: "Input your email"
+  
+  .form-group
+    .row
+      .col-md-5.col-md-offset-2
+        = f.button "Continue", class: "btn btn-danger"

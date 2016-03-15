@@ -11,7 +11,14 @@ Rails.application.routes.draw do
   resources :comments, only: [:create]
 
   resources :family_bonds, only: [:index, :new, :create, :destroy]
-  resources :users, only: [:show]
+
+  match "/users/:id/finish_signup", to: "users#finish_signup", via: [:get, :patch], as: :finish_signup
+  resources :users, only: [:show, :update, :destroy] do
+    member do
+      get "/security/change_password/", to: "users#form_change_password"
+      patch :change_password
+    end
+  end
 
   # routes for Api
   # default response format for Api is JSON
@@ -19,7 +26,10 @@ Rails.application.routes.draw do
     # make Api Version 1 as default Api
     # class ApiConstraint is inside lib/api_constraint.rb
     scope module: :v1, constraints: ApiConstraint.new(version: 1, default: true) do
-      resources :users, only: [:index, :show]
+      get "/users", to: "users#show"
+      get "/users/list", to: "users#index"
+      patch "/users/security/change_password", to: "users#change_password"
+      
       # handling log in, log out and sign up
       post "users/sign_in", to: "sessions#create"
       delete "users/sign_out", to: "sessions#destroy"

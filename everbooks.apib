@@ -1,0 +1,1217 @@
+FORMAT: 1A
+HOST: http://everbooks.herokuapp.com/
+
+# Everbooks
+
+This is a list of Everbook REST Apis. Everbook Api support versioning system. By default, this Api currently choose version 1 (v1), but if you want to use other version of this Api, just send this ```Accept: application/vnd.everbook.v{Api version}``` into request headers.
+
+
+## Group Sessions Controller 
+
+List of Api inside ```SessionsController```
+
+## Sign In [/api/users/sign_in]
+
+For User sign in
+
+### create [POST]
+
++ Request (application/json)   
+    
+    + Body
+    
+            {
+                "email": "opan.neutron@gmail.com",
+                "password": "11223344"
+            }
+
++ Response 200 (application/json)
+
+        {
+          "message": "Signed in successfully.",
+          "user": {
+            "id": 1,
+            "email": "opan.neutron@gmail.com",
+            "created_at": "2016-03-05T15:21:44.535Z",
+            "updated_at": "2016-03-13T03:04:21.769Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          },
+          "api_key": {
+            "id": 21,
+            "apikey": "9a45f8b83800a550db0d18d10ad06944af5109fb4af8fd29a5cf6e1aeb84c79c",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T03:04:21.785Z",
+            "updated_at": "2016-03-13T03:04:21.785Z",
+            "user_id": 1
+          }
+        }
+
+## Sign Out [/api/users/sign_out]
+
+For User sign out
+
+## destroy [DELETE]
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Token token=9a45f8b83800a550db0d18d10ad06944af5109fb4af8fd29a5cf6e1aeb84c79c
+
++ Response 200 (application/json)
+
+        {
+          "message": "Signed out successfully."
+        }
+
+
+## Group Oauth Verifications Controller
+
+List of Api inside ```OauthVerificationsController``` 
+
+## Google Oauth sign in [/api/user/oauth_verification/google]
+
+For writing this Api, i'm following this [scenario](http://blog.jachobsen.com/2013/08/10/google-oauth2-in-android-with-rails-backend/#oauth-part). So basically, the main process is, mobile device (client) will authenticate by it self and get the ```authentication token```. When you get the ```token``` (which is authentication was valid, and maybe you want to keep it on ```local storage```),  then mobile device will make a request into this Api, to re-authenticate using scope ```userinfo.profile``` Google Api. Once its valid, then this Api will return Everbook ```apikey``` then use this for each request until user sign out. You can found example response from Google OAuth right [here](https://github.com/zquestz/omniauth-google-oauth2#auth-hash). Just make sure you're sending ```token``` key, not ```refresh_token``` inside ```credentials``` object.
+
+## verify_google_token [POST]
+
++ Request (application/json)
+
+    + Body
+
+            {
+                "token": "tokenfromgoogleauth"
+            }
+
++ Response 200 (application/json)
+
+        {
+          "message": "Signed in Successfully.",
+          "user": {
+            "id": 1,
+            "email": "opan.neutron@gmail.com",
+            "created_at": "2016-03-05T15:21:44.535Z",
+            "updated_at": "2016-03-13T03:31:48.702Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          },
+          "api_key": {
+            "id": 20,
+            "apikey": "b44677a372b33a315f6d14bcc50f6d07f6221ba74c05500a8e5ff98035f1bbb4",
+            "expired_date": "2016-03-13",
+            "created_at": "2016-03-12T16:00:54.655Z",
+            "updated_at": "2016-03-12T16:00:54.655Z",
+            "user_id": 1
+          }
+        }
+
+## Group Registrations Controller
+
+List of Api inside ```RegistrationsController```
+
+## Sign Up [/api/users/sign_up]
+
+### create [POST]
+
++ Request (application/json)
+
+    + Body 
+
+            {
+                "user": {
+                    "email": "opan.neutron@gmail.com",
+                    "password":"11223344"
+                }
+            }
+
++ Response 200 (application/json)
+
+        {
+          "message": "Welcome! You have signed up successfully.",
+          "user": {
+            "id": 14,
+            "email": "super@email.com",
+            "created_at": "2016-03-13T03:45:32.076Z",
+            "updated_at": "2016-03-13T03:45:32.341Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          },
+          "api_key": {
+            "id": 22,
+            "apikey": "9d99bb2a0bb6d521058cad9a1f0d6952715111f09441941ef04be74e181bb040",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T03:45:32.118Z",
+            "updated_at": "2016-03-13T03:45:32.118Z",
+            "user_id": 14
+          }
+        }
+
+## Group Passwords Controller
+
+List of Api inside ```PasswordsController```
+
+## password [/api/users/password]
+
+### Request Instruction Forgot Password [POST]
+
++ Request (application/json)
+
+    + Body
+
+            {
+                "user": {
+                    "email": "opan.neutron@gmail.com"
+                }
+            }
+
++ Response 200 (application/json)
+
+        {
+            "message":"You will receive an email with instructions on how to reset your password in a few minutes."
+        }
+
+
+### Update Password [PUT]
+
++ Request (application/json)
+
+    + Body
+
+            {
+                "user": {
+                    "password":"11223344",
+                    "password_confirmation": "22334455",
+                    "reset_password_token":"abcasdasdiuh"
+                }
+            }
+
++ Response 200 (application/json)
+
+        {
+            "message":"Your password has been changed successfully. You are now signed in."
+        }
+
+## Group Invitations Controller
+
+List of Api inside ```InvitationsController```
+
+## invitation [/api/users/invitation]
+
+### Send Invitation [POST]
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Token token=apikeyvaluetoken
+
+    + Body
+
+            {
+                "email": "userinvite@email.com"
+            }
+
++ Response 200 (application/json)
+
+        {
+          "message": "Successfully inviting people.",
+          "user": {
+            "id": 14,
+            "email": "super@email.com",
+            "created_at": "2016-03-13T03:45:32.076Z",
+            "updated_at": "2016-03-13T03:45:32.341Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          },
+          "api_key": {
+            "id": 22,
+            "apikey": "9d99bb2a0bb6d521058cad9a1f0d6952715111f09441941ef04be74e181bb040",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T03:45:32.118Z",
+            "updated_at": "2016-03-13T03:45:32.118Z",
+            "user_id": 14
+          }
+        }
+
+## Group Users Controller
+
+List of Api inside ```UsersController```
+
+## Get List Users [/api/users/list]
+
+### index [GET]
+
++ Request (application/json)
+
+    + Headers 
+
+            Authorization: Token token=tokenvalidapikey
+
++ Response 200 (application/json)
+
+        {
+          "users": [
+            {
+              "id": 14,
+              "email": "super@email.com",
+              "created_at": "2016-03-13T03:45:32.076Z",
+              "updated_at": "2016-03-13T03:45:32.341Z",
+              "provider": null,
+              "uid": null,
+              "invitation_token": null,
+              "invitation_created_at": null,
+              "invitation_sent_at": null,
+              "invitation_accepted_at": null,
+              "invitation_limit": null,
+              "invited_by_id": null,
+              "invited_by_type": null
+            },
+            {
+              "id": 1,
+              "email": "opan.neutron@gmail.com",
+              "created_at": "2016-03-05T15:21:44.535Z",
+              "updated_at": "2016-03-13T04:19:23.338Z",
+              "provider": null,
+              "uid": null,
+              "invitation_token": null,
+              "invitation_created_at": null,
+              "invitation_sent_at": null,
+              "invitation_accepted_at": null,
+              "invitation_limit": null,
+              "invited_by_id": null,
+              "invited_by_type": null
+            },
+            {
+              "id": 13,
+              "email": "neutron_opan@yahoo.co.id",
+              "created_at": "2016-03-07T16:51:08.480Z",
+              "updated_at": "2016-03-12T09:51:36.629Z",
+              "provider": null,
+              "uid": null,
+              "invitation_token": "d4bbeb00aa89527f3d99a8f1f8ce5e90c990e913305624970ce51a4a521595cc",
+              "invitation_created_at": "2016-03-12T09:51:36.625Z",
+              "invitation_sent_at": "2016-03-12T09:51:36.625Z",
+              "invitation_accepted_at": null,
+              "invitation_limit": null,
+              "invited_by_id": 1,
+              "invited_by_type": "User"
+            }
+          ],
+          "total": 3
+        }
+
+## Get User [/api/users]
+
+### show [GET]
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Token token=tokenvalidapikey
+
++ Response 200 (application/json)
+
+        {
+          "user": {
+            "id": 1,
+            "email": "opan.neutron@gmail.com",
+            "created_at": "2016-03-05T15:21:44.535Z",
+            "updated_at": "2016-03-13T04:28:18.997Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          },
+          "api_key": {
+            "id": 23,
+            "apikey": "b65dcf95d53f8746513e1558bd394d3c74490d004b4f53ac1862844e27f28e5b",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T04:16:44.498Z",
+            "updated_at": "2016-03-13T04:16:44.498Z",
+            "user_id": 1
+          },
+          "user_found": {
+            "id": 1,
+            "email": "opan.neutron@gmail.com",
+            "created_at": "2016-03-05T15:21:44.535Z",
+            "updated_at": "2016-03-13T04:28:18.997Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          }
+        }
+
+## Change Password [/api/users/security/change_password]
+
+### change_password [PATCH]
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: Token token=validtokenapikey
+
+    + Body
+
+            {
+                "user":{
+                    "password": "1235678",
+                    "password_confirmation": "12345678",
+                    "current_password": "1234567"
+                }
+            }
+
++ Response 200 (application/json)
+
+        {
+          "api_key": {
+            "id": 23,
+            "apikey": "b65dcf95d53f8746513e1558bd394d3c74490d004b4f53ac1862844e27f28e5b",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T04:16:44.498Z",
+            "updated_at": "2016-03-13T04:16:44.498Z",
+            "user_id": 1
+          },
+          "user": {
+            "id": 1,
+            "email": "opan.neutron@gmail.com",
+            "created_at": "2016-03-05T15:21:44.535Z",
+            "updated_at": "2016-03-13T04:34:48.321Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          }
+        }
+
+## Group Albums Controller
+
+List of Api inside ```AlbumsController```
+
+## Album URL without ID [/api/albums]
+
+### Get List Index [GET]
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Token token=validtokenapikey
+
++ Response 200 (application/json)
+    
+        {
+          "albums": [
+            {
+              "id": 3,
+              "title": "test",
+              "created_at": "2016-03-13T04:46:56.685Z",
+              "updated_at": "2016-03-13T04:46:56.685Z",
+              "description": "asdiasd",
+              "user_id": 1
+            }
+          ],
+          "tags": [],
+          "user": {
+            "id": 1,
+            "email": "opan.neutron@gmail.com",
+            "created_at": "2016-03-05T15:21:44.535Z",
+            "updated_at": "2016-03-13T05:15:26.827Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          },
+          "api_key": {
+            "id": 24,
+            "apikey": "e294b3919ba2012bbf8aabff16a271474a2881a1916cf833893a3ac894078f19",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T05:15:20.969Z",
+            "updated_at": "2016-03-13T05:15:20.969Z",
+            "user_id": 1
+          }
+        }
+
+
+
+### Create Album [POST]
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Token token=validtokenapikey
+
+    + Body
+
+            {
+                "album":{
+                    "title": "title",
+                    "pins_attributes": [
+                        {
+                            "title": "pintitle",
+                            "image": "fileimage.png"
+                        }
+                    ]
+                }
+            }
+
++ Response 200 (application/json)
+
+    
+        {
+          "message": "Album was Successfully created!",
+          "album": {
+              "id": 3,
+              "title": "test",
+              "created_at": "2016-03-13T04:46:56.685Z",
+              "updated_at": "2016-03-13T04:46:56.685Z",
+              "description": "asdiasd",
+              "user_id": 1
+          },
+          "user": {
+            "id": 1,
+            "email": "opan.neutron@gmail.com",
+            "created_at": "2016-03-05T15:21:44.535Z",
+            "updated_at": "2016-03-13T04:40:16.539Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          },
+          "api_key": {
+            "id": 23,
+            "apikey": "b65dcf95d53f8746513e1558bd394d3c74490d004b4f53ac1862844e27f28e5b",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T04:16:44.498Z",
+            "updated_at": "2016-03-13T04:16:44.498Z",
+            "user_id": 1
+          }
+        }
+
+## Album URL with ID [/api/albums/{id}]
+
+### Get Album [GET]
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Token token=validtokenapikey
+
++ Parameters
+
+    + id (required, integer) - Album ID
+
+
++ Response 200 (application/json)
+
+        {
+          "album": {
+            "id": 4,
+            "title": "opan",
+            "created_at": "2016-03-13T05:28:12.180Z",
+            "updated_at": "2016-03-13T05:28:12.180Z",
+            "description": null,
+            "user_id": 1
+          },
+          "pins": [
+            {
+              "id": 13,
+              "title": "test",
+              "description": null,
+              "created_at": "2016-03-13T05:28:12.184Z",
+              "updated_at": "2016-03-13T05:28:12.184Z",
+              "image_file_name": "3.png",
+              "image_content_type": "image/png",
+              "image_file_size": 2752,
+              "image_updated_at": "2016-03-13T05:28:11.916Z",
+              "text_marks": [],
+              "album_id": 4,
+              "user_id": null
+            }
+          ],
+          "user": null,
+          "api_key": {
+            "id": 24,
+            "apikey": "e294b3919ba2012bbf8aabff16a271474a2881a1916cf833893a3ac894078f19",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T05:15:20.969Z",
+            "updated_at": "2016-03-13T05:15:20.969Z",
+            "user_id": 1
+          }
+        }
+
+
+### Update Album using method put or patch [PATCH]
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Token token=validtokenapikey
+
++ Parameters
+
+    + id (required, integer) - Album ID
+
+
++ Response 200 (application/json)
+
+        {
+          "message": "Album was Successfully updated!",
+          "album": {
+              "id": 3,
+              "title": "test",
+              "created_at": "2016-03-13T04:46:56.685Z",
+              "updated_at": "2016-03-13T04:46:56.685Z",
+              "description": "asdiasd",
+              "user_id": 1
+          },
+          "user": {
+            "id": 1,
+            "email": "opan.neutron@gmail.com",
+            "created_at": "2016-03-05T15:21:44.535Z",
+            "updated_at": "2016-03-13T04:40:16.539Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          },
+          "api_key": {
+            "id": 23,
+            "apikey": "b65dcf95d53f8746513e1558bd394d3c74490d004b4f53ac1862844e27f28e5b",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T04:16:44.498Z",
+            "updated_at": "2016-03-13T04:16:44.498Z",
+            "user_id": 1
+          }
+        }
+
+### Delete Album [DELETE]
+
++ Request (application/json)
+    
+    + Headers
+
+            Authorization: Token token=validtokenapikey
+
++ Parameters
+    
+    + id (required, integer) - Album ID
+
++ Response 200 (application/json)
+
+        {
+          "message": "Album was Successfully deleted!",
+          "album": {
+            "id": 4,
+            "title": "opan",
+            "created_at": "2016-03-13T05:28:12.180Z",
+            "updated_at": "2016-03-13T05:28:12.180Z",
+            "description": null,
+            "user_id": 1
+          },
+          "user": {
+            "id": 1,
+            "email": "opan.neutron@gmail.com",
+            "created_at": "2016-03-05T15:21:44.535Z",
+            "updated_at": "2016-03-13T05:28:11.813Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          },
+          "api_key": {
+            "id": 24,
+            "apikey": "e294b3919ba2012bbf8aabff16a271474a2881a1916cf833893a3ac894078f19",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T05:15:20.969Z",
+            "updated_at": "2016-03-13T05:15:20.969Z",
+            "user_id": 1
+          }
+        }
+
+
+## Group Pins Controller
+
+List of Api inside ```PinsController```
+
+## Pin URL without ID [/api/pins]
+
+### Get list Pins [GET]
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Token token=validtokenapikey
+
++ Response 200 (application/json)
+
+        {
+          "pins": [
+            {
+              "id": 12,
+              "title": "asdasdas",
+              "description": "",
+              "created_at": "2016-03-13T05:14:44.493Z",
+              "updated_at": "2016-03-13T05:14:44.493Z",
+              "image_file_name": "3.png",
+              "image_content_type": "image/png",
+              "image_file_size": 2752,
+              "image_updated_at": "2016-03-13T05:14:44.200Z",
+              "text_marks": [],
+              "album_id": null,
+              "user_id": 1
+            },
+            {
+              "id": 9,
+              "title": "api",
+              "description": "desc",
+              "created_at": "2016-03-10T15:32:15.847Z",
+              "updated_at": "2016-03-10T15:32:15.847Z",
+              "image_file_name": "14.png",
+              "image_content_type": "image/png",
+              "image_file_size": 3446,
+              "image_updated_at": "2016-03-10T15:32:15.384Z",
+              "text_marks": [],
+              "album_id": 2,
+              "user_id": 1
+            }
+          ],
+          "user": {
+            "id": 1,
+            "email": "opan.neutron@gmail.com",
+            "created_at": "2016-03-05T15:21:44.535Z",
+            "updated_at": "2016-03-13T05:35:31.741Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          },
+          "tags": [],
+          "api_key": {
+            "id": 24,
+            "apikey": "e294b3919ba2012bbf8aabff16a271474a2881a1916cf833893a3ac894078f19",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T05:15:20.969Z",
+            "updated_at": "2016-03-13T05:15:20.969Z",
+            "user_id": 1
+          }
+        }
+
+### Create Pin [POST]
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Token token=validtokenapikey
+
+    + Body
+
+            {
+                "pin": {
+                    "image": "image.png",
+                    "title": "pin title",
+                    "album_id": 2
+                }
+            }
+
++ Response 200 (application/json)
+
+        
+        {
+          "message": "Successfully created pin",
+          "user": {
+            "id": 1,
+            "email": "opan.neutron@gmail.com",
+            "created_at": "2016-03-05T15:21:44.535Z",
+            "updated_at": "2016-03-13T05:37:55.154Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          },
+          "api_key": {
+            "id": 24,
+            "apikey": "e294b3919ba2012bbf8aabff16a271474a2881a1916cf833893a3ac894078f19",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T05:15:20.969Z",
+            "updated_at": "2016-03-13T05:15:20.969Z",
+            "user_id": 1
+          },
+          "pin": {
+            "id": 14,
+            "title": "title",
+            "description": null,
+            "created_at": "2016-03-13T05:37:55.378Z",
+            "updated_at": "2016-03-13T05:37:55.378Z",
+            "image_file_name": "4.png",
+            "image_content_type": "image/png",
+            "image_file_size": 3097,
+            "image_updated_at": "2016-03-13T05:37:55.183Z",
+            "text_marks": [],
+            "album_id": 2,
+            "user_id": 1
+          }
+        }
+
+## Pin URL with ID [/api/pins/{id}]
+
+### Get Pin [GET]
+
++ Request (application/json)
+    
+    + Headers
+
+            Authorization: Token token=validtokenapikey
+
++ Parameters
+    
+    + id (required, integer) - Pin ID
+
++ Response 200 (application/json)
+
+        {
+          "user": {
+            "id": 1,
+            "email": "opan.neutron@gmail.com",
+            "created_at": "2016-03-05T15:21:44.535Z",
+            "updated_at": "2016-03-13T05:37:55.154Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          },
+          "api_key": {
+            "id": 24,
+            "apikey": "e294b3919ba2012bbf8aabff16a271474a2881a1916cf833893a3ac894078f19",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T05:15:20.969Z",
+            "updated_at": "2016-03-13T05:15:20.969Z",
+            "user_id": 1
+          },
+          "pin": {
+            "id": 14,
+            "title": "title",
+            "description": null,
+            "created_at": "2016-03-13T05:37:55.378Z",
+            "updated_at": "2016-03-13T05:37:55.378Z",
+            "image_file_name": "4.png",
+            "image_content_type": "image/png",
+            "image_file_size": 3097,
+            "image_updated_at": "2016-03-13T05:37:55.183Z",
+            "text_marks": [],
+            "album_id": 2,
+            "user_id": 1
+          }
+        }
+
+
+###  Update Pin using method put or patch [PATCH]
+
++ Request (application/json)
+    
+    + Headers
+
+            Authorization: Token token=validtokenapikey
+
++ Parameters
+    
+    + id (required, integer) - Pin ID
+
++ Response 200 (application/json)
+
+        {
+          "message": "Successfully updated pin",
+          "user": {
+            "id": 1,
+            "email": "opan.neutron@gmail.com",
+            "created_at": "2016-03-05T15:21:44.535Z",
+            "updated_at": "2016-03-13T05:37:55.154Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          },
+          "api_key": {
+            "id": 24,
+            "apikey": "e294b3919ba2012bbf8aabff16a271474a2881a1916cf833893a3ac894078f19",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T05:15:20.969Z",
+            "updated_at": "2016-03-13T05:15:20.969Z",
+            "user_id": 1
+          },
+          "pin": {
+            "id": 14,
+            "title": "title",
+            "description": null,
+            "created_at": "2016-03-13T05:37:55.378Z",
+            "updated_at": "2016-03-13T05:37:55.378Z",
+            "image_file_name": "4.png",
+            "image_content_type": "image/png",
+            "image_file_size": 3097,
+            "image_updated_at": "2016-03-13T05:37:55.183Z",
+            "text_marks": [],
+            "album_id": 2,
+            "user_id": 1
+          }
+        }
+
+### Delete Pin [DELETE]
+
++ Request (application/json)
+    
+    + Headers
+
+            Authorization: Token token=validtokenapikey
+
++ Parameters
+    
+    + id (required, integer) - Pin ID
+
++ Response 200 (application/json)
+
+        {
+          "message": "Successfully deleted pin",
+          "user": {
+            "id": 1,
+            "email": "opan.neutron@gmail.com",
+            "created_at": "2016-03-05T15:21:44.535Z",
+            "updated_at": "2016-03-13T05:37:55.154Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          },
+          "api_key": {
+            "id": 24,
+            "apikey": "e294b3919ba2012bbf8aabff16a271474a2881a1916cf833893a3ac894078f19",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T05:15:20.969Z",
+            "updated_at": "2016-03-13T05:15:20.969Z",
+            "user_id": 1
+          },
+          "pin": {
+            "id": 14,
+            "title": "title",
+            "description": null,
+            "created_at": "2016-03-13T05:37:55.378Z",
+            "updated_at": "2016-03-13T05:37:55.378Z",
+            "image_file_name": "4.png",
+            "image_content_type": "image/png",
+            "image_file_size": 3097,
+            "image_updated_at": "2016-03-13T05:37:55.183Z",
+            "text_marks": [],
+            "album_id": 2,
+            "user_id": 1
+          }
+        }
+
+## Group Comments Controller
+
+List of Api inside ```CommentsController```
+
+## comments [/api/comments]
+
+### Create Comment [POST]
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Token token=validtokenapikey
+
+    + Body
+
+            {
+                "comment":{
+                    "text": "comment content",
+                    "pin_id": 2
+                }
+            }
+
++ Response 200 (application/json)
+
+        {
+          "user": {
+            "id": 1,
+            "email": "opan.neutron@gmail.com",
+            "created_at": "2016-03-05T15:21:44.535Z",
+            "updated_at": "2016-03-13T05:46:07.397Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          },
+          "api_key": {
+            "id": 24,
+            "apikey": "e294b3919ba2012bbf8aabff16a271474a2881a1916cf833893a3ac894078f19",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T05:15:20.969Z",
+            "updated_at": "2016-03-13T05:15:20.969Z",
+            "user_id": 1
+          },
+          "comment": {
+            "id": 6,
+            "text": "aosidjoaisdoiajsdiojaoisjd",
+            "user_id": 1,
+            "pin_id": 14,
+            "created_at": "2016-03-13T05:46:07.437Z",
+            "updated_at": "2016-03-13T05:46:07.437Z"
+          },
+          "message": "Comment was Successfully created!"
+        }
+
+
+## Group Family Bond Controller
+
+List of Api inside ```FamilyBondsController```
+
+## Family bond without ID [/api/family_bonds]
+
+### Get list Family bond [GET]
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Token token=validtokenapikey
+
++ Response 200 (application/json)
+
+        {
+          "user": {
+            "id": 1,
+            "email": "opan.neutron@gmail.com",
+            "created_at": "2016-03-05T15:21:44.535Z",
+            "updated_at": "2016-03-13T05:48:29.713Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          },
+          "api_key": {
+            "id": 24,
+            "apikey": "e294b3919ba2012bbf8aabff16a271474a2881a1916cf833893a3ac894078f19",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T05:15:20.969Z",
+            "updated_at": "2016-03-13T05:15:20.969Z",
+            "user_id": 1
+          },
+          "family_bonds": [
+            {
+              "id": 1,
+              "family_member_one_id": 1,
+              "family_member_two_id": 13,
+              "created_at": "2016-03-10T15:17:15.397Z",
+              "updated_at": "2016-03-10T15:17:15.397Z"
+            }
+          ]
+        }
+
+### Create Family bond [POST]
+
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Token token=validtokenapikey
+
+    + Body
+
+            {
+                "family_bond": {
+                    "family_member_two_id": 2
+                }
+            }
+
++ Response 200 (application/json)
+
+        {
+          "user": {
+            "id": 1,
+            "email": "opan.neutron@gmail.com",
+            "created_at": "2016-03-05T15:21:44.535Z",
+            "updated_at": "2016-03-13T05:50:29.757Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          },
+          "api_key": {
+            "id": 24,
+            "apikey": "e294b3919ba2012bbf8aabff16a271474a2881a1916cf833893a3ac894078f19",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T05:15:20.969Z",
+            "updated_at": "2016-03-13T05:15:20.969Z",
+            "user_id": 1
+          },
+          "family_bond": {
+            "id": 2,
+            "family_member_one_id": 1,
+            "family_member_two_id": 14,
+            "created_at": "2016-03-13T05:50:29.790Z",
+            "updated_at": "2016-03-13T05:50:29.790Z"
+          },
+          "message": "Family was Successfully created!"
+        }
+
+## Family bond URL with ID [/api/family_bonds/{id}]
+
+### Delete Family bond [DELETE]
+
++ Request (application/json)
+    
+    + Headers
+
+            Authorization: Token token=validtokenapikey
+
++ Parameters
+    
+    + id (required, integer) - Family bond ID
+
++ Response 200 (application/json)
+
+        {
+          "user": {
+            "id": 1,
+            "email": "opan.neutron@gmail.com",
+            "created_at": "2016-03-05T15:21:44.535Z",
+            "updated_at": "2016-03-13T05:50:29.757Z",
+            "provider": null,
+            "uid": null,
+            "invitation_token": null,
+            "invitation_created_at": null,
+            "invitation_sent_at": null,
+            "invitation_accepted_at": null,
+            "invitation_limit": null,
+            "invited_by_id": null,
+            "invited_by_type": null
+          },
+          "api_key": {
+            "id": 24,
+            "apikey": "e294b3919ba2012bbf8aabff16a271474a2881a1916cf833893a3ac894078f19",
+            "expired_date": "2016-03-14",
+            "created_at": "2016-03-13T05:15:20.969Z",
+            "updated_at": "2016-03-13T05:15:20.969Z",
+            "user_id": 1
+          },
+          "family_bond": {
+            "id": 2,
+            "family_member_one_id": 1,
+            "family_member_two_id": 14,
+            "created_at": "2016-03-13T05:50:29.790Z",
+            "updated_at": "2016-03-13T05:50:29.790Z"
+          },
+          "message": "Family was Successfully deleted!"
+        }

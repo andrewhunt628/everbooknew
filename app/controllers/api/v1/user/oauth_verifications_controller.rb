@@ -35,6 +35,12 @@ module Api
           if response.code.eql? 200
             data = JSON.parse(response.body)
             @user = ::User.find_for_verify_google_token(data.symbolize_keys, uid, provider)
+
+            render json: {message: I18n.t("devise.failure.not_found_in_database", authentication_keys: "email")}, 
+              status: :unprocessable_entity if not @user.persisted?
+            sign_in @user, store: false
+          else
+            render json: response, status: response.code.to_i and return
           end
         end
 

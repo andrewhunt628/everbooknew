@@ -28,6 +28,8 @@ gem 'simple_form'
 gem 'devise'
 gem 'devise_invitable'
 gem "omniauth-google-oauth2"
+gem 'omniauth-facebook'
+gem "koala" # Facebook Api
 gem "paperclip", "~> 4.3"
 gem 'masonry-rails'
 gem "font-awesome-rails"
