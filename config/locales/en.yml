@@ -21,6 +21,8 @@
 
 en:
   hello: "Hello world"
+  welcome: "Welcome to the Kidio"
+  welcome_p: "Upload photos by drag and drop ans start using it right now!"
 
   date:
     formats:

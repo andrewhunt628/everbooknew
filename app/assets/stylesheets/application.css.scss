@@ -6,6 +6,7 @@
 @import "jquery.fileupload";
 @import "jquery.fileupload-ui";
 @import "dropzone";
+@import "albums";
 
 @font-face {
   font-family: 'Cantarell';
@@ -332,7 +333,7 @@ body {
 
   .upload-group {
     width: 100%;
-  
+
     .upload-btn {
       width: 100%;
       span.text {
@@ -343,7 +344,7 @@ body {
       }
 
     }
-    
+
   }
 
 }
@@ -600,5 +601,4 @@ body {
       }
     }
   }
-
 }

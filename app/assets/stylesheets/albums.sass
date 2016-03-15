@@ -39,9 +39,32 @@
         &:hover
           img
             opacity: 0.5
-        
+
           .action-img
             &.restore
               display: inline-block
             &.remove
               display: none
+
+.cover
+  display: none
+  position: absolute
+  top: 0
+  bottom: 0
+  right: 0
+  left: 0
+  background: rgba(0, 0, 0, .4)
+  z-index: 2
+  &:hover
+    cursor: pointer
+  h1, p
+    text-align: center
+    color: white
+    position: relative
+  h1
+    top: 2.5em
+  p
+    top: 7em
+
+.file-uploader
+  z-index: 3
