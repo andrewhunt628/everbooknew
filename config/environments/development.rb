@@ -58,4 +58,15 @@ Rails.application.configure do
 
   #for paperclip
   Paperclip.options[:command_path] = "/usr/bin/convert/"
+
+  config.middleware.insert_before 0, 'Rack::Cors', logger: (-> { Rails.logger }) do
+    allow do
+      origins '*'
+      resource '*',
+          headers: :any,
+          methods: [:get, :post, :delete, :put, :patch, :options, :head],
+          age: 0
+    end
+  end
+
 end
