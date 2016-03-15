@@ -13,14 +13,12 @@
     .main
       .design-back
         .col-sm-12.banner-text.text-center
-          %h1
-            Remember every moment
-          %h5
-            Everbook is the best way to organize your family memories
+          %h1= t('landing.header')
+          %h5= t('landing.p')
       .signup-pane
         .signup-form
           .logo.col-sm-12.text-center
-            %h1 Everbook
+            %h1= t('app')
           .social.col-sm-12
             =link_to user_omniauth_authorize_path(:google_oauth2), class: 'google btn btn-primary btn-block' do
               %i.fa.fa-google
@@ -53,7 +51,7 @@
                 = link_to "Forgot your password?", new_password_path(resource_name)
 
               .terms.col-sm-12.text-center
-                %h6 Creating an account means you’re okay with Everbook's
+                %h6= t('landing.terms')
                 = succeed "," do
                   %a{:href => "#"} Terms of Service
                 %a{:href => "#"} Privacy Policy

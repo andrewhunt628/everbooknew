@@ -21,6 +21,7 @@
 
 en:
   hello: "Hello world"
+  app: "Kidio"
   welcome: "Welcome to the Kidio"
   welcome_p: "Upload photos by drag and drop ans start using it right now!"
 
@@ -59,3 +60,7 @@ en:
       sign_in: "Signed in Successfully."
     invitation:
       success: "Successfully inviting people."
+  landing:
+    header: "Remember every moment"
+    p: "Kidio is the best way to organize your family memories"
+    terms: "Creating an account means you’re okay with Kidios'"
