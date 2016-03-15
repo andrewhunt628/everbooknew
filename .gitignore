@@ -17,3 +17,11 @@
 /tmp
 
 /public/system/pins
+.idea
+.bundle
+
+vendor/cache
+vendor/extensions
+vendor/gems
+vendor/ruby
+vendor/specifications

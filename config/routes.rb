@@ -53,7 +53,10 @@ Rails.application.routes.draw do
 
       post "/user/oauth_verification/google", to: "user/oauth_verifications#verify_google_token"
 
-      match '*path', via: [:options], to: lambda {|_| [200, {'Content-type' => 'text/plain'}, []]}
+      if Rails.env.development?
+        match '*path', via: [:options], to: lambda {|_| [200, {'Content-type' => 'text/plain'}, []]}
+      end
+
     end
   end
   
