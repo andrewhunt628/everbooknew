@@ -1,11 +1,9 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
-
 jQuery ->
   unless localStorage.getItem('onboarding')
+    $('body').addClass('image-wall')
     cover = $('.cover').fadeIn()
 
     $('.cover').click ->
       localStorage.setItem('onboarding', true)
+      $('body').removeClass('image-wall')
       $(this).fadeOut()
