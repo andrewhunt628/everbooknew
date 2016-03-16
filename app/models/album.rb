@@ -6,7 +6,7 @@ class Album < ActiveRecord::Base
   
   validates :title, :pins, presence: true
 
-  accepts_nested_attributes_for :pins, allow_destroy: true, reject_if: proc { |attributes| attributes['image'].blank? }
+  accepts_nested_attributes_for :pins, allow_destroy: true
 
   def cover
     pins.sample

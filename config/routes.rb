@@ -4,6 +4,8 @@ require "api_constraint"
 Rails.application.routes.draw do
 
   resources :albums
+  post "/albums/quickupload", to: "albums#quick_upload", as: :quick_upload
+  post "/albums/quickupload/save", to: "albums#quick_upload_save", as: :quick_upload_save
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 

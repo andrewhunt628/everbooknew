@@ -64,3 +64,5 @@ en:
     header: "Remember every moment"
     p: "Kidio is the best way to organize your family memories"
     terms: "Creating an account means you’re okay with Kidios'"
+  albums:
+    dropspan: "Drop files here"

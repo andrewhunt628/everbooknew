@@ -20,17 +20,51 @@ class AlbumsController < ApplicationController
 
   # GET /albums/new
   def new
-    @album = Album.new
+    @albums = current_user.albums
+    @pins = Pin.where(id: params[:pins])
   end
 
   # GET /albums/1/edit
   def edit
   end
 
+  # POST /albums/quickupload
+  def quick_upload
+    @pins = params[:files].map {|file|
+      @pin = Pin.new
+      @pin.image = file
+      @pin.save
+      @pin
+    }
+
+    respond_to do |format|
+      format.json { render json: {pins: @pins.map(&:id), status: :success}, status: :created }
+    end
+  end
+
+  # POST /albums/quickupload/save
+  def quick_upload_save
+    if params[:newAlbum] == 'true'
+      @user = current_user
+      @album = @user.albums.create(title: params[:title], description: params[:description])
+    else
+      @album = current_user.albums.find(params[:album][:id])
+    end
+
+    @pins = Pin.where(id: params[:pins].split(','))
+    @pins.each do |pin|
+      @album.pins << pin
+      current_user.pins << pin
+    end
+
+    @album.save
+
+    redirect_to '/albums'
+  end
+
   # POST /albums
   # POST /albums.json
   def create
-    @album = current_user.albums.new(album_params)
 
     respond_to do |format|
       if @album.save
