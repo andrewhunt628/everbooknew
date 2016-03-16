@@ -37,6 +37,8 @@ jQuery ->
       if (data.result)
         files.push(data.result.pins[0])
     stop: ->
+      localStorage.setItem 'onboarding', true
+      $('body').removeClass 'image-wall'
       window.location.href = 'albums/new?' + files.map((val) ->
         'pins[]=' + val).reduce (p, n) -> p + '&' +  n
 
