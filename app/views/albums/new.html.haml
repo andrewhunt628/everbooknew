@@ -3,7 +3,7 @@
     - @pins.each do |pin|
       = image_tag pin.image.url(:medium), {class: 'preview'}
 
-  %input{type: 'hidden', name: 'pins', value: @pins.map(&:id).join(',')}}
+  %input{type: 'hidden', name: 'pins', value: @pins.map(&:id).join(',')}
 
   .help-block
     %h2 Where to put?
