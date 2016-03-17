@@ -1,45 +1,54 @@
-= form_tag('/albums/quickupload/save', method: 'post', class: 'form-horizontal album-form') do
-  .form-group
+.page
+
+  = form_tag('/albums/quickupload/save', method: 'post', class: 'form-horizontal album-form') do
+
+    %input{type: 'hidden', name: 'pins', value: @pins.map(&:id).join(',')}
+
+    .form-group
+      %label.col-sm-1.control-label{for: 'album_id'} Put to
+      .col-sm-2
+        = select('album', 'id', @albums.collect {|album| [album.title, album.id]}, {}, {class: 'form-control'})
+      .col-sm-6
+        %a#new-album.btn.btn-default Create new
+
+    .new-album.hidden
+      .form-group
+        %label.col-sm-1.control-label Title
+        .col-sm-4
+          %input.form-control{type: 'text', name: 'title'}
+
+      .form-group
+        %label.col-sm-1.control-label Description
+        .col-sm-4
+          %textarea.form-control{cols: 5, rows: 5}
+
+      %input{type: 'hidden', name: 'newAlbum', value: 'false', id: 'new-album-flag'}
+
+    .form-group
+      .col-sm-offset-1.col-sm-10
+        .btn-group.actions
+          = submit_tag('Save', {class: 'btn btn-primary'})
+          = link_to 'Cancel', :back, class: 'btn btn-default'
+
+  #pins.pins-edit.transitions-enabled
+
     - @pins.each do |pin|
-      = image_tag pin.image.url(:medium), {class: 'preview'}
+      .box.panel.panel-default
+        .panel-info
+          %span.glyphicon.glyphicon-remove.pull-right.remove-pin(aria-hidden="true")
+        .panel-content
+          .photo-wrap
+            = image_tag pin.image.url(:medium), class: "image", 'data-toggle'=>"modal", 'data-target'=>"#pinModal"
+          .panel-footer
+            .form-group.has-feedback
+              %span.glyphicon.glyphicon-pencil.form-control-feedback(aria-hidden="true")
+              %input.form-control{placeholder: 'title'}
+            .form-group.has-feedback
+              %span.glyphicon.glyphicon-pencil.form-control-feedback(aria-hidden="true")
+              %input.form-control{placeholder: 'description'}
+            .form-group
+              %textarea.form-control
 
-  %input{type: 'hidden', name: 'pins', value: @pins.map(&:id).join(',')}
-
-  .help-block
-    %h2 Where to put?
-
-  .form-group
-    %label.col-sm-2.control-label{for: 'album_id'} Album
-    .col-sm-2
-      = select('album', 'id', @albums.collect {|album| [album.title, album.id]}, {}, {class: 'form-control'})
-    .col-sm-2.help-block
-      or
-      %a{href: '#', id: 'new-album'} Create new
-
-  .new-album.hidden
-    .form-group
-      %label.col-sm-2.control-label Title
-      .col-sm-8
-        %input.form-control{type: 'text', name: 'title'}
-
-    .form-group
-      %label.col-sm-2.control-label Description
-      .col-sm-8
-        %textarea.form-control{cols: 5, rows: 5}
-
-    %input{type: 'hidden', name: 'newAlbum', value: 'false', id: 'new-album-flag'}
-
-  .form-group
-    .col-sm-offset-2.col-sm-10
-      .btn-group.actions
-        = submit_tag('Save', {class: 'btn btn-primary'})
-        = link_to 'Cancel', :back, class: 'btn btn-default'
 
 :coffee
-  jQuery ->
-    $('#new-album').click ->
-      $('.new-album').toggleClass 'hidden'
-      if $('#new-album-flag').val() == 'false'
-        $('#new-album-flag').val 'true'
-      else
-        $('#new-album-flag').val 'false'
+  new App.Album el: $('.page')

@@ -11,3 +11,9 @@
         .panel-body
           .description
             = raw pin.description
+
+:coffee
+  jQuery ->
+    $('#pins').imagesLoaded ->
+      $(this).masonry
+        itemSelector: '.box'
