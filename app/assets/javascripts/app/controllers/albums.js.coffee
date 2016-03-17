@@ -7,13 +7,14 @@ class App.Albums extends Spine.Controller
     'document': 'document'
     '.cover': 'cover'
     '.file-uploader': 'container'
+    '#upload-status': 'uploadStatus'
 
   events:
     'imagesLoaded #pins': 'initializeMasonry'
     'dragover': 'dragOver'
     'drop': 'drop'
     'click #drop-zone': 'triggerUpload'
-    'click .cover': 'removeOnboarding'
+    'click .cover': 'removeCover'
 
   initializeMasonry: ->
     @pins.masonry
@@ -46,24 +47,42 @@ class App.Albums extends Spine.Controller
       dataType: 'json'
       dropZone: @dropZone
       url: '/albums/quickupload'
-      done: @done
-      stop: @stop
+      done: @uploadDone
+      start: @uploadStart
+      stop: @uploadStop
+      progressall: @uploadProgress
 
     unless localStorage.getItem 'onboarding'
-      @removeOnboarding()
+      @initializeOnboarding()
 
-  done: (e, data) =>
+  uploadDone: (e, data) =>
     @files.push(data.result.pins[0]) if data.result
 
-  stop: (e) =>
+  uploadStop: (e) =>
     localStorage.setItem 'onboarding', true
     window.location.href = '/albums/new?' + @files.map((val) -> 'pins[]=' + val).reduce (p, n) -> p + '&' + n
 
-  removeOnboarding: ->
+  uploadStart: =>
+    @uploadStatus.toggleClass('hidden')
+    @removeOnboarding()
+
+  uploadProgress: (e, data) =>
+    @progressBar = @uploadStatus.find('.progress-bar')
+    value = parseInt(data.loaded / data.total * 100)
+    @progressBar.attr('aria-valuenow', value)
+    @progressBar.css('width', value + '%')
+    @progressBar.find('span').text value + '%'
+
+  initializeOnboarding: =>
     $('body').addClass 'image-wall'
     @cover.fadeIn()
 
-    @cover.click =>
-      localStorage.setItem 'onboarding', true
-      @triggerUpload()
+  removeCover: =>
+    @removeOnboarding()
+    @triggerUpload()
+
+  removeOnboarding: =>
+    localStorage.setItem 'onboarding', true
+    @cover.fadeOut 400, ->
+      $('body').removeClass 'image-wall'
 

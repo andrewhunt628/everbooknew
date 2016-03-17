@@ -3,6 +3,10 @@
     %h1= t('welcome')
     %p= t('welcome_p')
 
+  .progress#upload-status.hidden
+    .progress-bar(role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100")
+      %span 60%
+
   #pins.transitions-enabled
     .box.wrapper
       .panel.panel-default.file-uploader
