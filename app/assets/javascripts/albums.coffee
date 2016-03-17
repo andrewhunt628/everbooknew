@@ -7,8 +7,7 @@ jQuery ->
 
     cover.click ->
       localStorage.setItem 'onboarding', true
-      $('body').removeClass 'image-wall'
-      window.location.href = 'albums/new'
+      $('#drop-input').trigger 'click'
 
   dropZone = $('#drop-zone')
   container = $('.file-uploader')
@@ -23,9 +22,6 @@ jQuery ->
     e.preventDefault()
     container.removeClass 'active'
     container.removeClass 'in'
-
-  container.click ->
-    window.location.href = 'albums/new'
 
   files = []
   $('#drop-input').fileupload
@@ -42,3 +38,5 @@ jQuery ->
       window.location.href = 'albums/new?' + files.map((val) ->
         'pins[]=' + val).reduce (p, n) -> p + '&' +  n
 
+  dropZone.click ->
+    $('#drop-input').trigger 'click'

@@ -8,7 +8,7 @@
       .panel-content
         .panel-body
           .wrapper
-            %input#drop-input{type: 'hidden', value: 'album[pin_ids][]', multiple: :true}
+            %input#drop-input{type: 'file', value: 'album[pin_ids][]', multiple: :true}
             %span#drop-zone= t('albums.dropspan')
 
     .panel.panel-default
