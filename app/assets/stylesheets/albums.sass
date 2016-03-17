@@ -99,8 +99,12 @@
 
 .album-form
   padding-left: 1em
+#upload-status
+  margin-left: 1em
 
 .pins-edit
+  img:hover
+    cursor: pointer
   input, textarea
     border: 0
     border-bottom: 1px solid #ccc
@@ -109,4 +113,10 @@
     box-shadow: none
   .remove-pin
     padding: 4px
+    position: absolute
+    color: white
+    right: 0
+    &:hover
+      color: #c9302c
+      z-index: 5
 

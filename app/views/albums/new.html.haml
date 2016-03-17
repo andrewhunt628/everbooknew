@@ -34,8 +34,7 @@
 
     - @pins.each do |pin|
       .box.panel.panel-default
-        .panel-info
-          %span.glyphicon.glyphicon-remove.pull-right.remove-pin(aria-hidden="true")
+        %span.glyphicon.glyphicon-remove.pull-right.remove-pin(aria-hidden="true")
         .panel-content
           .photo-wrap
             = image_tag pin.image.url(:medium), class: "image", 'data-toggle'=>"modal", 'data-target'=>"#pinModal"
