@@ -1,35 +1,39 @@
-.cover
-  %h1= t('welcome')
-  %p= t('welcome_p')
+.app
+  .cover
+    %h1= t('welcome')
+    %p= t('welcome_p')
 
-#pins.transitions-enabled
-  .box.wrapper
-    .panel.panel-default.file-uploader
-      .panel-content
-        .panel-body
-          .wrapper
-            %input#drop-input{type: 'file', value: 'album[pin_ids][]', multiple: :true}
-            %span#drop-zone= t('albums.dropspan')
+  #pins.transitions-enabled
+    .box.wrapper
+      .panel.panel-default.file-uploader
+        .panel-content
+          .panel-body
+            .wrapper
+              %input#drop-input{type: 'file', value: 'album[pin_ids][]', multiple: :true}
+              %span#drop-zone= t('albums.dropspan')
 
-    .panel.panel-default
-      .panel-content
-        .panel-body
-          %h3 Hashtags
-          .hashtags-container
-            - @tags.each do |tag|
-              .hashtag{href: "#"}
-                = link_to("##{tag}", get_mark_tag_url(tag))
-                = link_to get_unmark_tag_url(tag) do
-                  %span.close ×
-    .panel.panel-default
-      .panel-content
-        .panel-body
-          = link_to "view all", family_bonds_path, class: "pull-right orange help"
-          %h3 Friends
-          - current_user.family.each do |friend|
-            = link_to user_path(friend), class: "friend", title: "#{friend.full_name}" do
-              = image_tag friend.avatar, width: 30, height: 30 
+      .panel.panel-default
+        .panel-content
+          .panel-body
+            %h3 Hashtags
+            .hashtags-container
+              - @tags.each do |tag|
+                .hashtag{href: "#"}
+                  = link_to("##{tag}", get_mark_tag_url(tag))
+                  = link_to get_unmark_tag_url(tag) do
+                    %span.close ×
+      .panel.panel-default
+        .panel-content
+          .panel-body
+            = link_to "view all", family_bonds_path, class: "pull-right orange help"
+            %h3 Friends
+            - current_user.family.each do |friend|
+              = link_to user_path(friend), class: "friend", title: "#{friend.full_name}" do
+                = image_tag friend.avatar, width: 30, height: 30
 
-  - @albums.each do |album|
-    = render 'content', album: album
-    = display_modal_windows_for_album_pins(album)
+    - @albums.each do |album|
+      = render 'content', album: album
+      = display_modal_windows_for_album_pins(album)
+
+:coffee
+  new App.Albums el: $('.app')
