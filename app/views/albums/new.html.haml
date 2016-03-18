@@ -37,7 +37,7 @@
         %span.glyphicon.glyphicon-remove.pull-right.remove-pin(aria-hidden="true")
         .panel-content
           .photo-wrap
-            = image_tag pin.image.url(:medium), class: "image", 'data-toggle'=>"modal", 'data-target'=>"#pinModal"
+            = cl_image_tag(pin.public_id, {class: 'image', 'data-toggle' => 'modal', 'data-target' => '#pinModal'})
           .panel-footer
             .form-group.has-feedback
               %span.glyphicon.glyphicon-pencil.form-control-feedback(aria-hidden="true")

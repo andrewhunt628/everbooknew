@@ -4,7 +4,7 @@ class App.Album extends Spine.Controller
 
   elements:
     '.new-album': 'newAlbum'
-    '#new-albim-flag': 'newAlbum?'
+    '#new-album-flag': 'newAlbum?'
     '#pins': 'pins'
 
   constructor: ->
@@ -16,4 +16,4 @@ class App.Album extends Spine.Controller
 
   createNewAlbum: ->
     @newAlbum.toggleClass 'hidden'
-    @newAlbum?.val = @newAlbum?.val() == 'false' ? 'true' : 'false'
+    @newAlbum?.val 'true' //FIXME handle new album flag

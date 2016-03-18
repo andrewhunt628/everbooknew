@@ -7,10 +7,11 @@
     .box.panel.panel-default
       .panel-content
         .photo-wrap
-          = image_tag pin.image.url(:medium), class: "image", 'data-toggle'=>"modal", 'data-target'=>"#pinModal"
-        .panel-body
-          .description
-            = raw pin.description
+          = cl_image_tag(pin.public_id, {class: 'image', 'data-toggle'=> 'modal', 'data-target' => '#pinModal'})
+        - if pin.description
+          .panel-body
+            .description
+              = raw pin.description
 
 :coffee
   jQuery ->

@@ -10,6 +10,7 @@ class AlbumsController < ApplicationController
     end
     @albums = @albums.order("albums.created_at DESC")
     @tags = @albums.tag_counts_on(:tags)
+    @pins = @albums.reduce([]) {|n, album| album.pins + n}
 
   end
 
@@ -30,12 +31,13 @@ class AlbumsController < ApplicationController
 
   # POST /albums/quickupload
   def quick_upload
-    @pins = params[:files].map {|file|
+    @pins = params[:files].map do |file|
       @pin = Pin.new
-      @pin.image = file
+      image = Cloudinary::Uploader.upload(file)
+      @pin.public_id = image['public_id']
       @pin.save
       @pin
-    }
+    end
 
     respond_to do |format|
       format.json { render json: {pins: @pins.map(&:id), status: :success}, status: :created }

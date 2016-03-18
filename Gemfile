@@ -32,7 +32,11 @@ gem 'devise_invitable'
 gem "omniauth-google-oauth2"
 gem 'omniauth-facebook'
 gem "koala" # Facebook Api
-gem "paperclip", "~> 4.3"
+
+# gem "paperclip", "~> 4.3"
+gem 'carrierwave'
+gem 'cloudinary'
+
 gem 'masonry-rails'
 gem "font-awesome-rails"
 gem 'acts-as-taggable-on', '~> 3.4'

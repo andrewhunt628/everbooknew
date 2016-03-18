@@ -8,14 +8,14 @@ module AlbumsHelper
       iteration += 1
       result += content_tag :div, class: 'icon' do
                   if iteration == limit && get_remaining_pins_quantity(album) > 0
-                    link_to album, style: "background-image: url('#{pin.image.url(:thumb)}');" do
+                    link_to album, style: "background-image: url('#{cl_image_path(pin.album_id)}');" do
                       content_tag :div, class: 'album-counter' do
                         counter = content_tag :h4, get_remaining_pins_quantity(album)
                         counter += content_tag :h5, 'more'
                       end
                     end
                   else
-                    link_to pin, style: "background-image: url('#{pin.image.url(:thumb)}');", 'data-toggle' => "modal", 'data-target'=>"#pin#{pin.id}" do
+                    link_to pin, style: "background-image: url('#{cl_image_path(pin.album_id)}');", 'data-toggle' => "modal", 'data-target'=>"#pin#{pin.id}" do
                     end
                   end
                 end
