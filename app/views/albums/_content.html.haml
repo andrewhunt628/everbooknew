@@ -3,7 +3,7 @@
     .box.panel.panel-default
       .panel-content
         .photo-wrap
-          =cl_image_tag(pin.public_id, {class: 'image'})
+          =cl_image_tag(pin.public_id, {class: 'image', 'data-toggle' => 'modal', 'data-target' => '#pinModal'})
       .panel-footer
         %span.pull-right
           %span.fa.fa-comments-o
