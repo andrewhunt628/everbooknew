@@ -11,6 +11,7 @@ class AlbumsController < ApplicationController
     @albums = @albums.order("albums.created_at DESC")
     @tags = @albums.tag_counts_on(:tags)
     @pins = @albums.reduce([]) {|n, album| album.pins + n}
+    @pins.sort_by!(&:updated_at).reverse!
 
   end
 
