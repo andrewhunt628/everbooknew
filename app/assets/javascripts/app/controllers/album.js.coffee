@@ -9,6 +9,7 @@ class App.Album extends Spine.Controller
 
   constructor: ->
     super
+    @newAlbum?.val false
 
     @pins.imagesLoaded =>
       @pins.masonry
@@ -16,4 +17,4 @@ class App.Album extends Spine.Controller
 
   createNewAlbum: ->
     @newAlbum.toggleClass 'hidden'
-    @newAlbum?.val 'true' //FIXME handle new album flag
+    console.log @newAlbum?.val()
