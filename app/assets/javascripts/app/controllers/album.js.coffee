@@ -18,3 +18,4 @@ class App.Album extends Spine.Controller
   createNewAlbum: ->
     @newAlbum.toggleClass 'hidden'
     @newAlbum?.val @newAlbum?.val() == false ? true : false
+    console.log @newAlbum?.val()
