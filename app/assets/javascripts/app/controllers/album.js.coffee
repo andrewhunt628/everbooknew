@@ -8,7 +8,6 @@ class App.Album extends Spine.Controller
 
   constructor: ->
     super
-    $('#new-album-flag').val false
 
     @pins.imagesLoaded =>
       @pins.masonry
@@ -16,4 +15,4 @@ class App.Album extends Spine.Controller
 
   createNewAlbum: ->
     @newAlbum.toggleClass 'hidden'
-    $('#new-album-flag').val $('#new-album-flag').val() == false ? true : false
+    $('#new-album-flag').val $('#new-album-flag').val() == "false" ? true : false
