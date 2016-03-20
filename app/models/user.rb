@@ -23,6 +23,8 @@ class User < ActiveRecord::Base
   has_one :api_key, dependent: :destroy
   has_many :identities
 
+  has_attached_file :avatar, default_url: "/avatars/avatar#{rand(3)+1}.jpg"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
   # create api_key after user created by default
   after_create :create_apikey
 
@@ -46,18 +48,6 @@ class User < ActiveRecord::Base
 
   def full_name
     "#{first_name} #{last_name}"
-  end
-
-  def first_name
-    Forgery::Name.first_name
-  end
-
-  def last_name
-    Forgery::Name.last_name
-  end
-
-  def avatar
-    "/avatars/avatar#{rand(3)+1}.jpg"
   end
 
   # get or create new user from facebook
@@ -112,8 +102,9 @@ class User < ActiveRecord::Base
       # Create the user if it's a new registration
       if user.nil?
         user = User.new(
-          # name: auth.extra.raw_info.name,
-          #username: auth.info.nickname || auth.uid,
+          first_name: auth.extra.raw_info.given_name,
+          last_name: auth.extra.raw_info.family_name,
+          avatar: URI.parse(auth.extra.raw_info.picture),
           email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
           password: Devise.friendly_token[0,20]
         )
