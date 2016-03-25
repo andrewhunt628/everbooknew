@@ -25,6 +25,11 @@ class AlbumsController < ApplicationController
     @pins = Pin.where(id: params[:pins])
   end
 
+  def uploader
+    @albums = current_user.albums
+    @pins = Pin.where(id: params[:pins])
+  end
+
   # GET /albums/1/edit
   def edit
   end

@@ -1,0 +1,56 @@
+.page
+
+  .upload
+    .border
+      %img.add-button{src: '/images/add_button.svg'}
+      %span.drag-text drag & drop photos here
+      %span or
+      %span#chose-files Click to chose
+
+  -#= form_tag('/albums/quickupload/save', method: 'post', class: 'form-horizontal album-form') do
+
+    %input{type: 'hidden', name: 'pins', value: @pins.map(&:id).join(',')}
+
+    .form-group
+      %label.col-sm-1.control-label{for: 'album_id'} Put to
+      .col-sm-2
+        = select('album', 'id', @albums.collect {|album| [album.title, album.id]}, {}, {class: 'form-control'})
+      .col-sm-6
+        %a#new-album.btn.btn-default Create new
+
+    .new-album.hidden
+      .form-group
+        %label.col-sm-1.control-label Title
+        .col-sm-4
+          %input.form-control{type: 'text', name: 'title'}
+
+      .form-group
+        %label.col-sm-1.control-label Description
+        .col-sm-4
+          %textarea.form-control{cols: 5, rows: 5}
+
+      %input{type: 'hidden', name: 'newAlbum', value: 'false', id: 'new-album-flag'}
+
+    .form-group
+      .col-sm-offset-1.col-sm-10
+        .btn-group.actions
+          = submit_tag('Save', {class: 'btn btn-primary'})
+          = link_to 'Cancel', :back, class: 'btn btn-default'
+
+  #pins.pins-edit.transitions-enabled
+
+    - @pins.each do |pin|
+      .box.panel.panel-default
+        %img.remove-button{src: '/images/remove_button.svg'}
+        -#%span.glyphicon.glyphicon-remove.pull-right.remove-pin(aria-hidden="true")
+        .panel-content
+          .photo-wrap
+            = image_tag pin.image.url(:medium), class: "image", 'data-toggle'=>"modal", 'data-target'=>"#pinModal"
+          .panel-footer
+            = pin.image_file_name + ' – ' + number_with_precision((pin.image_file_size.to_d / 1024), precision: 2).to_s + ' KB'
+
+  .action-button
+    %a{href: '#'} Go to final step
+
+:coffee
+  new App.Album el: $('.page')

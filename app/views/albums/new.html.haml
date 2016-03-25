@@ -1,40 +1,76 @@
-.page
+.page.edit-album
 
-  = form_tag('/albums/quickupload/save', method: 'post', class: 'form-horizontal album-form') do
+  %a.back < Go back and chose more
 
-    %input{type: 'hidden', name: 'pins', value: @pins.map(&:id).join(',')}
+  .action-button
+    %a{href: '#'} Upload photos
 
-    .form-group
-      %label.col-sm-1.control-label{for: 'album_id'} Put to
-      .col-sm-2
-        = select('album', 'id', @albums.collect {|album| [album.title, album.id]}, {}, {class: 'form-control'})
-      .col-sm-6
-        %a#new-album.btn.btn-default Create new
 
-    .new-album.hidden
-      .form-group
-        %label.col-sm-1.control-label Title
-        .col-sm-4
-          %input.form-control{type: 'text', name: 'title'}
+  #pins.transitions-enabled
+    .box.wrapper.controls
+      .panel.panel-default
+        .panel-content
+          .panel-body
+            .wrapper
+              = form_tag('/albums/quickupload/save', method: 'post', class: 'form-horizontal album-form') do
 
-      .form-group
-        %label.col-sm-1.control-label Description
-        .col-sm-4
-          %textarea.form-control{cols: 5, rows: 5}
+                .form-group.header
+                  %h3 Editing <span class="pins-count">#{@pins.count.to_s + ' photo' + (@pins.count > 1 ? 's' : '')}</span>:
 
-      %input{type: 'hidden', name: 'newAlbum', value: 'false', id: 'new-album-flag'}
+                .form-group
+                  %label.control-label{for: 'title'} Add title
+                  %input.form-control{type: 'text', name: 'title', placeholder: 'Title'}
 
-    .form-group
-      .col-sm-offset-1.col-sm-10
-        .btn-group.actions
-          = submit_tag('Save', {class: 'btn btn-primary'})
-          = link_to 'Cancel', :back, class: 'btn btn-default'
+                .form-group
+                  %label.control-label{for: 'description'} Add description
+                  %textarea.form-control Description
 
-  #pins.pins-edit.transitions-enabled
+                .form-group
+                  %label.control-label Edit hashtags
+                  %div
+                    %span.hash-tag #summer2015 ×
+                    %span.hash-tag #funny ×
+                    %span.hash-tag #rob and bob rules ×
+                    %input.form-control{type: 'text', name: 'hashtag', placeholder: 'Add new #hashtag'}
+
+                .form-group
+                  %label.control-label{for: 'album_id'} Add to album
+                  = select('album', 'id', @albums.collect {|album| [album.title, album.id]}, {}, {class: 'form-control'})
+
+                .form-group
+                  %a#new-album{href: '#'} Create new
+                -#%input{type: 'hidden', name: 'pins', value: @pins.map(&:id).join(',')}
+                -#
+                -#.form-group
+                -#  %label.col-sm-1.control-label{for: 'album_id'} Put to
+                -#  .col-sm-2
+                -#    = select('album', 'id', @albums.collect {|album| [album.title, album.id]}, {}, {class: 'form-control'})
+                -#  .col-sm-6
+                -#    %a#new-album.btn.btn-default Create new
+                -#
+                -#.new-album.hidden
+                -#  .form-group
+                -#    %label.col-sm-1.control-label Title
+                -#    .col-sm-4
+                -#      %input.form-control{type: 'text', name: 'title'}
+                -#
+                -#  .form-group
+                -#    %label.col-sm-1.control-label Description
+                -#    .col-sm-4
+                -#      %textarea.form-control{cols: 5, rows: 5}
+                -#
+                -#  %input{type: 'hidden', name: 'newAlbum', value: 'false', id: 'new-album-flag'}
+                -#
+                -#.form-group
+                -#  .col-sm-offset-1.col-sm-10
+                -#    .btn-group.actions
+                -#      = submit_tag('Save', {class: 'btn btn-primary'})
+                -#      = link_to 'Cancel', :back, class: 'btn btn-default'
 
     - @pins.each do |pin|
-      .box.panel.panel-default
-        %span.glyphicon.glyphicon-remove.pull-right.remove-pin(aria-hidden="true")
+      .box.panel.panel-default.pin
+        %img.remove-button{src: '/images/remove_button.svg'}
+        -#%span.glyphicon.glyphicon-remove.pull-right.remove-pin(aria-hidden="true")
         .panel-content
           .photo-wrap
             = image_tag pin.image.url(:medium), class: "image", 'data-toggle'=>"modal", 'data-target'=>"#pinModal"
@@ -45,9 +81,11 @@
             .form-group.has-feedback
               %span.glyphicon.glyphicon-pencil.form-control-feedback(aria-hidden="true")
               %input.form-control{placeholder: 'description'}
-            .form-group
-              %textarea.form-control
+            .form-group.tags-group
+              %span.pin-hash-tag summer2015 ×
+              %span.pin-hash-tag funny ×
 
+  %a.back /\ Back to top
 
 :coffee
   new App.Album el: $('.page')
