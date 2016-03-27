@@ -9,6 +9,11 @@ class App.UploaderFinish extends Spine.Controller
     'keyup #global-description': 'updateDescription'
     'focus #global-description': 'clearDescriptionPlaceholder'
     'blur #global-description': 'resetDescriptionPlaceholder'
+    'click .hash-tag .delete': 'deleteHashTag'
+    'click .pin-hash-tag .delete-local': 'deleteLocalHashTag'
+    'keyup #add-hashtag': 'addHashTag'
+    'click #new-album': 'createNewAlbum'
+    'click .back-to-top': 'scrollTop'
 
   elements:
     '#pins': 'pins'
@@ -19,8 +24,11 @@ class App.UploaderFinish extends Spine.Controller
     @files = window.files || []
 
     @pins.imagesLoaded =>
-      @pins.masonry
-        itemSelector: '.box'
+      @initMasonry()
+
+  initMasonry: =>
+    @pins.masonry
+      itemSelector: '.box'
 
   complete: ->
     $('.pin-form').submit()
@@ -41,6 +49,9 @@ class App.UploaderFinish extends Spine.Controller
 
   goBack: =>
     window.location.href = '/uploader?' + @toString @files
+
+  scrollTop: ->
+    $(window).scrollTop(0)
 
   updateTitle: (e) =>
     $('.panel-pin .title').each (i, input) ->
@@ -67,4 +78,34 @@ class App.UploaderFinish extends Spine.Controller
     $('.panel-pin .description').each (i, input) ->
       unless input.value
         input.placeholder = 'Description'
+
+  deleteHashTag: (e) =>
+    $(e.target.parentNode).remove()
+
+    @replaceHashTags()
+
+    @initMasonry()
+
+  deleteLocalHashTag: (e) =>
+    $(e.target.parentNode).remove()
+    @initMasonry()
+
+  replaceHashTags: =>
+    $('.panel-pin .tags-group').html ''
+    $('#global-hashtags').find('.hash-tag').each (i, tagNode) =>
+      $('.panel-pin .tags-group').each (i, element) =>
+        $(element).append '<span class="pin-hash-tag">' + $(tagNode).contents()[0].textContent + '<span class="delete-local">×</span></span>'
+
+  addHashTag: (e) =>
+    if (e.keyCode == 13)
+      $('#global-hashtags').prepend '<span class="hash-tag">' + e.target.value + ' <span class="delete">×</span></span>'
+      @replaceHashTags()
+      e.target.value = ''
+      @initMasonry()
+    e.preventDefault()
+
+  createNewAlbum: =>
+    $('#new-album-form').toggleClass 'hidden'
+    $('#new-album-flag').val $('#new-album-flag').val() == 'false' ? true : false
+    @initMasonry()
 

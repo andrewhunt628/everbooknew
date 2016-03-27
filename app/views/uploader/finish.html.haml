@@ -28,11 +28,11 @@
 
                 .form-group
                   %label.control-label Edit hashtags
-                  %div
-                    %span.hash-tag #summer2015 ×
-                    %span.hash-tag #funny ×
-                    %span.hash-tag #rob and bob rules ×
-                    %input.form-control{type: 'text', name: 'hashtag', placeholder: 'Add new #hashtag'}
+                  %div#global-hashtags
+                    -#%span.hash-tag #summer2015 <span class="delete">×</span>
+                    -#%span.hash-tag #funny <span class="delete">×</span>
+                    -#%span.hash-tag #rob and bob rules <span class="delete">×</span>
+                    %input.form-control#add-hashtag{type: 'text', name: 'hashtag', placeholder: 'Add new #hashtag'}
 
                 .form-group
                   %label.control-label{for: 'album_id'} Add to album
@@ -40,6 +40,17 @@
 
                 .form-group
                   %a#new-album{href: '#'} Create new
+                  %input#new-album-flag{type: 'hidden', name: 'newAlbum', value: 'false'}
+
+                #new-album-form.hidden
+                  .form-group
+                    %label.control-label{for: 'album-title'} Add album title
+                    %input.form-control#album-title{type: 'text', name: 'albumTitle', placeholder: 'Title'}
+
+                  .form-group
+                    %label.control-label{for: 'album-description'} Add album description
+                    %textarea.form-control#album-description{type: 'text', name: 'albumDescription', placeholder: 'Description'}
+
       - @pins.each do |pin|
         .box.panel.panel-default.pin.panel-pin
           %img.remove-button{src: '/images/remove_button.svg', 'data-id' => pin.id}
@@ -54,10 +65,11 @@
                 %span.glyphicon.glyphicon-pencil.form-control-feedback(aria-hidden="true")
                 %input.form-control.description{placeholder: 'description', name: "pins[#{pin.id}][description]"}
               .form-group.tags-group
-                %span.pin-hash-tag summer2015 ×
-                %span.pin-hash-tag funny ×
+                -#%span.pin-hash-tag summer2015 ×
+                -#%span.pin-hash-tag funny ×
 
-  %a.back-to-top /\ Back to top
+  .center-block
+    %a.back-to-top /\ Back to top
 
 :coffee
   window.files = #{@pins.collect(&:id)}

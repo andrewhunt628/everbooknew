@@ -29,21 +29,29 @@ class UploaderController < ApplicationController
   def save
     print params
 
-    # if params[:newAlbum] == 'true'
-    #   @user = current_user
-    #   @album = @user.albums.create(title: params[:title], description: params[:description])
-    # else
-    #   @album = current_user.albums.find(params[:album][:id])
-    # end
-    #
-    # @pins = Pin.where(id: params[:pins].split(','))
-    # @pins.each do |pin|
-    #   @album.pins << pin
-    #   current_user.pins << pin
-    # end
-    #
-    # @album.save
-    #
+    if params[:newAlbum] == 'true'
+      @user = current_user
+      @album = @user.albums.create(title: params[:albumTitle], description: params[:albumDescription])
+    else
+      @album = current_user.albums.find(params[:album][:id])
+    end
+
+    @pins = params[:pins].map do |pin_params|
+      pin = Pin.find pin_params[0]
+      pin.title = pin_params[1]['title']
+      pin.description = pin_params[1]['description']
+      #TODO tags
+      pin.save
+      pin
+    end
+
+    @pins.each do |pin|
+      @album.pins << pin
+      current_user.pins << pin
+    end
+
+    @album.save
+
     redirect_to '/albums'
   end
 

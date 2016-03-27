@@ -29,10 +29,9 @@ class App.Uploader extends Spine.Controller
 
   removePin: (e) =>
     @removeId = $(e.target).data 'id'
-    $.ajax({
+    $.ajax
         url: '/pins/' + @removeId
         type: 'DELETE'
-    })
     .done (result) =>
       window.location.href = '/uploader?' + @toString @files.filter (pin) -> pin != @removeId
     .fail (error) =>

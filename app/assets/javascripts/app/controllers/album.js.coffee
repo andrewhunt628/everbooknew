@@ -1,18 +1,22 @@
 class App.Album extends Spine.Controller
-  events:
-    'click #new-album': 'createNewAlbum'
-
   elements:
-    '.new-album': 'newAlbum'
     '#pins': 'pins'
+
+  events:
+    'click .remove-button': 'removePin'
 
   constructor: ->
     super
 
-    @pins.imagesLoaded =>
-      @pins.masonry
+    @pins.imagesLoaded ->
+      this.masonry
         itemSelector: '.box'
 
-  createNewAlbum: ->
-    @newAlbum.toggleClass 'hidden'
-    $('#new-album-flag').val $('#new-album-flag').val() == "false" ? true : false
+  removePin: (e) ->
+    $.ajax
+      url: '/pins/' + $(e.target).data 'id'
+      type: 'DELETE'
+    .done (result) ->
+      window.location.href = '/albums/' + window.album
+    .fail (error) ->
+      window.location.href = '/albums/' + window.album

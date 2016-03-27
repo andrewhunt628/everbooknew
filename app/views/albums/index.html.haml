@@ -7,15 +7,16 @@
             = link_to album do
               = image_tag album.cover.image.url(:album_cover)
           .media-body
-            %h4.media-heading
-              = album.title
-            .media-middle
-              = album.description
+            %h4.media-heading= album.title
+            .media-middle= album.description
             .pull-right.edit-album
-              = link_to 'Edit Album', [:edit, album]
+              = link_to 'Edit Album', {edit: album}, {'data-id' => album.id}
 
     .col-md-6
       .upload
         .border
           %img.add-button{src: '/images/add_button.svg'}
-          %span#chose-files Create new album
+          %a#chose-files{href: '/uploader'} Create new album
+
+:coffee
+  new App.Albums el: $('.albums')

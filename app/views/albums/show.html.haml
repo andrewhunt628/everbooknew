@@ -7,7 +7,7 @@
   #pins.transitions-enabled
     - @album.pins.each do |pin|
       .box.panel.panel-default.pin
-        %img.remove-button{src: '/images/remove_button.svg'}
+        %img.remove-button{src: '/images/remove_button.svg', 'data-id' => pin.id}
         .panel-content
           .photo-wrap
             = image_tag pin.image.url(:medium), class: "image", 'data-toggle'=>"modal", 'data-target'=>"#pinModal"
@@ -25,7 +25,5 @@
   = link_to '← Back to albums', albums_path
 
 :coffee
-  jQuery ->
-    $('#pins').imagesLoaded ->
-      $(this).masonry
-        itemSelector: '.box'
+  window.album = #{@album.id}
+  new App.Album el: $('.page')
