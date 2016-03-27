@@ -17,8 +17,8 @@
             %span.input-group-addon.btn
               %span.fa.fa-search.orange
       %ul.nav.navbar-nav.navbar-left
-        %li.responsive= link_to "EXPLORE", '#'
-        %li.responsive= link_to "SHOP", '#'
+        %li.responsive= link_to "EXPLORE", '/explore'
+        %li.responsive= link_to "MY ALBUMS", '/albums'
         %li.responsive= link_to "INVITE", new_user_invitation_path, class: 'orange'
 
         %li.small-screen
@@ -44,13 +44,13 @@
             %span.caret
           %ul.dropdown-menu
             %li.responsive
-              %a{href: "#"}  Explore
+              %a{href: "/explore"}  Explore
             %li.responsive
-              %a{href: "#"}  Shop
+              %a{href: "/albums"}  My albums
             %li.responsive
               = link_to "Invite", new_user_invitation_path, class: 'orange'
             %li
-              = link_to "Upload", "#"
+              = link_to "Upload", "/uploader"
             %li
               = link_to "Edit Profile", "#"
             %li

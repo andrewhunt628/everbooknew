@@ -1,70 +1,75 @@
-class App.Albums extends Spine.Controller
+class App.Uploader extends Spine.Controller
   elements:
-    '#pins': 'pins'
     '#drop-input': 'dropInput'
     '#drop-zone': 'dropZone'
-    'body': 'body'
-    'document': 'document'
-    '.cover': 'cover'
-    '.file-uploader': 'container'
+    '.upload': 'container'
     '#upload-status': 'uploadStatus'
 
   events:
-    'imagesLoaded #pins': 'initializeMasonry'
     'dragover': 'dragOver'
     'drop': 'drop'
-    'click #drop-zone': 'triggerUpload'
-    'click .cover': 'removeCover'
+    'click #chose-files': 'triggerUpload'
+    'click .remove-button': 'removePin'
+    'click #final': 'finalRedirect'
 
   initializeMasonry: ->
     @pins.masonry
       itemSelector: '.box'
 
-  dragOver: (e) ->
+  dragOver: (e) =>
     e.preventDefault()
     @container.addClass 'active'
     if (e.target == @dropZone[0])
       @container.addClass 'in'
       @container.removeClass 'active'
 
-  triggerUpload: ->
+  triggerUpload: =>
+    console.log @dropInput
     @dropInput.trigger 'click'
 
-  drop: (e) ->
+  removePin: (e) =>
+    @removeId = $(e.target).data 'id'
+    $.ajax({
+        url: '/pins/' + @removeId
+        type: 'DELETE'
+    })
+    .done (result) =>
+      window.location.href = '/uploader?' + @toString @files.filter (pin) -> pin != @removeId
+    .fail (error) =>
+      window.location.href = '/uploader?' + @toString @files.filter (pin) -> pin != @removeId
+
+  finalRedirect: ->
+    window.location.href = '/uploader/finish?' + @toString @files
+
+  drop: (e) =>
     e.preventDefault()
     @container.removeClass 'active'
     @container.removeClass 'in'
 
+  toString: (pins) ->
+    pins.map((val) -> 'pins[]=' + val).reduce (p, n) -> p + '&' + n
+
   constructor: ->
     super
-    @files = []
-
-    @pins.imagesLoaded =>
-      @pins.masonry
-        itemSelector: '.box'
+    @files = window.files || []
 
     @dropInput.fileupload
       dataType: 'json'
       dropZone: @dropZone
-      url: '/albums/quickupload'
+      url: '/uploader'
       done: @uploadDone
       start: @uploadStart
       stop: @uploadStop
       progressall: @uploadProgress
 
-    unless localStorage.getItem 'onboarding'
-      @initializeOnboarding()
-
   uploadDone: (e, data) =>
     @files.push(data.result.pins[0]) if data.result
 
   uploadStop: (e) =>
-    localStorage.setItem 'onboarding', true
-    window.location.href = '/albums/new?' + @files.map((val) -> 'pins[]=' + val).reduce (p, n) -> p + '&' + n
+    window.location.href = '/uploader?' + @toString @files
 
   uploadStart: =>
     @uploadStatus.toggleClass('hidden')
-    @removeOnboarding()
 
   uploadProgress: (e, data) =>
     @progressBar = @uploadStatus.find('.progress-bar')
@@ -72,17 +77,3 @@ class App.Albums extends Spine.Controller
     @progressBar.attr('aria-valuenow', value)
     @progressBar.css('width', value + '%')
     @progressBar.find('span').text value + '%'
-
-  initializeOnboarding: =>
-    $('body').addClass 'image-wall'
-    @cover.fadeIn()
-
-  removeCover: =>
-    @removeOnboarding()
-    @triggerUpload()
-
-  removeOnboarding: =>
-    localStorage.setItem 'onboarding', true
-    @cover.fadeOut 400, ->
-      $('body').removeClass 'image-wall'
-

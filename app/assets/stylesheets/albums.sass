@@ -80,20 +80,6 @@
 #drop-input
   display: none
 
-.panel.panel-default.file-uploader.in
-  background: rgba(144, 225, 243, 0.35)
-  .wrapper
-    border-color: white
-    span
-      color: white
-
-.panel.panel-default.file-uploader.active
-  background: rgba(255, 10, 0, 0.35)
-  .wrapper
-    border-color: white
-    span
-      color: white
-
 .image-wall
   background: url("/images/background-wall.jpg")
 
@@ -129,32 +115,6 @@
     color: #c9302c
     z-index: 5
 
-.upload
-  background: white
-  margin: 8px
-  padding: 10px
-  border-radius: 3px
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .3)
-  text-align: center
-  .border
-    border: 2px dashed #CBCBCB
-  .add-button
-    height: 78px
-    margin: 40px auto 0
-  span
-    color: #CBCBCB
-    display: block
-  .drag-text
-    text-transform: uppercase
-    font-weight: bold
-    margin-top: 13px
-  #chose-files
-    text-transform: uppercase
-    border-bottom: 1px solid #CBCBCB
-    margin-bottom: 34px
-    display: inline-block
-    color: #6E7074
-    
 .action-button
   text-transform: uppercase
   background-color: #F05E33
@@ -176,7 +136,7 @@
     a
       border-bottom: 1px solid white
 
-.edit-album
+.page
   .panel-footer
     background: none
   .pins-count
@@ -241,3 +201,45 @@
     border-bottom: 1px solid #6E7074
     &:hover
       text-decoration: none
+
+.albums
+  .media
+    background-color: white
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .3)
+    border-radius: 3px
+    position: relative
+    margin-bottom: 21px
+  .media-heading
+    color: #333
+    margin-top: 17px
+    font-weight: 100
+  .media-middle
+    font-weight: 100
+    margin-top: 8px
+    font-size: 14px
+    color: #999
+  .media-left
+    padding-right: 16px
+  .edit-album
+    position: absolute
+    bottom: 16px
+    right: 18px
+    a
+      color: #333
+      font-weight: 100
+  .upload
+    height: 180px
+    width: 100%
+    margin: 0
+    .border
+      height: 100%
+    .add-button
+      height: 66px
+      margin: 34px auto 7px
+    #chose-files
+      display: block
+      width: 120px
+      font-size: 11px
+      margin: 0 auto 4px
+      &:hover
+        cursor: pointer

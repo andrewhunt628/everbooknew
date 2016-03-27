@@ -1,0 +1,156 @@
+@media (max-width: 767px){
+  nav.navbar.navbar-everbook{
+    .navbar-header{
+      button{
+        border: 2px solid #f05323;
+        padding: 7px;
+        margin-top: 4px;
+        span.icon-bar{
+          background-color: #f05323;
+          width:25px;
+        }
+      }
+    }
+    .navbar-collapse{
+      position: absolute;
+      margin: 0px;
+      left: 0px;
+      background-color: #fff;
+      width: 100%;
+      z-index: 9999999;
+      overflow-y: hidden;
+      box-shadow: 0 4px 7px -1px #cdcdcd;
+      .navbar-form{
+        margin-left: 0px;
+        .input-group {
+          width:100%;
+          .form-control{
+            width: 100%;
+          }
+        }
+      }
+      ul.navbar-right {
+        display: none;
+      }
+      ul.nav.navbar-nav.navbar-left, ul.nav.navbar-nav.navbar-right {
+        height: auto;
+        & > li{
+          border-bottom: 1px dotted #4f4f4f;
+          &:last-child {
+            border-bottom: none;
+          }
+          a{
+            padding-left: 30px
+          }
+          &.responsive{
+            display: block;
+          }
+          &.small-screen{
+            display: block;
+          }
+          &.user-menu{
+            ul.dropdown-menu{
+              background-color: #fff;
+              li.responsive {
+                display: list-item;
+              }
+
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
+
+@media (min-width: 768px){
+  nav.navbar.navbar-everbook{
+    .navbar-form{
+      margin-left: 0px;
+      .form-control{
+        width: 260px;
+      }
+    }
+    ul.navbar-left {
+      display: none;
+    }
+    ul.nav.navbar-nav.navbar-left, ul.nav.navbar-nav.navbar-right {
+      & > li{
+        a{
+          padding-left: 0px
+        }
+        &.responsive{
+          display: none;
+        }
+        &.small-screen{
+          display: none;
+        }
+        &.user-menu{
+          ul.dropdown-menu{
+            li.responsive {
+              display: list-item;
+            }
+
+          }
+        }
+      }
+    }
+  }
+
+}
+
+@media (min-width: 992px){
+  nav.navbar.navbar-everbook{
+    .navbar-form{
+      margin-left: 0px;
+      .form-control{
+        width: 260px;
+      }
+    }
+    ul.navbar-left {
+      display: block;
+    }
+    ul.nav.navbar-nav.navbar-left, ul.nav.navbar-nav.navbar-right {
+      & > li{
+        a{
+          padding-left: 0px
+        }
+        &.responsive{
+          display: block;
+        }
+        &.user-menu{
+          ul.dropdown-menu{
+            li.responsive {
+              display: none
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
+
+@media (min-width: 1200px){
+  nav.navbar.navbar-everbook{
+    .navbar-form{
+      margin-left: 20px;
+      .form-control{
+        width: 430px;
+      }
+    }
+    ul.nav.navbar-nav.navbar-left, ul.nav.navbar-nav.navbar-right {
+      & > li{
+        a{
+          padding-left: 10px
+        }
+        &.user-menu{
+          ul.dropdown-menu{
+
+          }
+        }
+      }
+    }
+  }
+}

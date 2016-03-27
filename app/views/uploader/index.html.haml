@@ -1,0 +1,31 @@
+.page.uploader
+
+  .progress#upload-status.hidden
+    .progress-bar(role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100")
+      %span 60%
+
+  .upload
+    #drop-zone.border
+      %img.add-button{src: '/images/add_button.svg'}
+      %span.drag-text drag & drop photos here
+      %span or
+      %span#chose-files Click to chose
+      %input#drop-input.hidden{type: 'file'}
+
+  #pins.pins-edit.transitions-enabled
+
+    - @pins.each do |pin|
+      .box.panel.panel-default
+        %img.remove-button{src: '/images/remove_button.svg', 'data-id' => pin.id}
+        .panel-content
+          .photo-wrap
+            = image_tag pin.image.url(:medium), class: "image", 'data-toggle'=>"modal", 'data-target'=>"#pinModal"
+          .panel-footer
+            = pin.image_file_name + ' – ' + number_with_precision((pin.image_file_size.to_d / 1024), precision: 2).to_s + ' KB'
+
+  .action-button
+    %a#final{href: '#'} Go to final step
+
+:coffee
+  window.files = #{@pins.collect(&:id)}
+  new App.Uploader el: $('.page')

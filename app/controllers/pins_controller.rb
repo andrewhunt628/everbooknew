@@ -19,7 +19,11 @@ class PinsController < ApplicationController
 
   def destroy
     @pin.destroy
-    redirect_to root_path
+
+    respond_to do |format|
+      format.json { render nothing: true, status: 200 }
+      format.html { redirect_to root_path }
+    end
   end
 
   def edit
@@ -36,10 +40,6 @@ class PinsController < ApplicationController
 
   def new
     @pin = current_user.pins.build
-  end
-
-  def uploading#tmp method for demostration
-    
   end
 
   def create

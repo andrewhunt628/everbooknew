@@ -1,11 +1,15 @@
 # load class ApiConstraint
-require "api_constraint"
+require 'api_constraint'
 
 Rails.application.routes.draw do
 
   resources :albums
-  post "/albums/quickupload", to: "albums#quick_upload", as: :quick_upload
-  post "/albums/quickupload/save", to: "albums#quick_upload_save", as: :quick_upload_save
+  post '/uploader', to: 'uploader#upload', as: :upload
+  get '/uploader/finish', to: 'uploader#finish'
+  post '/uploader/save', to: 'uploader#save', as: :save
+  get '/uploader', to: 'uploader#index', as: :upload_index
+
+  get '/explore', to: 'explore#index'
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
@@ -14,10 +18,10 @@ Rails.application.routes.draw do
 
   resources :family_bonds, only: [:index, :new, :create, :destroy]
 
-  match "/users/:id/finish_signup", to: "users#finish_signup", via: [:get, :patch], as: :finish_signup
+  match '/users/:id/finish_signup', to: 'users#finish_signup', via: [:get, :patch], as: :finish_signup
   resources :users, only: [:show, :update, :destroy] do
     member do
-      get "/security/change_password/", to: "users#form_change_password"
+      get '/security/change_password/', to: 'users#form_change_password'
       patch :change_password
     end
   end
@@ -28,24 +32,24 @@ Rails.application.routes.draw do
     # make Api Version 1 as default Api
     # class ApiConstraint is inside lib/api_constraint.rb
     scope module: :v1, constraints: ApiConstraint.new(version: 1, default: true) do
-      get "/users", to: "users#show"
-      get "/users/list", to: "users#index"
-      patch "/users/security/change_password", to: "users#change_password"
+      get '/users', to: 'users#show'
+      get '/users/list', to: 'users#index'
+      patch '/users/security/change_password', to: 'users#change_password'
       
       # handling log in, log out and sign up
-      post "users/sign_in", to: "sessions#create"
-      delete "users/sign_out", to: "sessions#destroy"
+      post 'users/sign_in', to: 'sessions#create'
+      delete 'users/sign_out', to: 'sessions#destroy'
       
       # we must tell Devise to custom their routes
       devise_scope :user do
         # for sign up
-        post "/users/sign_up", to: "registrations#create"
+        post '/users/sign_up', to: 'registrations#create'
         # for invitation 
-        post "/users/invitation", to: "invitations#create"
+        post '/users/invitation', to: 'invitations#create'
 
         # for passwords
-        post "/users/password", to: "passwords#create"
-        put "/users/password", to: "passwords#update"
+        post '/users/password', to: 'passwords#create'
+        put '/users/password', to: 'passwords#update'
       end
 
       resources :pins, except: [:edit, :new]
@@ -53,7 +57,7 @@ Rails.application.routes.draw do
       resources :comments,only: :create
       resources :family_bonds, only: [:index,:create, :destroy]
 
-      post "/user/oauth_verification/google", to: "user/oauth_verifications#verify_google_token"
+      post '/user/oauth_verification/google', to: 'user/oauth_verifications#verify_google_token'
 
       if Rails.env.development?
         match '*path', via: [:options], to: lambda {|_| [200, {'Content-type' => 'text/plain'}, []]}
@@ -62,10 +66,7 @@ Rails.application.routes.draw do
     end
   end
   
-
-  get "uploading" => "pins#uploading", as: :uploading
-
-  root "albums#index"
+  root 'explore#index'
 
   get '*tags_list' => 'albums#index', as: :tag# this line should be last
 end

@@ -1,16 +1,28 @@
-%div
-  = link_to 'Edit album', edit_album_path(@album), class: 'btn btn-default'
-  = link_to 'Delete album', album_path(@album), class: 'btn btn-danger', method: :delete, data: {confitm: "Are you sure?"}
-#pins.transitions-enabled
+.page
+  %h1
+    = @album.title
 
-  - @album.pins.each do |pin|
-    .box.panel.panel-default
-      .panel-content
-        .photo-wrap
-          = image_tag pin.image.url(:medium), class: "image", 'data-toggle'=>"modal", 'data-target'=>"#pinModal"
-        .panel-body
-          .description
-            = raw pin.description
+  = link_to '← Back to albums', albums_path
+
+  #pins.transitions-enabled
+    - @album.pins.each do |pin|
+      .box.panel.panel-default.pin
+        %img.remove-button{src: '/images/remove_button.svg'}
+        .panel-content
+          .photo-wrap
+            = image_tag pin.image.url(:medium), class: "image", 'data-toggle'=>"modal", 'data-target'=>"#pinModal"
+          .panel-footer
+            .form-group.has-feedback
+              %span.glyphicon.glyphicon-pencil.form-control-feedback(aria-hidden="true")
+              %input.form-control{placeholder: 'title'}
+            .form-group.has-feedback
+              %span.glyphicon.glyphicon-pencil.form-control-feedback(aria-hidden="true")
+              %input.form-control{placeholder: 'description'}
+            .form-group.tags-group
+              %span.pin-hash-tag summer2015 ×
+              %span.pin-hash-tag funny ×
+
+  = link_to '← Back to albums', albums_path
 
 :coffee
   jQuery ->

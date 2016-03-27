@@ -1,68 +1,21 @@
-.app
-  .cover
-    %h1= t('welcome')
-    %p= t('welcome_p')
+.albums
+  .row
+    - @albums.each do |album|
+      .col-md-6
+        .media
+          .media-left
+            = link_to album do
+              = image_tag album.cover.image.url(:album_cover)
+          .media-body
+            %h4.media-heading
+              = album.title
+            .media-middle
+              = album.description
+            .pull-right.edit-album
+              = link_to 'Edit Album', [:edit, album]
 
-  .progress#upload-status.hidden
-    .progress-bar(role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100")
-      %span 60%
-
-  #pins.transitions-enabled
-    .box.wrapper
-      .panel.panel-default.file-uploader
-        .panel-content
-          .panel-body
-            .wrapper
-              %input#drop-input{type: 'file', value: 'album[pin_ids][]', multiple: :true}
-              %span#drop-zone= t('albums.dropspan')
-
-      .panel.panel-default
-        .panel-content
-          .panel-body
-            %h3 Hashtags
-            .hashtags-container
-              - @tags.each do |tag|
-                .hashtag{href: "#"}
-                  = link_to("##{tag}", get_mark_tag_url(tag))
-                  = link_to get_unmark_tag_url(tag) do
-                    %span.close ×
-      .panel.panel-default
-        .panel-content
-          .panel-body
-            = link_to "view all", family_bonds_path, class: "pull-right orange help"
-            %h3 Friends
-            - current_user.family.each do |friend|
-              = link_to user_path(friend), class: "friend", title: "#{friend.full_name}" do
-                = image_tag friend.avatar, width: 30, height: 30
-
-    - @pins.each do |pin|
-      .box.panel.panel-default
-        .panel-content
-          .photo-wrap
-            = link_to pin, 'data-toggle' => 'modal', 'data-target' => "#pin#{pin.id}" do
-              = image_tag pin.image.url(:medium), class: 'image'
-            - if pin.description? and pin.tag_list
-              .panel-body
-                - if pin.description?
-                  = raw pin.description
-                - if pin.tag_list
-                  .hashtags
-                    = raw pin.tag_list.map {|t| link_to "##{r}", tag_path(t) }.join('  ')
-          .footer
-            %span.pull-right
-              %span.fa.fa-comments-o
-              23
-              %span.orange (+3)
-            %a{href: "#"}
-              %span.avatar-mini
-                = image_tag pin.user.avatar, width: 30, height: 30
-              %span.author
-                = pin.user.full_name
-
-  - @pins.each do |pin|
-    = content_tag :div, class: 'modal fade', id: "pin#{pin.id}", "aria-labelledby" => "signUpModalLabel", :role => "dialog", :tabindex => "-1" do
-      = content_tag :div, class: 'modal-dialog modal-lg' do
-        = content_tag :div, '', class: 'modal-content'
-
-:coffee
-  new App.Albums el: $('.app')
+    .col-md-6
+      .upload
+        .border
+          %img.add-button{src: '/images/add_button.svg'}
+          %span#chose-files Create new album
