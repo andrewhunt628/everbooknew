@@ -18,11 +18,15 @@ class App.Albums extends Spine.Controller
     unless @toggled
       title.attr 'contenteditable', true
       description.attr 'contenteditable', true
+      title.toggleClass 'editing'
+      description.toggleClass 'editing'
       $(e.target).text 'Done'
       @toggled = true
     else #save state
       $(e.target).text 'Edit Album'
       @toggled = false
+      title.toggleClass 'editing'
+      description.toggleClass 'editing'
       $.ajax
         url: '/albums/' + id + '.json'
         type: 'PATCH'

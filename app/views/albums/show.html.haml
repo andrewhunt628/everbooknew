@@ -14,13 +14,11 @@
           .panel-footer
             .form-group.has-feedback
               %span.glyphicon.glyphicon-pencil.form-control-feedback(aria-hidden="true")
-              %input.form-control{placeholder: 'title'}
+              %input.form-control#pin-title{placeholder: 'title', value: pin.title, 'data-id' => pin.id}
             .form-group.has-feedback
               %span.glyphicon.glyphicon-pencil.form-control-feedback(aria-hidden="true")
-              %input.form-control{placeholder: 'description'}
+              %input.form-control#pin-description{placeholder: 'description', value: pin.description, 'data-id' => pin.id}
             .form-group.tags-group
-              %span.pin-hash-tag summer2015 ×
-              %span.pin-hash-tag funny ×
 
   = link_to '← Back to albums', albums_path
 

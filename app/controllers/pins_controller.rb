@@ -31,10 +31,14 @@ class PinsController < ApplicationController
   end
 
   def update
-    if @pin.update(pin_params)
-      redirect_to pins_path, notice: "Pin was Successfully updated!"
-    else
-      render 'edit'
+    respond_to do |format|
+      if @pin.update(pin_params)
+        format.html { redirect_to @pin, notice: "Pin was Successfully updated!" }
+        format.json { render json: {status: :ok, location: @pin}}
+      else
+        format.html { render 'edit' }
+        format.json { render json: @album.errors, status: :unprocessable_entity }
+      end
     end
   end
 
