@@ -8,13 +8,7 @@
     .box.wrapper
       .panel.panel-default.panel-action
         .panel-body
-          = link_to 'Upload', upload_path
-      -#.panel.panel-default.file-uploader
-      -#  .panel-content
-      -#    .panel-body
-      -#      .wrapper
-      -#        %input#drop-input{type: 'file', value: 'album[pin_ids][]', multiple: :true}
-      -#        %span#drop-zone= t('albums.dropspan')
+          = link_to 'Upload', upload_path, {id: 'upload-button'}
 
       .panel.panel-default
         .panel-content

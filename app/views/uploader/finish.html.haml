@@ -15,25 +15,6 @@
               .wrapper
                 -#= form_tag('/uploader/save', method: 'post', class: 'form-horizontal album-form') do
 
-                .form-group.header
-                  %h3 Editing <span class="pins-count">#{@pins.count.to_s + ' photo' + (@pins.count > 1 ? 's' : '')}</span>:
-
-                .form-group
-                  %label.control-label{for: 'title'} Add title
-                  %input.form-control#global-title{type: 'text', name: 'title', placeholder: 'Title'}
-
-                .form-group
-                  %label.control-label{for: 'description'} Add description
-                  %textarea.form-control#global-description{placeholder: 'Description'}
-
-                .form-group
-                  %label.control-label Edit hashtags
-                  %div#global-hashtags
-                    -#%span.hash-tag #summer2015 <span class="delete">×</span>
-                    -#%span.hash-tag #funny <span class="delete">×</span>
-                    -#%span.hash-tag #rob and bob rules <span class="delete">×</span>
-                    %input.form-control#add-hashtag{type: 'text', name: 'hashtag', placeholder: 'Add new #hashtag'}
-
                 .form-group
                   %label.control-label{for: 'album_id'} Add to album
                   = select('album', 'id', @albums.collect {|album| [album.title, album.id]}, {}, {class: 'form-control'})
@@ -44,12 +25,21 @@
 
                 #new-album-form.hidden
                   .form-group
-                    %label.control-label{for: 'album-title'} Add album title
+                    %label.control-label{for: 'album-title'} Add title
                     %input.form-control#album-title{type: 'text', name: 'albumTitle', placeholder: 'Title'}
 
                   .form-group
-                    %label.control-label{for: 'album-description'} Add album description
+                    %label.control-label{for: 'album-description'} Add description
                     %textarea.form-control#album-description{type: 'text', name: 'albumDescription', placeholder: 'Description'}
+
+                -#.form-group
+                -#  %label.control-label Edit hashtags
+                -#  %div#global-hashtags
+                    -#%span.hash-tag #summer2015 <span class="delete">×</span>
+                    -#%span.hash-tag #funny <span class="delete">×</span>
+                    -#%span.hash-tag #rob and bob rules <span class="delete">×</span>
+                    %input.form-control#add-hashtag{type: 'text', name: 'hashtag', placeholder: 'Add new #hashtag'}
+
 
       - @pins.each do |pin|
         .box.panel.panel-default.pin.panel-pin

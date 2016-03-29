@@ -12,16 +12,15 @@
       %span#chose-files Click to chose
       %input#drop-input.hidden{type: 'file'}
 
-  #pins.pins-edit.transitions-enabled
-
-    - @pins.each do |pin|
-      .box.panel.panel-default
-        %img.remove-button{src: '/images/remove_button.svg', 'data-id' => pin.id}
-        .panel-content
-          .photo-wrap
-            = image_tag pin.image.url(:medium), class: "image", 'data-toggle'=>"modal", 'data-target'=>"#pinModal"
-          .panel-footer
-            = pin.image_file_name + ' – ' + number_with_precision((pin.image_file_size.to_d / 1024), precision: 2).to_s + ' KB'
+    #pins.pins-edit.transitions-enabled
+      - @pins.each do |pin|
+        .box.panel.panel-default
+          %img.remove-button{src: '/images/remove_button.svg', 'data-id' => pin.id}
+          .panel-content
+            .photo-wrap
+              = image_tag pin.image.url(:medium), class: "image", 'data-toggle'=>"modal", 'data-target'=>"#pinModal"
+            .panel-footer
+              = pin.image_file_name + ' – ' + number_with_precision((pin.image_file_size.to_d / 1024), precision: 2).to_s + ' KB'
 
   .action-button
     %a#final{href: '#'} Go to final step

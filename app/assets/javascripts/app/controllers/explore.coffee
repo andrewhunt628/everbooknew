@@ -5,6 +5,7 @@ class App.Explore extends Spine.Controller
 
   events:
     'click .cover': 'removeCover'
+    'click #upload-button': 'removeCover'
 
   constructor: ->
     super

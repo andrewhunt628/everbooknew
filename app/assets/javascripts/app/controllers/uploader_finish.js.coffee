@@ -3,13 +3,6 @@ class App.UploaderFinish extends Spine.Controller
     'click #finish': 'complete'
     'click .remove-button': 'removePin'
     'click .back': 'goBack'
-    'keyup #global-title': 'updateTitle'
-    'focus #global-title': 'clearTitlePlaceholder'
-    'blur #global-title': 'resetTitlePlaceholder'
-    'keyup #global-description': 'updateDescription'
-    'focus #global-description': 'clearDescriptionPlaceholder'
-    'blur #global-description': 'resetDescriptionPlaceholder'
-    'click .hash-tag .delete': 'deleteHashTag'
     'click .pin-hash-tag .delete-local': 'deleteLocalHashTag'
     'keyup #add-hashtag': 'addHashTag'
     'click #new-album': 'createNewAlbum'
@@ -53,36 +46,8 @@ class App.UploaderFinish extends Spine.Controller
   scrollTop: ->
     $(window).scrollTop(0)
 
-  updateTitle: (e) =>
-    $('.panel-pin .title').each (i, input) ->
-      input.value = e.target.value
-
-  clearTitlePlaceholder: (e) =>
-    $('.panel-pin .title').each (i, input) ->
-      input.placeholder = ''
-
-  resetTitlePlaceholder: (e) =>
-    $('.panel-pin .title').each (i, input) ->
-      unless input.value
-        input.placeholder = 'Title'
-
-  updateDescription: (e) =>
-    $('.panel-pin .description').each (i, input) ->
-      input.value = e.target.value
-
-  clearDescriptionPlaceholder: (e) =>
-    $('.panel-pin .description').each (i, input) ->
-      input.placeholder = ''
-
-  resetDescriptionPlaceholder: (e) =>
-    $('.panel-pin .description').each (i, input) ->
-      unless input.value
-        input.placeholder = 'Description'
-
   deleteHashTag: (e) =>
     $(e.target.parentNode).remove()
-
-    @replaceHashTags()
 
     @initMasonry()
 
@@ -90,16 +55,9 @@ class App.UploaderFinish extends Spine.Controller
     $(e.target.parentNode).remove()
     @initMasonry()
 
-  replaceHashTags: =>
-    $('.panel-pin .tags-group').html ''
-    $('#global-hashtags').find('.hash-tag').each (i, tagNode) =>
-      $('.panel-pin .tags-group').each (i, element) =>
-        $(element).append '<span class="pin-hash-tag">' + $(tagNode).contents()[0].textContent + '<span class="delete-local">×</span></span>'
-
   addHashTag: (e) =>
     if (e.keyCode == 13)
       $('#global-hashtags').prepend '<span class="hash-tag">' + e.target.value + ' <span class="delete">×</span></span>'
-      @replaceHashTags()
       e.target.value = ''
       @initMasonry()
     e.preventDefault()
