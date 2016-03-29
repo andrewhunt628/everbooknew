@@ -55,6 +55,8 @@
                 %span.glyphicon.glyphicon-pencil.form-control-feedback(aria-hidden="true")
                 %input.form-control.description{placeholder: 'description', name: "pins[#{pin.id}][description]"}
               .form-group.tags-group
+                -#%input.form-control.pins-input{name: "pins[#{pin.id}][tag_list][]", 'data-id' => pin.id}
+                = text_field "pins[#{pin.id}]", :tag_list, { value: pin.tag_list.join(','), class: 'form-control', placeholder: '#tags, #separated by comma' }
                 -#%span.pin-hash-tag summer2015 ×
                 -#%span.pin-hash-tag funny ×
 

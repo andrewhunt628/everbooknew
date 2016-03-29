@@ -3,8 +3,6 @@ class App.UploaderFinish extends Spine.Controller
     'click #finish': 'complete'
     'click .remove-button': 'removePin'
     'click .back': 'goBack'
-    'click .pin-hash-tag .delete-local': 'deleteLocalHashTag'
-    'keyup #add-hashtag': 'addHashTag'
     'click #new-album': 'createNewAlbum'
     'click .back-to-top': 'scrollTop'
 
@@ -45,22 +43,6 @@ class App.UploaderFinish extends Spine.Controller
 
   scrollTop: ->
     $(window).scrollTop(0)
-
-  deleteHashTag: (e) =>
-    $(e.target.parentNode).remove()
-
-    @initMasonry()
-
-  deleteLocalHashTag: (e) =>
-    $(e.target.parentNode).remove()
-    @initMasonry()
-
-  addHashTag: (e) =>
-    if (e.keyCode == 13)
-      $('#global-hashtags').prepend '<span class="hash-tag">' + e.target.value + ' <span class="delete">×</span></span>'
-      e.target.value = ''
-      @initMasonry()
-    e.preventDefault()
 
   createNewAlbum: =>
     $('#new-album-form').toggleClass 'hidden'

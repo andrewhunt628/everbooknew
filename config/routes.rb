@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   resources :pins
+  delete '/pins/:id/tags/:tag', to: 'pins#remove_tag'
   resources :comments, only: [:create]
 
   resources :family_bonds, only: [:index, :new, :create, :destroy]

@@ -17,11 +17,26 @@ class PinsController < ApplicationController
     render :show, layout: false 
   end
 
+  def remove_tag
+    @pin = Pin.find params[:id]
+    @pin.tag_list.remove(params[:tag])
+
+    respond_to do |format|
+      if @pin.save
+        format.json {render json: {status: :ok, location: @pin}}
+        format.html {redirect_to @pin, notice: 'Tag was successfully removed.'}
+      else
+        format.json {render json: @pin.errors, status: :unprocessable_entity}
+        format.html {redirect_to :edit}
+      end
+    end
+  end
+
   def destroy
     @pin.destroy
 
     respond_to do |format|
-      format.json { render nothing: true, status: 200 }
+      format.json { render nothing: true, status: :ok }
       format.html { redirect_to root_path }
     end
   end

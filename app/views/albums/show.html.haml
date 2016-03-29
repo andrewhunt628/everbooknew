@@ -2,7 +2,7 @@
   %h1
     = @album.title
 
-  = link_to '← Back to albums', albums_path
+  = link_to '← Back to albums', albums_path, {class: 'back'}
 
   #pins.transitions-enabled
     - @album.pins.each do |pin|
@@ -10,7 +10,8 @@
         %img.remove-button{src: '/images/remove_button.svg', 'data-id' => pin.id}
         .panel-content
           .photo-wrap
-            = image_tag pin.image.url(:medium), class: "image", 'data-toggle'=>"modal", 'data-target'=>"#pinModal"
+            = link_to pin, 'data-toggle' => 'modal', 'data-target' => "#pin#{pin.id}" do
+              = image_tag pin.image.url(:medium), class: 'image'
           .panel-footer
             .form-group.has-feedback
               %span.glyphicon.glyphicon-pencil.form-control-feedback(aria-hidden="true")
@@ -19,8 +20,15 @@
               %span.glyphicon.glyphicon-pencil.form-control-feedback(aria-hidden="true")
               %input.form-control#pin-description{placeholder: 'description', value: pin.description, 'data-id' => pin.id}
             .form-group.tags-group
+              - pin.tag_list.each do |tag|
+                %span.pin-hash-tag #{tag} <span class="delete" data-pin-id="#{pin.id}" data-tag-id="#{tag}">×</span>
 
-  = link_to '← Back to albums', albums_path
+  = link_to '← Back to albums', albums_path, {class: 'back'}
+
+  - @album.pins.each do |pin|
+    = content_tag :div, class: 'modal fade', id: "pin#{pin.id}", "aria-labelledby" => "signUpModalLabel", :role => "dialog", :tabindex => "-1" do
+      = content_tag :div, class: 'modal-dialog modal-lg' do
+        = content_tag :div, '', class: 'modal-content'
 
 :coffee
   window.album = #{@album.id}

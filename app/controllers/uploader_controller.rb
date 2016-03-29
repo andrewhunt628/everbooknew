@@ -27,8 +27,6 @@ class UploaderController < ApplicationController
 
   # POST /uploader/save
   def save
-    print params
-
     if params[:newAlbum] == 'true'
       @user = current_user
       @album = @user.albums.create(title: params[:albumTitle], description: params[:albumDescription])
@@ -40,7 +38,7 @@ class UploaderController < ApplicationController
       pin = Pin.find pin_params[0]
       pin.title = pin_params[1]['title']
       pin.description = pin_params[1]['description']
-      #TODO tags
+      pin.tag_list = pin_params[1]['tag_list']
       pin.save
       pin
     end
