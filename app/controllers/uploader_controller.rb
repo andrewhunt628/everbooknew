@@ -8,6 +8,7 @@ class UploaderController < ApplicationController
 
   # POST /uploader
   def upload
+    # The upload is not multiple
     @pins = params[:files].map {|file|
       @pin = Pin.new
       @pin.image = file
@@ -16,7 +17,11 @@ class UploaderController < ApplicationController
     }
 
     respond_to do |format|
-      format.json { render json: {pins: @pins.map(&:id), status: :success}, status: :created }
+      format.json { render json: {pin: {
+          id: @pin.id,
+          url: @pin.image.url(:medium),
+          title: @pin.image_file_name + ' – ' + (@pin.image_file_size.to_d / 1024).round(2).to_s + ' KB'
+      }, status: :success}, status: :created }
     end
   end
 

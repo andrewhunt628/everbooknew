@@ -33,9 +33,10 @@ class App.Uploader extends Spine.Controller
         url: '/pins/' + @removeId
         type: 'DELETE'
     .done (result) =>
-      window.location.href = '/uploader?' + @toString @files.filter (pin) -> pin != @removeId
+      @files.filter (pin) -> pin != @removeId
+      $(e.target).parent().remove()
     .fail (error) =>
-      window.location.href = '/uploader?' + @toString @files.filter (pin) -> pin != @removeId
+      console.log error
 
   finalRedirect: ->
     window.location.href = '/uploader/finish?' + @toString @files
@@ -58,11 +59,15 @@ class App.Uploader extends Spine.Controller
       url: '/uploader'
       done: @uploadDone
       start: @uploadStart
-      stop: @uploadStop
       progressall: @uploadProgress
 
   uploadDone: (e, data) =>
-    @files.push(data.result.pins[0]) if data.result
+    if data.result
+      @files.push(data.result.pin.id)
+      $('#pins').append @render(data.result.pin)
+
+  render: (pin) ->
+    JST['app/views/pin']({pin: pin})
 
   uploadStop: (e) =>
     window.location.href = '/uploader?' + @toString @files

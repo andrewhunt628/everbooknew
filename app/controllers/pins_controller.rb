@@ -36,7 +36,7 @@ class PinsController < ApplicationController
     @pin.destroy
 
     respond_to do |format|
-      format.json { render nothing: true, status: :ok }
+      format.json { render json: {status: :ok } }
       format.html { redirect_to root_path }
     end
   end

@@ -1,0 +1,11 @@
+<div class="box panel panel-default">
+  <img class="remove-button" src="/images/remove_button.svg", data-id="<%= @pin.id %>">
+  <div class="panel-content">
+    <div class="photo-wrap">
+      <img src="<%= @pin.url %>" class="image" data-toggle="modal" data-target="#pinModal">
+    </div>
+    <div class="panel-footer">
+      <%= @pin.title %>
+    </div>
+  </div>
+</div>

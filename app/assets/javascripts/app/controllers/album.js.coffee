@@ -6,7 +6,10 @@ class App.Album extends Spine.Controller
     'click .remove-button': 'removePin'
     'blur #pin-title': 'submitTitle'
     'blur #pin-description': 'submitDescription'
-    'click .delete': 'removeTag'
+    'blur #tags': 'submitTags'
+    'keyup #pin-title': 'submitByEnter'
+    'keyup #pin-description': 'submitByEnter'
+    'keyup #tags': 'submitByEnter'
 
   constructor: ->
     super
@@ -28,31 +31,35 @@ class App.Album extends Spine.Controller
       window.location.href = '/albums/' + window.album
 
   submitTitle: (e) ->
-    $.ajax
-      url: '/pins/' + @id(e) + '.json'
-      type: 'PATCH'
-      data:
-        pin:
-          id: @id(e)
-          title: e.target.value
+    @updatePin @id(e), {title: e.target.value}
 
   submitDescription: (e) ->
+    @updatePin @id(e), {description: e.target.value}
+
+  submitTags: (e) ->
+    @updatePin @id(e), {tag_list: e.target.value}
+
+  submitByEnter: (e) ->
+    if (e.keyCode == 13)
+      $(e.target).blur()
+
+  updatePin: (id, data) ->
+    sendObj = {
+      id: id
+    }
+    $.extend sendObj, data
     $.ajax
-      url: '/pins/' + @id(e) + '.json'
+      url: '/pins/' + id + '.json'
       type: 'PATCH'
       data:
-        pin:
-          id: @id(e)
-          description: e.target.value
+        pin: sendObj
 
   removeTag: (e) ->
     $.ajax
       url: '/pins/' + $(e.target).data('pin-id') + '/tags/' + $(e.target).data('tag-id') + '.json'
       type: 'DELETE'
     .done (result) ->
-      console.log result
       $(e.target).parent().remove()
     .fail (error) ->
-      console.log error
       $(e.target).parent().remove()
 
