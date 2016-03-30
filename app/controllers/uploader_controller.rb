@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class UploaderController < ApplicationController
 
   # GET /uploader
@@ -20,7 +21,7 @@ class UploaderController < ApplicationController
       format.json { render json: {pin: {
           id: @pin.id,
           url: @pin.image.url(:medium),
-          title: @pin.image_file_name + " – " + (@pin.image_file_size.to_d / 1024).round(2).to_s + " KB"
+          title: @pin.image_file_name + ' – ' + (@pin.image_file_size.to_d / 1024).round(2).to_s + ' KB'
       }, status: :success}, status: :created }
     end
   end
