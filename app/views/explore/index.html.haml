@@ -41,7 +41,7 @@
                   = raw pin.description
                 - if pin.tag_list
                   .hashtags
-                    = raw pin.tag_list.map {|t| link_to "##{r}", tag_path(t) }.join('  ')
+                    = raw pin.tag_list.map {|t| link_to "##{t}", tag_path(t) }.join('  ')
           .footer
             %span.pull-right
               %span.fa.fa-comments-o
