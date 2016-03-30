@@ -29,12 +29,7 @@
               = link_to user_path(friend), class: "friend", title: "#{friend.full_name}" do
                 = image_tag friend.avatar, width: 30, height: 30
 
-    -#- if @pins.count == 0
-    .box.panel.panel-default
-      .panel-body
-        There is no pins yet, upload some!
-
-    -#- @pins.each do |pin|
+    - @pins.each do |pin|
       .box.panel.panel-default
         .panel-content
           .photo-wrap
