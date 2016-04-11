@@ -3,6 +3,10 @@ require 'api_constraint'
 
 Rails.application.routes.draw do
 
+  get 'friendship/create'
+
+  get 'friendship/destroy'
+
   resources :albums
   post '/uploader', to: 'uploader#upload', as: :upload
   get '/uploader/finish', to: 'uploader#finish'
@@ -18,6 +22,12 @@ Rails.application.routes.draw do
   resources :comments, only: [:create]
 
   resources :family_bonds, only: [:index, :new, :create, :destroy]
+
+  # for the Amistad model
+  resources :friends, :controller => 'friendships', :except => [:show, :edit] do
+    get "requests", :on => :collection
+    get "invites", :on => :collection
+  end
 
   match '/users/:id/finish_signup', to: 'users#finish_signup', via: [:get, :patch], as: :finish_signup
   resources :users, only: [:show, :update, :destroy] do

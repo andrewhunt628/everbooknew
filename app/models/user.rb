@@ -8,10 +8,12 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :invitable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable
-         # , :omniauth_providers => [:google_oauth2]
+         :omniauthable #:omniauth_providers => [:facebook]
 
   validates_format_of :email, without: TEMP_EMAIL_REGEX, on: :update
+
+  #amistad gem
+  include Amistad::FriendModel
 
   has_many :pins
   has_many :albums
