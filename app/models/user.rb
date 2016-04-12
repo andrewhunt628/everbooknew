@@ -92,6 +92,11 @@ class User < ActiveRecord::Base
       # so we can check, if it's google_oauth2, then we can bypass condition check "auth.info.verified"
       if auth.provider.eql? "google_oauth2"
         email_is_verified = auth.info.email
+      elsif auth.provider.eql? "facebook"
+        auth.extra.raw_info.given_name = auth.info.name
+        avatar = HTTParty.get(auth.info.image, follow_redirects: false)
+        auth.extra.raw_info.picture = avatar.headers['location']
+        email_is_verified = auth.info.email && (auth.info.verified || auth.info.verified_email)
       else
         email_is_verified = auth.info.email && (auth.info.verified || auth.info.verified_email)
       end
