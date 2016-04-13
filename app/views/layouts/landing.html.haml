@@ -1,5 +1,5 @@
 %html
-  %body
+  %head
     %meta{:charset => "utf-8"}
     %title Landing Page
     %meta{:content => "", :name => "description"}
@@ -8,8 +8,7 @@
 
     = stylesheet_link_tag 'landing', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
-
-
+  %body
     .main
       .design-back
         .col-sm-12.banner-text.text-center

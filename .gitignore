@@ -25,3 +25,5 @@ vendor/extensions
 vendor/gems
 vendor/ruby
 vendor/specifications
+# Ignore application configuration
+/config/application.yml
