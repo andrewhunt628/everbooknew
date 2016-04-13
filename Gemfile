@@ -41,6 +41,8 @@ gem "jquery-validation-rails"
 
 gem 'momentjs-rails'
 
+#this is for google,facebook authorization
+gem "figaro"
 
 # Use spine-js as the JavaScript library
 gem "json2-rails"
