@@ -41,14 +41,11 @@ gem "jquery-validation-rails"
 
 gem 'momentjs-rails'
 
-<<<<<<< HEAD
 #amistad for friendship model
 gem 'amistad'
 
-=======
 #this is for google,facebook authorization
 gem "figaro"
->>>>>>> master
 
 # Use spine-js as the JavaScript library
 gem "json2-rails"
