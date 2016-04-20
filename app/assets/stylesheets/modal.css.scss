@@ -66,6 +66,9 @@
                     padding-left: 5px;
                     line-height: 14px;
                     font-size: 13px;
+                    .content{
+                      word-break: break-all;
+                    }
                     .info{
                       font-size: 10px;
                       margin-top: 5px;
