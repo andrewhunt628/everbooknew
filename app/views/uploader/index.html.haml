@@ -9,8 +9,8 @@
       %img.add-button{src: '/images/add_button.svg'}
       %span.drag-text drag & drop photos here
       %span or
-      %span#chose-files Click to chose
-      %input#drop-input.hidden{type: 'file'}
+      %span#chose-files Click to choose
+      %input#drop-input.hidden{type: 'file', multiple: 'multiple'}
 
     #pins.pins-edit.transitions-enabled
       - @pins.each do |pin|

@@ -41,14 +41,12 @@ gem "jquery-validation-rails"
 
 gem 'momentjs-rails'
 
-<<<<<<< HEAD
+
 #amistad for friendship model
 gem 'amistad'
-
-=======
 #this is for google,facebook authorization
 gem "figaro"
->>>>>>> master
+
 
 # Use spine-js as the JavaScript library
 gem "json2-rails"
@@ -59,6 +57,9 @@ gem 'underscore-rails'
 gem "jquery-fileupload-rails"
 
 gem "nested_form"
+
+#for facebook invitations
+gem "fb_graph2"
 
 
 # Use ActiveModel has_secure_password
