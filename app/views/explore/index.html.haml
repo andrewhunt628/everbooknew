@@ -29,34 +29,16 @@
               = link_to user_path(friend), class: "friend", title: "#{friend.full_name}" do
                 = image_tag friend.avatar, width: 30, height: 30
 
-    - @pins.each do |pin|
-      .box.panel.panel-default
-        .panel-content
-          .photo-wrap
-            = link_to pin, 'data-toggle' => 'modal', 'data-target' => "#pin#{pin.id}" do
-              = image_tag pin.image.url(:medium), class: 'image'
-            - if pin.description? and pin.tag_list
-              .panel-body
-                - if pin.description?
-                  = raw pin.description
-                - if pin.tag_list
-                  .hashtags
-                    = raw pin.tag_list.map {|t| link_to "##{t}", tag_path(t) }.join('  ')
-          .footer
-            %span.pull-right
-              %span.fa.fa-comments-o
-              = pin.comments.count
-              -#%span.orange (+3)
-            %a{href: "#"}
-              %span.avatar-mini
-                = image_tag pin.user.avatar, width: 30, height: 30
-              %span.author
-                = pin.user.full_name
 
-  - @pins.each do |pin|
-    = content_tag :div, class: 'modal fade', id: "pin#{pin.id}", "aria-labelledby" => "signUpModalLabel", :role => "dialog", :tabindex => "-1" do
-      = content_tag :div, class: 'modal-dialog modal-lg' do
-        = content_tag :div, '', class: 'modal-content'
+    - @users.each do |user|
+      .col-md-3
+        = image_tag user.avatar.url
+        = user.first_name + " " + user.last_name
+        .col-sm-3
+          = link_to 'Add Friend', friend_with_path(user), class: 'btn btn-default', method: :post
+
+
+
 
 :coffee
   new App.Explore el: $('.page')

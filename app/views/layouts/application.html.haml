@@ -8,6 +8,9 @@
   %body
     - if user_signed_in?
       = render "shared/header"
+    - unless flash[:notice].try(:empty?)
+      .notice
+        = flash[:notice] 
 
     .container
       = yield

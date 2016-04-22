@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get '/uploader', to: 'uploader#index', as: :upload_index
 
   get '/explore', to: 'explore#index'
+  post '/friend_with/:friend_id', to: 'explore#add_friendship', as: :friend_with
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
