@@ -37,7 +37,11 @@ class UploaderController < ApplicationController
       @user = current_user
       @album = @user.albums.create(title: params[:albumTitle], description: params[:albumDescription])
     else
-      @album = current_user.albums.find(params[:album][:id])
+      if params[:album]
+        @album = current_user.albums.find(params[:album][:id])
+      else
+        @album = current_user.albums.new(title: 'New Album')
+      end
     end
 
     @pins = params[:pins].map do |pin_params|

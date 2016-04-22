@@ -42,6 +42,7 @@ gem "jquery-validation-rails"
 gem 'momentjs-rails'
 
 
+
 #amistad for friendship model
 gem 'amistad'
 #this is for google,facebook authorization
