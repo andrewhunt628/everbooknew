@@ -78,7 +78,7 @@ Rails.application.routes.draw do
     end
   end
   
-  root 'explore#index'
+  root 'index#index'
 
   get '*tags_list' => 'albums#index', as: :tag# this line should be last
 end
