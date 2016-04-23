@@ -37,8 +37,16 @@
           .col-md-12
             = user.full_name
           .col-md-12
-            = link_to 'Add Friend', friend_with_path(user),
-            :class => 'btn btn-default', method: :post
+            - if current_user.friend_with? user
+              You are already friends
+            - elsif current_user.invited? user
+              Pending request
+            - elsif user.invited? current_user
+              = link_to 'Confirm Friend', friend_path(user),
+                :class => 'btn btn-default', :method => :put
+            - else
+              = link_to 'Add Friend', friend_with_path(user),
+                :class => 'btn btn-default', :method => :post
 
 
 
