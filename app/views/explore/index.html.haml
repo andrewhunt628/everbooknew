@@ -5,7 +5,7 @@
     %p= t('welcome_p')
 
   #pins.transitions-enabled
-    .box.wrapper
+    .col-md-3.wrapper
       .panel.panel-default.panel-action
         .panel-body
           = link_to 'Upload', upload_path, {id: 'upload-button'}
@@ -29,13 +29,24 @@
               = link_to user_path(friend), class: "friend", title: "#{friend.full_name}" do
                 = image_tag friend.avatar, width: 30, height: 30
 
-
-    - @users.each do |user|
-      .col-md-3
-        = image_tag user.avatar.url
-        = user.first_name + " " + user.last_name
-        .col-sm-3
-          = link_to 'Add Friend', friend_with_path(user), class: 'btn btn-default', method: :post
+    .col-md-9
+      - @users.each do |user|
+        .col-md-3
+          .col-md-12
+            = image_tag user.avatar.url, :class => 'img-responsive'
+          .col-md-12
+            = user.full_name
+          .col-md-12
+            - if current_user.friend_with? user
+              You are already friends
+            - elsif current_user.invited? user
+              Pending request
+            - elsif user.invited? current_user
+              = link_to 'Confirm Friend', friend_path(user),
+                :class => 'btn btn-default', :method => :put
+            - else
+              = link_to 'Add Friend', friends_path(:user_id => user),
+                :class => 'btn btn-default', :method => :post
 
 
 

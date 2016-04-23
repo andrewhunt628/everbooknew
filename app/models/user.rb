@@ -30,6 +30,8 @@ class User < ActiveRecord::Base
   # create api_key after user created by default
   after_create :create_apikey
 
+  scope :all_except, ->(user) { where.not(:id => user) }
+
   def create_apikey
     ApiKey.create user: self
   end
@@ -90,7 +92,7 @@ class User < ActiveRecord::Base
       # user to verify it on the next step via UsersController.finish_signup
 
 
-      # since google oauth doesn't provide "auth.info.verified" object, 
+      # since google oauth doesn't provide "auth.info.verified" object,
       # so we can check, if it's google_oauth2, then we can bypass condition check "auth.info.verified"
       if auth.provider.eql? "google_oauth2"
         email_is_verified = auth.info.email
@@ -118,7 +120,7 @@ class User < ActiveRecord::Base
         # if module Devise :confirmable is included
         # user.skip_confirmation!
 
-        # use this module Devise :confirmable is not include 
+        # use this module Devise :confirmable is not include
         user.skip_confirmation! if user.respond_to?(:skip_confirmation)
         user.save!
       end

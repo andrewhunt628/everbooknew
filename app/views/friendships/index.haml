@@ -1,0 +1,14 @@
+%h1 My family
+
+
+%table.table.table-bordered
+  %thead
+    %th #
+    %th email
+  %tbody
+    - @pending_invites.each_with_index do |family_member, index|
+      %tr
+        %td
+          = index + 1
+        %td
+          = family_member.email
