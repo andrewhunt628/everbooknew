@@ -45,7 +45,7 @@
               = link_to 'Confirm Friend', friend_path(user),
                 :class => 'btn btn-default', :method => :put
             - else
-              = link_to 'Add Friend', friend_with_path(user),
+              = link_to 'Add Friend', friends_path(:user_id => user),
                 :class => 'btn btn-default', :method => :post
 
 
