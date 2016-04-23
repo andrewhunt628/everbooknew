@@ -11,12 +11,4 @@ class ExploreController < ApplicationController
     @users = User.all_except(current_user).decorate
   end
 
-  def add_friendship
-  	@friendship_user = User.find(params[:friend_id])
-  	current_user.invite @friendship_user
-  	FriendshipNotifications.new_invitation(current_user, @friendship_user).deliver_now
-  	flash[:notice] = "An invite was sent to #{@friendship_user.first_name} #{@friendship_user.last_name}"
-  	redirect_to action: "index"
-  end
-
 end

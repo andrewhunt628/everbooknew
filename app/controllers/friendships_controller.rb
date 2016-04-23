@@ -11,12 +11,16 @@ class FriendshipsController < ApplicationController
   end
 
   def create
-    invitee = User.find_by_id(params[:user_id])
+    invitee = User.find_by_id params[:user_id]
+
     if current_user.invite invitee
-      redirect_to new_friend_path, :notice => "Successfully invited friend!"
+      FriendshipNotifications.new_invitation(current_user, invitee).deliver_now
+      flash[:notice] = "An invite was sent to #{invitee.first_name} #{invitee.last_name}"
     else
-      redirect_to new_friend_path, :notice => "Sorry! You can't invite that user!"
+      flash[:notice] = "Sorry! You can't invite that user!"
     end
+
+    redirect_to :back
   end
 
   def update
