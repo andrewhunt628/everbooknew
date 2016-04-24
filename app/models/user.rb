@@ -31,6 +31,10 @@ class User < ActiveRecord::Base
   # create api_key after user created by default
   after_create :create_apikey
 
+
+  scope :all_except, ->(user) { where.not(:id => user) }
+
+
   def create_apikey
     ApiKey.create user: self
   end
