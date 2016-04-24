@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160411015915) do
+ActiveRecord::Schema.define(version: 20160424034017) do
 
   create_table "albums", force: :cascade do |t|
     t.string   "title"
@@ -47,13 +47,14 @@ ActiveRecord::Schema.define(version: 20160411015915) do
   end
 
   create_table "friendships", force: :cascade do |t|
-    t.integer "friendable_id"
-    t.integer "friend_id"
-    t.integer "blocker_id"
-    t.boolean "pending",       default: true
+    t.integer  "friendable_id"
+    t.string   "friendable_type"
+    t.integer  "friend_id"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "blocker_id"
   end
-
-  add_index "friendships", ["friendable_id", "friend_id"], name: "index_friendships_on_friendable_id_and_friend_id", unique: true
 
   create_table "identities", force: :cascade do |t|
     t.integer  "user_id"

@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '2.2.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
@@ -41,10 +42,6 @@ gem "jquery-validation-rails"
 
 gem 'momentjs-rails'
 
-
-
-#amistad for friendship model
-gem 'amistad'
 #this is for google,facebook authorization
 gem "figaro"
 
@@ -61,6 +58,9 @@ gem "nested_form"
 
 #for facebook invitations
 gem "fb_graph2"
+
+
+gem 'has_friendship', '0.1.3'
 
 
 # Use ActiveModel has_secure_password

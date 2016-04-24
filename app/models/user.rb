@@ -12,9 +12,6 @@ class User < ActiveRecord::Base
 
   validates_format_of :email, without: TEMP_EMAIL_REGEX, on: :update
 
-  #amistad gem
-  include Amistad::FriendModel
-
   has_many :pins
   has_many :albums
   has_many :comments
@@ -24,6 +21,10 @@ class User < ActiveRecord::Base
   # destroy Api key when user destroyed
   has_one :api_key, dependent: :destroy
   has_many :identities
+
+
+  has_friendship
+
 
   has_attached_file :avatar, default_url: "/avatars/avatar#{rand(3)+1}.jpg"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
@@ -90,7 +91,7 @@ class User < ActiveRecord::Base
       # user to verify it on the next step via UsersController.finish_signup
 
 
-      # since google oauth doesn't provide "auth.info.verified" object, 
+      # since google oauth doesn't provide "auth.info.verified" object,
       # so we can check, if it's google_oauth2, then we can bypass condition check "auth.info.verified"
       if auth.provider.eql? "google_oauth2"
         email_is_verified = auth.info.email
@@ -118,7 +119,7 @@ class User < ActiveRecord::Base
         # if module Devise :confirmable is included
         # user.skip_confirmation!
 
-        # use this module Devise :confirmable is not include 
+        # use this module Devise :confirmable is not include
         user.skip_confirmation! if user.respond_to?(:skip_confirmation)
         user.save!
       end
