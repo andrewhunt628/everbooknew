@@ -1,0 +1,10 @@
+%h5
+  Hi #{@invitee.email}!
+
+%h6
+  You have a new friend request on Kidio from #{@inviter.email}
+
+
+= link_to 'Click here to accept request',
+  friend_url(@invitee), :method => :put
+
