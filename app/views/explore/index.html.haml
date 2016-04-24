@@ -6,39 +6,7 @@
 
   #pins.transitions-enabled
     .col-md-3.wrapper
-      .panel.panel-default.panel-action
-        .panel-body
-          = link_to 'Upload', upload_path, {id: 'upload-button'}
-
-      .panel.panel-default
-        .panel-content
-          .panel-body
-            %h3 Hashtags
-            .hashtags-container
-              - if @tags.empty?
-                You do not have any hashtags yet
-
-              - @tags.each do |tag|
-                .hashtag{href: "#"}
-                  = link_to("##{tag}", get_mark_tag_url(tag))
-                  = link_to get_unmark_tag_url(tag) do
-                    %span.close ×
-      .panel.panel-default
-        .panel-content
-          .panel-body
-            - if current_user.friends.present?
-              = link_to 'View all', family_bonds_path,
-                :class => 'pull-right orange help'
-
-            %h3 Friends
-
-            - if current_user.friends.empty?
-              You do not have any friends yet
-            - else
-              - current_user.friends.each do |friend|
-                = link_to user_path(friend), :class => 'friend',
-                  :title=> "#{friend.full_name}" do
-                  = image_tag friend.avatar, :width => 30, :height => 30
+      = render :partial => 'shared/sidebar', :locals => {:tags => @tags}
 
     .col-md-9
       - @users.each do |user|

@@ -6,7 +6,8 @@ class IndexController < ApplicationController
 
     @pins = @albums.reduce([]) {|n, album| album.pins + n}
                 .sort_by!(&:updated_at).reverse!
-    @tags = @albums.tag_counts_on(:tags)
+
+    @tags = current_user.owned_tags.alphabetical
     @users = User.all
   end
 
@@ -18,6 +19,6 @@ class IndexController < ApplicationController
     redirect_to action: "index"
   end
 
-  
+
 
 end
