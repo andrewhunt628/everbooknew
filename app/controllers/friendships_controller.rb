@@ -13,9 +13,12 @@ class FriendshipsController < ApplicationController
   def create
     invitee = User.find_by_id params[:user_id]
 
-    current_user.friend_request(invitee) ?
-      flash[:notice] = "An invite was sent to #{invitee.first_name} #{invitee.last_name}" :
+    if current_user.friend_request(invitee)
+      FriendshipNotifications.new_invitation(current_user, invitee).deliver_now
+      flash[:notice] = "An invite was sent to #{invitee.first_name} #{invitee.last_name}"
+    else
       flash[:notice] = "Sorry! You can't invite that user!"
+    end
 
     redirect_to :back
   end
