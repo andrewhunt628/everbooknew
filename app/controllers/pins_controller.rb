@@ -9,12 +9,12 @@ class PinsController < ApplicationController
       @pins = current_user.pins
     end
     @pins = @pins.order("pins.created_at DESC")
-    @tags = @pins.tag_counts_on(:tags)  
+    @tags = @pins.tag_counts_on(:tags)
   end
 
 
   def show
-    render :show, layout: false 
+    render :show, layout: false
   end
 
   def remove_tag
@@ -42,12 +42,13 @@ class PinsController < ApplicationController
   end
 
   def edit
-    
+
   end
 
   def update
     respond_to do |format|
       if @pin.update(pin_params)
+        current_user.tag @pin, :on => :tags, :with => params[:pin][:tag_list]
         format.html { redirect_to @pin, notice: "Pin was Successfully updated!" }
         format.json { render json: {status: :ok, location: @pin}}
       else
@@ -66,6 +67,7 @@ class PinsController < ApplicationController
 
     respond_to do |format|
       if @pin.save
+        current_user.tag @pin, :on => :tags, :with => params[:pin][:tag_list]
         format.json { render json: @pin, status: :created, location: @pin }
         format.html { redirect_to pins_path }
       else
@@ -78,7 +80,7 @@ class PinsController < ApplicationController
   private
 
     def pin_params
-      @pin_params = params.require(:pin).permit(:title, :description, :image, :text_marks, :tag_list, :album_id, :person_ids => [])
+      @pin_params = params.require(:pin).permit(:title, :description, :image, :text_marks, :album_id, :person_ids => [])
       @pin_params[:text_marks] = @pin_params[:text_marks].to_s.split(",").map(&:squish)
       @pin_params.merge(user_id: current_user.id)
     end

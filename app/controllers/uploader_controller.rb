@@ -50,6 +50,8 @@ class UploaderController < ApplicationController
       pin.description = pin_params[1]['description']
       pin.tag_list = pin_params[1]['tag_list']
       pin.save
+      current_user.tag pin, :on => :tags, :with => pin_params[1]['tag_list']
+
       pin
     end
 

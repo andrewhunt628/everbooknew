@@ -10,3 +10,9 @@ ActsAsTaggableOn.delimiter = ['#', ' ']
 # ActiveSupport.on_load(:active_record) do
 #  self.include_root_in_json = true
 # end
+
+ActsAsTaggableOn::Tag.class_eval do
+
+  scope :alphabetical, -> { order :name }
+
+end

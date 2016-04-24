@@ -25,6 +25,8 @@ class User < ActiveRecord::Base
 
   has_friendship
 
+  acts_as_tagger
+
 
   has_attached_file :avatar, default_url: "/avatars/avatar#{rand(3)+1}.jpg"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
