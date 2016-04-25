@@ -24,6 +24,13 @@ production:
   <<: *default
   database: db/production.sqlite3
 
+
+staging:
+  adapter: postgresql
+  database: kideo_staging
+  pool: 5
+  timeout: 5000
+
 production:
   adapter: postgresql
   database: my_database_production
