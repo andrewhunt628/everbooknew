@@ -64,6 +64,8 @@ gem 'has_friendship', '0.1.3'
 
 gem 'draper', '~> 2.1.0'
 
+gem 'omnicontacts', '~> 0.3.7'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

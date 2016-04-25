@@ -47,16 +47,16 @@ Rails.application.routes.draw do
       get '/users', to: 'users#show'
       get '/users/list', to: 'users#index'
       patch '/users/security/change_password', to: 'users#change_password'
-      
+
       # handling log in, log out and sign up
       post 'users/sign_in', to: 'sessions#create'
       delete 'users/sign_out', to: 'sessions#destroy'
-      
+
       # we must tell Devise to custom their routes
       devise_scope :user do
         # for sign up
         post '/users/sign_up', to: 'registrations#create'
-        # for invitation 
+        # for invitation
         post '/users/invitation', to: 'invitations#create'
 
         # for passwords
@@ -77,8 +77,17 @@ Rails.application.routes.draw do
 
     end
   end
-  
+
   root 'index#index'
+
+  resources :invitations, :only => [:index] do
+    collection do
+      get :callback
+    end
+  end
+
+  get '/invitations/:provider/callback', :to => 'invitations#callback'
+  get '/contacts/failure' => 'invitations#failure'
 
   get '*tags_list' => 'albums#index', as: :tag# this line should be last
 end
