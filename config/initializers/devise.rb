@@ -236,7 +236,7 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  
+
   # Google OAuth
   config.omniauth :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"], {
     # add scope
@@ -245,7 +245,7 @@ Devise.setup do |config|
   # Facebook OAuth
   config.omniauth :facebook, ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_APP_SECRET"], scope: "email,user_about_me", info_fields: "email,id,verified,name"
 
-  
+
   # For Devise Invitable Module
   config.scoped_views = true
 
@@ -271,4 +271,5 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+  config.secret_key = '5578494c9e8d37b37edb2c974a2a237fa01aa354a758bc2c683c82fa2b95c7c0bae35f60580f9538d0e6a7cb2feb2b1f3ae0a8e2c08e5569c57c3eac4a9d1d2b'
 end
