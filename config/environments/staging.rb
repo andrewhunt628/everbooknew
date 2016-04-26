@@ -83,13 +83,14 @@ Rails.application.configure do
   # mailer config
   config.action_mailer.delivery_method = :letter_opener
 
-  config.paperclip_defaults = {
-      storage: :s3,
-      s3_credentials: {
-          bucket: ENV["S3_BUCKET"],
-          access_key_id: ENV["S3_ACCESS_KEY"],
-          secret_access_key: ENV["S3_SECRET_KEY"]
-      }
-  }
+  Paperclip.options[:command_path] = "/usr/bin/convert/"
+  # config.paperclip_defaults = {
+  #     storage: :s3,
+  #     s3_credentials: {
+  #         bucket: ENV["S3_BUCKET"],
+  #         access_key_id: ENV["S3_ACCESS_KEY"],
+  #         secret_access_key: ENV["S3_SECRET_KEY"]
+  #     }
+  # }
 
 end
