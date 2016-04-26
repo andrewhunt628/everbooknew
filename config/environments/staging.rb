@@ -82,6 +82,7 @@ Rails.application.configure do
   config.action_mailer.default_url_options = {:host => 'kidio-staging.herokuapp.com'}
   # mailer config
   config.action_mailer.delivery_method = :letter_opener
+  LetterOpener.cannot_write_to_file_system!
 
   Paperclip.options[:command_path] = "/usr/bin/convert/"
   # config.paperclip_defaults = {
