@@ -81,7 +81,7 @@ group :production do
   gem "rails_12factor"
 end
 
-gem 'letter_opener'
+gem 'letter_opener' #move to :development, :test section before first relase
 
 # use 'postgresql' in any environment
 gem 'pg'

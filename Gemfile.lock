@@ -160,6 +160,10 @@ GEM
       addressable
       faraday
       multi_json
+    launchy (2.4.3)
+      addressable (~> 2.3)
+    letter_opener (1.4.1)
+      launchy (~> 2.2)
     listen (3.0.4)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
@@ -361,6 +365,7 @@ DEPENDENCIES
   jquery-validation-rails
   json2-rails
   koala
+  letter_opener
   masonry-rails
   momentjs-rails
   nested_form

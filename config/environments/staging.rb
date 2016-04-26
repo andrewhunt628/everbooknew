@@ -81,8 +81,16 @@ Rails.application.configure do
   # for devise
   config.action_mailer.default_url_options = {:host => 'kidio-staging.herokuapp.com'}
   # mailer config
-  config.action_mailer.delivery_method = :letter_opener
-  LetterOpener.cannot_write_to_file_system!
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      :address   => 'smtp.mandrillapp.com',
+      :port      => 587,
+      :enable_starttls_auto => true,
+      :user_name => ENV['MANDRILL_USER']
+      :password  => ENV['MANDRILL_PASSWORD'],
+      :authentication => 'login',
+      :domain => 'kidio-staging.herokuapp.com'
+  }
 
   Paperclip.options[:command_path] = "/usr/bin/convert/"
   # config.paperclip_defaults = {
