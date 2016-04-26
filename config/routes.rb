@@ -83,7 +83,7 @@ Rails.application.routes.draw do
     root :to => 'index#index', :as => :authenticated_root
   end
 
-  root :to => redirect '/users/sign_in'
+  root :to => redirect('/users/sign_in')
 
   resources :invitations, :only => [:index] do
     collection do
