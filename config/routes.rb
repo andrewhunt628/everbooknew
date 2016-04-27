@@ -32,6 +32,8 @@ Rails.application.routes.draw do
 
   match '/users/:id/finish_signup', to: 'users#finish_signup', via: [:get, :patch], as: :finish_signup
   resources :users, only: [:show, :update, :destroy] do
+    resources :tags, :only => [:show]
+
     member do
       get '/security/change_password/', to: 'users#form_change_password'
       patch :change_password

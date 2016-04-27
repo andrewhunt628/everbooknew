@@ -1,11 +1,11 @@
-class Pin < ActiveRecord::Base  
+class Pin < ActiveRecord::Base
   acts_as_taggable
-  
+
   belongs_to :album
   belongs_to :user
   has_many :comments
   has_and_belongs_to_many :people, class_name: 'User'
-  
+
   serialize :text_marks, Array
 
   has_attached_file :image, styles: {
@@ -19,6 +19,8 @@ class Pin < ActiveRecord::Base
     validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   validates :image, presence: true
+
+  scope :by_latest, -> { order :created_at => :desc }
 
   def text_marks=(value)
     value = value.to_s.split(",").map(&:squish).uniq unless value.instance_of?(Array)

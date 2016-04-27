@@ -17,7 +17,7 @@
 
         - tags.each do |tag|
           .hashtag{href: "#"}
-            = link_to("##{tag}", get_mark_tag_url(tag))
+            = link_to("##{tag}", user_tag_path(current_user, tag.name))
             = link_to get_unmark_tag_url(tag) do
               %span.close ×
 
