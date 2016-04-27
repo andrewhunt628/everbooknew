@@ -24,7 +24,7 @@
         %li.small-screen
           = link_to "UPLOAD", "/uploader"
         %li.small-screen
-          = link_to "EDIT PROFILE", "#"
+          = link_to "EDIT PROFILE", edit_user_registration_path
         %li.small-screen
           = link_to "CHANGE PASSWORD", security_change_password_user_path(current_user)
         %li.small-screen
@@ -39,7 +39,7 @@
         %li.user-menu
           %a.dropdown-toggle{href: "#", 'data-toggle' => "dropdown", 'aria-haspopup' => "true", 'aria-expanded' => "false"}
             %span.avatar-mini
-              = image_tag current_user.try(:avatar), width: 40, height: 40 
+              = image_tag current_user.try(:avatar), width: 40, height: 40
             %span.welcome Welcome #{current_user.try(:first_name)}
             %span.caret
           %ul.dropdown-menu
@@ -52,7 +52,7 @@
             %li
               = link_to "Upload", "/uploader"
             %li
-              = link_to "Edit Profile", "#"
+              = link_to "Edit Profile", edit_user_registration_path
             %li
               = link_to "Change Password", security_change_password_user_path(current_user)
             %li

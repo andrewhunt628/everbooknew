@@ -16,7 +16,10 @@ Rails.application.routes.draw do
   get '/explore', to: 'explore#index'
   post '/friend_with/:friend_id', to: 'explore#add_friendship', as: :friend_with
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, :controllers => {
+    :omniauth_callbacks => 'users/omniauth_callbacks',
+    :registrations => 'registrations'
+  }
 
   resources :pins
   delete '/pins/:id/tags/:tag', to: 'pins#remove_tag'
