@@ -128,7 +128,11 @@ class User < ActiveRecord::Base
         # use this module Devise :confirmable is not include
         user.skip_confirmation! if user.respond_to?(:skip_confirmation)
         user.save!
+      else
+        user.update_attributes :avatar => URI.parse(auth.extra.raw_info.picture)
       end
+
+
     end
 
     # Associate the identity with the user if needed
