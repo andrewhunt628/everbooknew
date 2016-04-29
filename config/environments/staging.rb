@@ -1,5 +1,5 @@
 require 'rubygems' if RUBY_VERSION < '1.9'
-require 'rest_client'
+require 'rest-client'
 require 'json'
 
 Rails.application.configure do

@@ -66,7 +66,7 @@ gem 'draper', '~> 2.1.0'
 
 gem 'omnicontacts', '~> 0.3.7'
 
-gem 'rest_client', '~> 1.8.3'
+gem 'rest-client', '~> 1.8'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
