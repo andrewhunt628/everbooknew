@@ -1,7 +1,5 @@
 source 'https://rubygems.org'
 
-ruby '2.2.2'
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 # Use sqlite3 as the database for Active Record
@@ -28,8 +26,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'haml'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'simple_form'
-gem 'devise'
-gem 'devise_invitable'
+gem 'devise',           '~> 3.5.2'
+gem 'devise_invitable', '~> 1.5.2'
 gem "omniauth-google-oauth2"
 gem 'omniauth-facebook'
 gem "koala" # Facebook Api

@@ -357,8 +357,8 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.5)
   byebug
   coffee-rails (~> 4.1.0)
-  devise
-  devise_invitable
+  devise (~> 3.5.2)
+  devise_invitable (~> 1.5.2)
   draper (~> 2.1.0)
   eco
   factory_girl_rails
