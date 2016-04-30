@@ -112,8 +112,8 @@ Rails.application.configure do
 
   first_inbox = JSON.parse(response)[0] # get first inbox
 
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
     :user_name => first_inbox['username'],
     :password => first_inbox['password'],
     :address => first_inbox['domain'],
