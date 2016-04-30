@@ -85,16 +85,16 @@ Rails.application.configure do
   # for devise
   config.action_mailer.default_url_options = {:host => 'kidio-staging.herokuapp.com'}
   # mailer config
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-      :address   => 'smtp.mandrillapp.com',
-      :port      => 587,
-      :enable_starttls_auto => true,
-      :user_name => ENV['MANDRILL_USER'],
-      :password  => ENV['MANDRILL_PASSWORD'],
-      :authentication => 'login',
-      :domain => 'kidio-staging.herokuapp.com'
-  }
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #     :address   => 'smtp.mandrillapp.com',
+  #     :port      => 587,
+  #     :enable_starttls_auto => true,
+  #     :user_name => ENV['MANDRILL_USER'],
+  #     :password  => ENV['MANDRILL_PASSWORD'],
+  #     :authentication => 'login',
+  #     :domain => 'kidio-staging.herokuapp.com'
+  # }
 
   # Paperclip.options[:command_path] = "/usr/bin/convert/"
   config.paperclip_defaults = {
@@ -112,8 +112,8 @@ Rails.application.configure do
 
   first_inbox = JSON.parse(response)[0] # get first inbox
 
-  ActionMailer::Base.delivery_method = :smtp
-  ActionMailer::Base.smtp_settings = {
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
     :user_name => first_inbox['username'],
     :password => first_inbox['password'],
     :address => first_inbox['domain'],
