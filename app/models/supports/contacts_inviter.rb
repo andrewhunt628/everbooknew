@@ -1,8 +1,10 @@
 class ContactsInviter
 
-  def initialize contacts = nil
+  def initialize current_user, contacts = nil
+    raise 'User is required' if contacts.nil?
     raise 'Contacts(array) is required' if contacts.nil?
 
+    @current_user = current_user
     @contacts = contacts
   end
 
@@ -15,8 +17,7 @@ class ContactsInviter
       puts "Contact found: name => #{name}, email => #{email}"
 
       if self.not_a_user? email
-        User.invite! :email => email, :first_name => name
-        sleep(0.4)
+        @current_user.delay.invite_new_user! email
       end
     end
   end

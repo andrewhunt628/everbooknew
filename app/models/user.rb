@@ -37,6 +37,11 @@ class User < ActiveRecord::Base
   scope :all_except, ->(user) { where.not(:id => user) }
 
 
+  def invite_new_user! email
+    User.invite! :email => email
+  end
+
+
   def create_apikey
     ApiKey.create user: self
   end

@@ -66,6 +66,7 @@ gem 'omnicontacts', '~> 0.3.7'
 
 gem 'rest-client', '~> 1.8'
 
+gem 'delayed_job_active_record'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
