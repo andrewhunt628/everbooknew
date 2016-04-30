@@ -16,6 +16,7 @@ class ContactsInviter
 
       if self.not_a_user? email
         User.invite! :email => email, :first_name => name
+        sleep(0.4)
       end
     end
   end
