@@ -12,10 +12,11 @@ class FriendshipsController < ApplicationController
 
   def create
     invitee = User.find_by_id params[:user_id]
+    url = request.base_url
 
     if current_user.friend_request(invitee)
-      FriendshipNotifications.new_invitation(current_user, invitee).deliver_now
-      flash[:notice] = "An invite was sent to #{invitee.first_name} #{invitee.last_name}"
+      FriendshipNotifications.new_invitation(current_user, invitee, url).deliver_now
+      flash[:notice] = "An invite was sent to #{invitee.email}"
     else
       flash[:notice] = "Sorry! You can't invite that user!"
     end
@@ -31,6 +32,16 @@ class FriendshipsController < ApplicationController
       flash[:notice] = "Sorry! Could not confirm friend!"
 
     redirect_to :back
+  end
+
+  def confirm
+    inviter = User.find_by_id params[:id]
+
+    current_user.accept_request(inviter) ?
+      flash[:notice] = 'Successfully confirmed friend!' :
+      flash[:notice] = "Sorry! Could not confirm friend!"
+
+    redirect_to explore_path
   end
 
   def requests

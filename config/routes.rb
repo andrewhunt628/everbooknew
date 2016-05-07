@@ -99,5 +99,6 @@ Rails.application.routes.draw do
   get '/invitations/:provider/callback', :to => 'invitations#callback'
   get '/contacts/failure' => 'invitations#failure'
 
+  get '/friends/:id' => 'friendships#confirm', :as => 'confirm_friend'
   get '*tags_list' => 'albums#index', as: :tag# this line should be last
 end
