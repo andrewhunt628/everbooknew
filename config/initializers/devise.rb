@@ -248,6 +248,7 @@ Devise.setup do |config|
 
   # For Devise Invitable Module
   config.scoped_views = true
+  config.invite_for = 2.weeks
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

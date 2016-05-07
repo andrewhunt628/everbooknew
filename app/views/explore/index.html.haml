@@ -10,6 +10,8 @@
 
     .col-md-9
       - @users.each do |user|
+        - next if user.invited_to_sign_up?
+
         .col-md-3
           .col-md-12
             = image_tag user.avatar.url, :class => 'img-responsive'
