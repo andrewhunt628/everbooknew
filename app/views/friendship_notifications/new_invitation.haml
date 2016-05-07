@@ -1,6 +1,6 @@
 - inviter = @inviter.decorate
 
-.container{:style => 'border-style: solid; border-width: 1px; border-color: rgb(233, 233, 233); background-color: rgb(255, 255, 255); position: absolute; left: 300px; top: 0px; width: 616px; height: 500px; z-index: 3'}
+.container{:style => 'border-style: solid; border-width: 1px; border-color: rgb(233, 233, 233); background-color: rgb(255, 255, 255); position: absolute; left: 40px; top: 0px; width: 616px; height: 500px; z-index: 3'}
 
 
 
@@ -13,10 +13,10 @@
   .body{:style => 'padding-top: 80px; display: block; text-align: center;'}
     - if Rails.env.development?
       = image_tag "#{@base_url}/#{inviter.avatar.url}",
-        :style => 'border-radius:50%; width: 90px; height: 90px;'
+        :style => 'border-radius:50%; width: 80px; height: 80px;'
     - else
       = image_tag inviter.avatar.url,
-        :style => 'border-radius:50%; width: 90px; height: 90px;'
+        :style => 'border-radius:50%; width: 80px; height: 80px;'
 
     .inviter-name{:style => 'font-size: 30px; font-family: "Roboto"; color: rgb(240, 94, 51); margin-top: 10px;'}
       = inviter.full_name
