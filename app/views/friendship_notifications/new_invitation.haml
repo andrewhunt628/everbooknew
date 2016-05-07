@@ -1,10 +1,12 @@
-%h5
-  Hi #{@invitee.email}!
-
-%h6
-  You have a new friend request on Kidio from #{@inviter.email}
+- inviter = @inviter.decorate
 
 
-= link_to 'Click here to accept request',
+= image_tag inviter.avatar.url
+%h1= inviter.full_name
+
+%p
+  Wants to be your friend on Kidio
+
+%p
+  = link_to 'CONFIRM REQUEST',
   friend_url(@invitee), :method => :put
-
