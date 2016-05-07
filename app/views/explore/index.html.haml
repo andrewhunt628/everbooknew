@@ -10,7 +10,7 @@
 
     .col-md-9
       - @users.each do |user|
-        - next if user.invited_to_sign_up?
+        - next if user.invited_user?
 
         .col-md-3
           .col-md-12

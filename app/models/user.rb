@@ -37,6 +37,12 @@ class User < ActiveRecord::Base
   scope :all_except, ->(user) { where.not(:id => user) }
 
 
+
+  def invited_user?
+    (self.invited_to_sign_up?) && (self.sign_in_count == 0)
+  end
+
+
   def invite_new_user! email
     User.invite! :email => email
   end
