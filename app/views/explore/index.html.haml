@@ -9,28 +9,22 @@
       = render :partial => 'shared/sidebar', :locals => {:tags => @tags}
 
     .col-md-9
+      .panel.panel-default
+        .panel-body
+          = link_to 'PEOPLE NEAR YOU', '#',
+            :class => 'tab-item active'
+
+
+
+    .col-md-9
       - @users.each do |user|
         - next if user.invited_user?
 
-        .col-md-3
-          .col-md-12
-            = image_tag user.avatar.url, :class => 'img-responsive'
-          .col-md-12
-            = user.full_name
-          .col-md-12
-            = user.address
-          .col-md-12
-            - if current_user.friends_with? user
-              You are already friends
-            - elsif current_user.pending_friends.include? user
-              Pending request
-            - elsif current_user.requested_friends.include? user
-              = link_to 'Confirm Friend', friend_path(user),
-                :class => 'btn btn-default', :method => :put
-            - else
-              = link_to 'Add Friend', friends_path(:user_id => user),
-                :class => 'btn btn-default', :method => :post
+        .user-container
+          = image_tag user.avatar.url
 
+          .name= user.full_name
+          .location= user.address
 
 
 
