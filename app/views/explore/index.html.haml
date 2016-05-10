@@ -18,6 +18,8 @@
           .col-md-12
             = user.full_name
           .col-md-12
+            = user.address
+          .col-md-12
             - if current_user.friends_with? user
               You are already friends
             - elsif current_user.pending_friends.include? user

@@ -19,4 +19,13 @@ class UserDecorator < Draper::Decorator
   #     end
   #   end
 
+
+  def address
+    if (source.location == 'Reserved') || (source.location.nil?)
+      return nil
+    else
+      source.location
+    end
+  end
+
 end
