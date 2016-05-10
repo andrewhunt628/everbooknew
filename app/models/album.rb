@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: albums
+#
+#  id          :integer          not null, primary key
+#  title       :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  description :text
+#  user_id     :integer
+#
+
 class Album < ActiveRecord::Base
   acts_as_taggable
 

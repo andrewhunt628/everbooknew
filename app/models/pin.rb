@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: pins
+#
+#  id                 :integer          not null, primary key
+#  title              :string
+#  description        :text
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  image_file_name    :string
+#  image_content_type :string
+#  image_file_size    :integer
+#  image_updated_at   :datetime
+#  text_marks         :text
+#  album_id           :integer
+#  user_id            :integer
+#
+
 class Pin < ActiveRecord::Base
   acts_as_taggable
 

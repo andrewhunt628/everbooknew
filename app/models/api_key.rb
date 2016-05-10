@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: api_keys
+#
+#  id           :integer          not null, primary key
+#  apikey       :string           not null
+#  expired_date :date             not null
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  user_id      :integer
+#
+# Indexes
+#
+#  index_api_keys_on_user_id  (user_id)
+#
+
 class ApiKey < ActiveRecord::Base
   belongs_to :user
 
