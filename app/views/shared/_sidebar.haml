@@ -13,7 +13,7 @@
       %h3 Hashtags
       .hashtags-container
         - if tags.empty?
-          You do not have any hashtags yet
+          You don't have any hashtags. Try adding some to your photos.
 
         - tags.each do |tag|
           .hashtag{href: "#"}
@@ -31,7 +31,7 @@
       %h3 Friends
 
       - if current_user.friends.empty?
-        You do not have any friends yet
+        You don't have any friends added yet.
       - else
         - current_user.friends.each do |friend|
           = link_to user_path(friend), :class => 'friend',
