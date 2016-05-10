@@ -123,6 +123,7 @@ GEM
       railties (>= 3.2, < 5.0)
     forgery (0.6.0)
     formatador (0.2.5)
+    geocoder (1.1.8)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     guard (2.13.0)
@@ -376,6 +377,7 @@ DEPENDENCIES
   figaro
   font-awesome-rails
   forgery
+  geocoder (~> 1.1.8)
   guard
   guard-rspec
   haml

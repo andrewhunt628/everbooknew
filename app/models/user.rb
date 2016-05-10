@@ -78,6 +78,11 @@ class User < ActiveRecord::Base
   scope :all_except, ->(user) { where.not(:id => user) }
 
 
+  def update_location! ip
+    location = Geocoder.search(ip).first.data['country_name']
+
+    self.update_attributes :location => location
+  end
 
   def invited_user?
     (self.invited_to_sign_up?) && (self.sign_in_count == 0)
@@ -130,7 +135,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.find_for_oauth(auth, signed_in_resource = nil)
+  def self.find_for_oauth(auth, signed_in_resource = nil, ip)
 
     # Get the identity and user if they exist
     identity = Identity.find_for_oauth(auth)
@@ -180,10 +185,12 @@ class User < ActiveRecord::Base
         # use this module Devise :confirmable is not include
         user.skip_confirmation! if user.respond_to?(:skip_confirmation)
         user.save!
+
+        user.delay.update_location! ip
+
       else
         user.update_attributes :avatar => URI.parse(auth.extra.raw_info.picture)
       end
-
 
     end
 
