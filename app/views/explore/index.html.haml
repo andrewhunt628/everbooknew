@@ -26,7 +26,25 @@
           .name= user.full_name
           .location= user.address
 
+          - if current_user.friends_with? user
+            = link_to '#', :class => 'add-friend-text', :disabled => true do
+              .add-friend-btn
+                .text ALREADY FRIENDS
 
+          - elsif current_user.pending_friends.include? user
+            = link_to '#', :class => 'add-friend-text', :disabled => true do
+              .add-friend-btn
+                .text PENDING REQUEST
+
+          - elsif current_user.requested_friends.include? user
+            = link_to friend_path(user), :class => 'add-friend-text' do
+              .add-friend-btn
+                .text CONFIRM FRIEND
+          - else
+            = link_to friends_path(:user_id => user), :class => 'add-friend-text' do
+              .add-friend-btn
+                .text ADD TO FRIENDS
 
 :coffee
   new App.Explore el: $('.page')
+

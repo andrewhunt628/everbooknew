@@ -1,0 +1,81 @@
+
+.user-container {
+  position: relative;
+  display: inline-block;
+  border-radius: 3px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.18);
+  width: 256px;
+  height: 364px;
+  z-index: 129;
+  margin-right: 16px !important;
+  margin-bottom: 16px !important;
+
+  img {
+    height: 60% !important;
+    width: 100% !important;
+  }
+
+
+  .name {
+    text-align: center !important;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: 15px;
+    margin-right: 15px;
+
+    top: 45%;
+    font-size: 18px;
+    font-weight: 500;
+    color: rgb(255, 255, 255);
+    line-height: 1.389;
+    z-index: 133;
+    word-break:break-all;
+  }
+
+  .location {
+    text-align: center !important;
+    font-size: 18px;
+    color: rgb(185, 184, 184);
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    top: 67.5%;
+  }
+
+  .add-friend-btn {
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(233, 233, 233) !important;
+    border-radius: 3px;
+    background-color: rgba(240, 83, 35, 0);
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-left: 25px;
+    margin-right: 25px;
+    top: 78%;
+    width: 208px;
+    height: 46px;
+  }
+
+  .add-friend-text {
+    text-align: center !important;
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-left: auto;
+    margin-right: auto;
+    top: 80%;
+
+    .text {
+      margin-top: 12px;
+      color: rgb(240, 83, 35);
+    }
+  }
+
+}
