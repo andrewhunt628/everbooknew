@@ -79,6 +79,8 @@ class User < ActiveRecord::Base
 
 
   def update_location! ip
+    return if  (self.location.present? && (self.location != 'Reserved'))
+
     location = Geocoder.search(ip).first.data['country_name']
 
     self.update_attributes :location => location
@@ -185,14 +187,13 @@ class User < ActiveRecord::Base
         # use this module Devise :confirmable is not include
         user.skip_confirmation! if user.respond_to?(:skip_confirmation)
         user.save!
-
-        user.delay.update_location! ip
-
       else
         user.update_attributes :avatar => URI.parse(auth.extra.raw_info.picture)
       end
-
+    else
+      user.delay.update_location! ip
     end
+
 
     # Associate the identity with the user if needed
     if identity.user != user
