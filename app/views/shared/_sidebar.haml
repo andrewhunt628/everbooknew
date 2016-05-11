@@ -10,10 +10,13 @@
 .panel.panel-default
   .panel-content
     .panel-body
-      %h3 Hashtags
+      %h3.sidebar-label Hashtags
       .hashtags-container
         - if tags.empty?
-          You don't have any hashtags. Try adding some to your photos.
+          .no-tags-text You don't have any hashtags. Try adding some to your photos.
+
+          = link_to 'GO TO MY ALBUMS', :albums,
+            :class => 'btn btn-default btn-block sidebar-btn'
 
         - tags.each do |tag|
           .hashtag{href: "#"}
@@ -28,10 +31,13 @@
         = link_to 'View all', family_bonds_path,
           :class => 'pull-right orange help'
 
-      %h3 Friends
+      %h3.sidebar-label Friends
 
       - if current_user.friends.empty?
-        You don't have any friends added yet.
+        .no-friends-text You don't have any friends added yet.
+
+        = link_to 'INVITE FRIENDS', :explore,
+          :class => 'btn btn-default btn-block sidebar-btn'
       - else
         - current_user.friends.each do |friend|
           = link_to user_path(friend), :class => 'friend',

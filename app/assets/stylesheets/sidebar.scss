@@ -1,6 +1,22 @@
 .wrapper {
 
-  .hashtags-container{
+  .sidebar-btn {
+    font-size: 12px;
+    color: rgb(240, 83, 35);
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 2.083;
+    margin-top: 25px;
+  }
+
+
+  .sidebar-label {
+    font-size: 18px !important;
+    color: rgb(97, 97, 97);
+    margin-bottom: 25px;
+  }
+
+  .hashtags-container {
     .hashtag{
       float: left;
       font-size: 14px;
@@ -23,5 +39,11 @@
     }
   }
 
+  .no-tags-text, .no-friends-text {
+    text-align: center !important;
+    font-size: 15px;
+    color: rgb(191, 191, 191);
+    margin: 0 25px 0 25px !important;
+  }
 
 }
