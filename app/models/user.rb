@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :invitable,
          :recoverable, :trackable, :validatable,
-         :omniauthable #:omniauth_providers => [:facebook]
+         :omniauthable, :rememberable #:omniauth_providers => [:facebook]
 
   validates_format_of :email, without: TEMP_EMAIL_REGEX, on: :update
 
