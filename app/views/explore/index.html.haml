@@ -40,7 +40,7 @@
 
           - else
             = link_to 'ADD TO FRIENDS', friends_path(:user_id => user),
-              :class => 'btn btn-default btn-block friend-btn'
+              :method => :post, :class => 'btn btn-default btn-block friend-btn'
 
 
 :coffee
