@@ -6,14 +6,21 @@
   background-color: rgb(255, 255, 255);
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.18);
   width: 256px;
-  height: 364px;
+  height: 256px;
   z-index: 129;
   margin-right: 16px !important;
   margin-bottom: 16px !important;
 
   img {
-    height: 60% !important;
-    width: 100% !important;
+    height: 60px !important;
+    width: 60px !important;
+    text-align: center !important;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
 
@@ -24,13 +31,11 @@
     right: 0;
     margin-left: 15px;
     margin-right: 15px;
+    top: 40%;
 
-    text-shadow: 2px 2px 8px rgb(240, 83, 35);
-
-    top: 45%;
     font-size: 18px;
     font-weight: 500;
-    color: rgb(255, 255, 255);
+    color: #616161;
     line-height: 1.389;
     z-index: 133;
     word-break:break-all;
@@ -45,39 +50,24 @@
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    top: 67.5%;
+    top: 50%;
   }
 
-  .add-friend-btn {
-    border-style: solid;
-    border-width: 1px;
-    border-color: rgb(233, 233, 233) !important;
-    border-radius: 3px;
-    background-color: rgba(240, 83, 35, 0);
-
+  .friend-btn {
     position: absolute;
     left: 0;
-    top: 0;
+    right: 0;
     margin-left: 25px;
     margin-right: 25px;
-    top: 78%;
+    top: 65%;
     width: 208px;
-    height: 46px;
-  }
 
-  .add-friend-text {
-    text-align: center !important;
-    position: absolute;
-    left: 0;
-    top: 0;
-    margin-left: auto;
-    margin-right: auto;
-    top: 80%;
-
-    .text {
-      margin-top: 12px;
-      color: rgb(240, 83, 35);
-    }
+    font-size: 12px;
+    color: rgb(240, 83, 35);
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 2.083;
+    margin-top: 25px;
   }
 
 }

@@ -21,29 +21,27 @@
         - next if user.invited_user?
 
         .user-container
-          = image_tag user.avatar.url
+          = image_tag user.avatar.url, :class => 'img img-circle'
 
           .name= user.full_name
           .location= user.address
 
           - if current_user.friends_with? user
-            = link_to '#', :class => 'add-friend-text', :disabled => true do
-              .add-friend-btn
-                .text ALREADY FRIENDS
+            = link_to 'ALREADY FRIENDS', '#', :disabled => true,
+              :class => 'btn btn-default btn-block friend-btn'
 
           - elsif current_user.pending_friends.include? user
-            = link_to '#', :class => 'add-friend-text', :disabled => true do
-              .add-friend-btn
-                .text PENDING REQUEST
+            = link_to 'PENDING REQUEST', '#', :disabled => true,
+              :class => 'btn btn-default btn-block friend-btn'
 
           - elsif current_user.requested_friends.include? user
-            = link_to friend_path(user), :class => 'add-friend-text' do
-              .add-friend-btn
-                .text CONFIRM FRIEND
+            = link_to 'CONFIRM FRIEND', friend_path(user),
+              :class => 'btn btn-default btn-block friend-btn'
+
           - else
-            = link_to friends_path(:user_id => user), :class => 'add-friend-text' do
-              .add-friend-btn
-                .text ADD TO FRIENDS
+            = link_to 'ADD TO FRIENDS', friends_path(:user_id => user),
+              :class => 'btn btn-default btn-block friend-btn'
+
 
 :coffee
   new App.Explore el: $('.page')
