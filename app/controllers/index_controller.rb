@@ -1,8 +1,7 @@
 class IndexController < ApplicationController
 
   def index
-    @albums = Album.where(user_id: current_user.family_ids + [current_user.id])
-                .order('albums.created_at DESC')
+    @albums = Album.by_users(current_user.friend_ids << current_user.id).latest
 
     @pins = @albums.reduce([]) {|n, album| album.pins + n}
                 .sort_by!(&:updated_at).reverse!

@@ -15,10 +15,14 @@ class Album < ActiveRecord::Base
 
   belongs_to :user
   has_many :pins
-  
+
   validates :title, :pins, presence: true
 
   accepts_nested_attributes_for :pins, allow_destroy: true
+
+  scope :by_users, -> (user_ids) { where :user_id => user_ids }
+  scope :latest, -> { order :created_at => :desc }
+
 
   def cover
     pins.sample
