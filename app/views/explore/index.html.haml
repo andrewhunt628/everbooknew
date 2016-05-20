@@ -21,7 +21,7 @@
         - next if user.invited_user?
 
         .user-container
-          = image_tag user.avatar.url, :class => 'img img-circle'
+          = image_tag user.avatar.url
 
           .name= user.full_name
           .location= user.address
