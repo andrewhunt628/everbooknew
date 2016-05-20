@@ -239,11 +239,12 @@ Devise.setup do |config|
 
   # Google OAuth
   config.omniauth :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"], {
-    # add scope
-    :scope => "email,profile,userinfo.profile"
+    :scope => "email,profile,userinfo.profile,plus.me",
+    :image_size => 200
   }
   # Facebook OAuth
-  config.omniauth :facebook, ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_APP_SECRET"], scope: "email,user_about_me", info_fields: "email,id,verified,name"
+  config.omniauth :facebook, ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_APP_SECRET"],
+    :scope => "email,user_about_me", :info_fields => "email,id,verified,name", :image_size => 'large'
 
 
   # For Devise Invitable Module

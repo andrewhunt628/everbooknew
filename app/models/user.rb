@@ -69,7 +69,13 @@ class User < ActiveRecord::Base
   acts_as_tagger
 
 
-  has_attached_file :avatar, default_url: "/avatars/avatar#{rand(3)+1}.jpg"
+  has_attached_file :avatar,
+                    :default_url => "/avatars/avatar#{rand(3)+1}.jpg",
+                    :styles => {
+                      :thumb => "50x50#",
+                      :small  => "150x150>",
+                      :medium => "200x200"
+                    }
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
   # create api_key after user created by default
   after_create :create_apikey
@@ -177,7 +183,7 @@ class User < ActiveRecord::Base
         user = User.new(
           first_name: auth.extra.raw_info.given_name,
           last_name: auth.extra.raw_info.family_name,
-          avatar: URI.parse(auth.extra.raw_info.picture),
+          avatar: URI.parse(auth.extra.raw_info.picture.sub('?sz=50','?sz=256')),
           email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
           password: Devise.friendly_token[0,20]
         )
@@ -187,10 +193,9 @@ class User < ActiveRecord::Base
         # use this module Devise :confirmable is not include
         user.skip_confirmation! if user.respond_to?(:skip_confirmation)
         user.save!
-      else
-        user.update_attributes :avatar => URI.parse(auth.extra.raw_info.picture)
       end
     else
+      user.update_attributes :avatar => URI.parse(auth.extra.raw_info.picture.sub('?sz=50','?sz=256'))
       user.delay.update_location! ip
     end
 
