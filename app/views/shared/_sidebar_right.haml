@@ -1,0 +1,41 @@
+-#
+-# locals:
+-# non_friends
+-#
+
+.panel.panel-default
+  .panel-content
+    .panel-body
+      .extra-panel-container
+        = image_tag 'camera-icon.jpg'
+
+        .text-container
+          Add more photos to boost your profile
+
+        = link_to 'UPLOAD A PHOTO', upload_path, :id => 'upload-button',
+          :class => 'btn btn-default btn-block side-btn'
+
+
+.panel.panel-default
+  .panel-content
+    .panel-body
+      %table
+        %thead
+          %th{:style => 'width: 5%'}
+          %th{:style => 'width: 90%'}
+          %th{:style => 'width: 5%'}
+        %tbody
+          - non_friends.each do |user|
+            %tr
+              %td.text-left
+                = image_tag user.avatar, :width => 26, :height => 26,
+                :class => 'img img-circle'
+              %td.text-center{:style => 'font-size: 12.5px;'}
+                = user.full_name
+              %td.text-right
+                = link_to friends_path(:user_id => user), :method => :post do
+                  = image_tag 'add-friend-btn.jpg'
+
+      = link_to 'PEOPLE AROUND YOU', :explore,
+        :class => 'btn btn-default btn-block'
+

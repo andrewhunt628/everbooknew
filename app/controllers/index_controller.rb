@@ -8,6 +8,7 @@ class IndexController < ApplicationController
 
     @tags = current_user.owned_tags.alphabetical
     @users = User.all
+    @non_friends = UserDecorator.decorate_collection current_user.non_friends
   end
 
   def add_friendship

@@ -88,3 +88,53 @@
   }
 
 }
+
+.box-right {
+  margin-left: -20px !important;
+
+  .btn {
+    font-size: 12px;
+    color: rgb(240, 83, 35);
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 2.083;
+    margin-top: 25px;
+  }
+
+  .side-btn {
+    position: absolute;
+    top: 75%;
+  }
+
+  .extra-panel-container {
+    position: relative;
+    height: 270px;
+
+    img {
+      top: 8%;
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+
+    .text-container {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      margin: auto;
+
+      text-align: center !important;
+      font-size: 15px;
+      color: rgb(191, 191, 191);
+      margin: 0 55px 0 55px !important;
+    }
+
+  }
+
+  tr > td {
+    padding-bottom: 1em;
+  }
+
+}

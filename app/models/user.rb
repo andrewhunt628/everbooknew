@@ -84,6 +84,10 @@ class User < ActiveRecord::Base
   scope :all_except, ->(user) { where.not(:id => user) }
 
 
+  def non_friends
+    User.all_except(self) - self.friends
+  end
+
   def update_location! ip
     return if  (self.location.present? && (self.location != 'Reserved'))
 

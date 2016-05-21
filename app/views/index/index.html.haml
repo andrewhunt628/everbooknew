@@ -4,33 +4,39 @@
     %h1= t('welcome')
     %p= t('welcome_p')
 
-  #pins.transitions-enabled
-    .box.wrapper
-      = render :partial => 'shared/sidebar', :locals => {:tags => @tags}
 
-    - @pins.each do |pin|
-      .box.panel.panel-default
-        .panel-content
-          .photo-wrap
-            = link_to pin, 'data-toggle' => 'modal', 'data-target' => "#pin#{pin.id}" do
-              = image_tag pin.image.url(:medium), class: 'image'
-            - if pin.description? and pin.tag_list
-              .panel-body
-                - if pin.description?
-                  = raw pin.description
-                - if pin.tag_list
-                  .hashtags
-                    = raw pin.tag_list.map {|t| link_to "##{t}", tag_path(t) }.join('  ')
-          .footer
-            %span.pull-right
-              %span.fa.fa-comments-o
-              = pin.comments.count
-              -#%span.orange (+3)
-            %a{href: "#"}
-              %span.avatar-mini
-                = image_tag pin.user.avatar, width: 30, height: 30
-              %span.author
-                = pin.user.full_name
+  .col-md-3.wrapper
+    = render :partial => 'shared/sidebar', :locals => {:tags => @tags}
+
+  .col-md-6
+    #pins
+      - @pins.each do |pin|
+        .box.panel.panel-default
+          .panel-content
+            .photo-wrap
+              = link_to pin, 'data-toggle' => 'modal', 'data-target' => "#pin#{pin.id}" do
+                = image_tag pin.image.url(:medium), class: 'image'
+              - if pin.description? and pin.tag_list
+                .panel-body
+                  - if pin.description?
+                    = raw pin.description
+                  - if pin.tag_list
+                    .hashtags
+                      = raw pin.tag_list.map {|t| link_to "##{t}", tag_path(t) }.join('  ')
+            .footer
+              %span.pull-right
+                %span.fa.fa-comments-o
+                = pin.comments.count
+                -#%span.orange (+3)
+              %a{href: "#"}
+                %span.avatar-mini
+                  = image_tag pin.user.avatar, width: 30, height: 30
+                %span.author
+                  = pin.user.full_name
+
+  .col-md-3.box-right
+    = render :partial => 'shared/sidebar_right',
+      :locals => {:non_friends => @non_friends}
 
   - @pins.each do |pin|
     = content_tag :div, class: 'modal fade', id: "pin#{pin.id}", "aria-labelledby" => "signUpModalLabel", :role => "dialog", :tabindex => "-1" do
