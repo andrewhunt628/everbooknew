@@ -43,3 +43,29 @@
           = link_to user_path(friend), :class => 'friend',
             :title=> "#{friend.full_name}" do
             = image_tag friend.avatar, :width => 30, :height => 30
+
+.panel.panel-default
+  .panel-content
+    .panel-body
+      .extra-panel-container
+        = image_tag 'mobile-icon.jpg'
+
+        .text-container
+          Try our mobile app.
+
+        = link_to 'GO TO APP STORE', '#',
+          :class => 'btn btn-default btn-block'
+
+
+.panel.panel-default
+  .panel-content
+    .panel-body
+      .extra-panel-container.panel-long
+        = image_tag 'explore-icon.jpg'
+
+        .text-container
+          Explore Kidio and find new friends.
+
+        = link_to 'EXPLORE', :explore,
+          :class => 'btn btn-default btn-block extra-space'
+

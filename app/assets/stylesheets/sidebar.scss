@@ -46,4 +46,45 @@
     margin: 0 25px 0 25px !important;
   }
 
+  .extra-panel-container {
+    position: relative;
+    height: 220px;
+
+    img {
+      top: 8%;
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+
+    .text-container {
+      position: absolute;
+      top: 55%;
+      left: 0;
+      right: 0;
+      margin: auto;
+
+      text-align: center !important;
+      font-size: 15px;
+      color: rgb(191, 191, 191);
+      margin: 0 25px 0 25px !important;
+    }
+
+    .btn {
+      position: absolute;
+      top: 65%;
+      @extend .sidebar-btn;
+    }
+
+    .extra-space {
+      margin-top: 35px;
+    }
+
+  }
+
+  .panel-long {
+    height: 235px;
+  }
+
 }
