@@ -135,6 +135,26 @@
 
   tr > td {
     padding-bottom: 1em;
+    word-wrap: break-word;
+  }
+
+  .td-name {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  @media (min-width: 768px) {
+    table {
+      border-collapse:collapse;
+      table-layout:fixed;
+      width: 215px;
+    }
+  }
+
+
+  td {
+    word-wrap: break-word;
+    font-size: 12px;
   }
 
 }
