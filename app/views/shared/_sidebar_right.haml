@@ -27,6 +27,8 @@
         %tbody
           - non_friends.each do |user|
             - next if user.invited_user?
+            - next if current_user.requested_friends.include? user
+            - next if current_user.pending_friends.include? user
 
             %tr
               %td.text-left
