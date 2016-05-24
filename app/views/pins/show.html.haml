@@ -1,17 +1,17 @@
 .modal-body
   .row
-    .modal-picture.col-md-7
+    .modal-picture.col-md-12
       = image_tag @pin.image.url(:original), style: "width: 100%"
-    .modal-panel.col-md-5
+    .modal-panel.col-md-12
       .modal-description
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
           %span{"aria-hidden" => "true"} X
         .description
-          %p
-            = @pin.description
+          %p.title= @pin.title
           %p.info
-            %span.fa.fa-clock-o
-            17 Feb 2016 7.30pm
+            %span.fa.fa-clock-o= @pin.created_at
+
+          %p= @pin.description
           .hashtags
             = raw @pin.tag_list.map { |t| link_to "##{t}", tag_path(t) }.join('  ')
       .modal-comments
@@ -28,10 +28,10 @@
 
 .hide#commentTemplate
   = render 'comments/comment', user: current_user, comment: nil
-  
 
 
-:javascript  
+
+:javascript
   commentForm = $("form#comment_for_pin#{@pin.id}")
   commentText = commentForm.find("textarea")
   modalWindow = $("#pin#{@pin.id}")
@@ -42,7 +42,7 @@
         event.preventDefault();
         commentForm.submit();
         text = commentText.val();
-        
+
         commentText.val('')
         commentItem = modalWindow.find("#commentTemplate table.comment").clone();
         commentItem.find(".content").html(text);
@@ -51,7 +51,7 @@
           commentsBlock.html(commentItem);
         }
         else {
-         commentsBlock.append(commentItem); 
+         commentsBlock.append(commentItem);
         }
 
     }
