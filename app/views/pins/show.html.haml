@@ -6,25 +6,37 @@
       .modal-description
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
           %span{"aria-hidden" => "true"} X
-        .description
-          %p.title= @pin.title
-          %p.info
-            %span.fa.fa-clock-o= @pin.created_at
 
-          %p= @pin.description
-          .hashtags
-            = raw @pin.tag_list.map { |t| link_to "##{t}", tag_path(t) }.join('  ')
+        .col-md-12
+          .description
+            %p.title= @pin.title
+            %p.info
+              %span.fa.fa-clock-o= @pin.created_at
+
+            %p= @pin.description
+            .hashtags
+              = raw @pin.tag_list.map { |t| link_to "##{t}", tag_path(t) }.join('  ')
+            %br
       .modal-comments
-        .modal-messages
-          - if @pin.comments.count.zero?
-            You comment will be first...
-          - else
-            - @pin.comments.each do |comment|
-              = render 'comments/comment', user: comment.user, comment: comment
         .modal-input
-          = form_for Comment.new, remote: true, html: {'data-type' => 'commentForm', id: "comment_for_pin#{@pin.id}"} do |f|
-            = f.hidden_field :pin_id, value: @pin.id
-            = f.text_area :text, class: 'form-control'
+          .col-md-2
+            = image_tag current_user.avatar,
+              :width => 40, :height => 40, :class => 'img img-circle'
+
+          .col-md-10
+            = form_for Comment.new, remote: true, html: {'data-type' => 'commentForm', id: "comment_for_pin#{@pin.id}"} do |f|
+              = f.hidden_field :pin_id, value: @pin.id
+              = f.text_area :text, :class => 'comment-box',
+                :placeholder => 'Add a comment'
+        %hr
+        .modal-messages
+          .col-md-12
+            - if @pin.comments.count.zero?
+              You comment will be first...
+            - else
+              - @pin.comments.each do |comment|
+                = render 'comments/comment', user: comment.user, comment: comment
+
 
 .hide#commentTemplate
   = render 'comments/comment', user: current_user, comment: nil

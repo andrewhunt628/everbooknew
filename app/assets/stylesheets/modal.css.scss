@@ -65,6 +65,7 @@
                 margin-bottom: 10px;
               }
               .modal-messages{
+                margin-top: 20px;
                 overflow-y: auto;
                 padding: 10px;
                 padding-left: 0px;
@@ -94,13 +95,18 @@
                 }
               }
               .modal-input{
+                display: inline;
                 padding: 10px 10px 10px 0px;
-                textarea.form-control{
+                textarea.comment-box{
                   resize: none;
                   width: 100%;
-                  height: 65px;
-                  border: 2px solid #ddd;
-                  border-radius: 0px;
+                  height: 45px;
+                  border: 1px #ffffff;
+                  border-radius: 5px;
+                  background-color: rgba(232,232,232,0.9);
+                  padding: 10px;
+                  color: rgb(67, 67, 67);
+                  margin-left: -30px !important;
                 }
               }
             }
