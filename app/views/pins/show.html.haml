@@ -28,18 +28,20 @@
               = f.hidden_field :pin_id, value: @pin.id
               = f.text_area :text, :class => 'comment-box',
                 :placeholder => 'Add a comment'
-        %hr
-        .modal-messages
-          .col-md-12
+
+        .col-md-12
+          .modal-messages
             - if @pin.comments.count.zero?
               You comment will be first...
             - else
-              - @pin.comments.each do |comment|
-                = render 'comments/comment', user: comment.user, comment: comment
+              - @pin.comments.latest.each do |comment|
+                = render 'comments/comment', :user => comment.user,
+                  :comment => comment
+
 
 
 .hide#commentTemplate
-  = render 'comments/comment', user: current_user, comment: nil
+  = render 'comments/comment', :user => current_user, :comment => nil
 
 
 
@@ -63,7 +65,7 @@
           commentsBlock.html(commentItem);
         }
         else {
-         commentsBlock.append(commentItem);
+         commentsBlock.prepend(commentItem);
         }
 
     }
