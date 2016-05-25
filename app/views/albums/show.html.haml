@@ -1,8 +1,7 @@
 .page
-  %h1
-    = @album.title
+  %h1= @album.title
 
-  = link_to '← Back to albums', albums_path, {class: 'back'}
+  = link_to '← Back to albums', [:albums], {:class => 'back'}
 
   #pins.transitions-enabled
     - @album.pins.each do |pin|
@@ -11,23 +10,24 @@
         .panel-content
           .photo-wrap
             = link_to pin, 'data-toggle' => 'modal', 'data-target' => "#pin#{pin.id}" do
-              = image_tag pin.image.url(:medium), class: 'image'
+              = image_tag pin.image.url(:medium), :class => 'image'
           .panel-footer
             .form-group.has-feedback
               %span.glyphicon.glyphicon-pencil.form-control-feedback(aria-hidden="true")
-              %input.form-control#pin-title{placeholder: 'title', value: pin.title, 'data-id' => pin.id}
+              %input.form-control#pin-title{:placeholder => 'title', :value => pin.title, 'data-id' => pin.id}
             .form-group.has-feedback
               %span.glyphicon.glyphicon-pencil.form-control-feedback(aria-hidden="true")
               %input.form-control#pin-description{placeholder: 'description', value: pin.description, 'data-id' => pin.id}
             .form-group.tags-group
-              = text_field "pins[#{pin.id}]", :tag_list, { value: pin.tag_list.join(', '), id: 'tags', 'data-id' => pin.id, class: 'form-control', placeholder: '#tags, #separated by comma' }
+              = text_field "pins[#{pin.id}]", :tag_list,
+                {:value => pin.tag_list.join(', '), :id => 'tags', 'data-id' => pin.id, :class => 'form-control', :placeholder => '#tags, #separated by comma'}
 
-  = link_to '← Back to albums', albums_path, {class: 'back'}
+  = link_to '← Back to albums', albums_path, {:class => 'back'}
 
   - @album.pins.each do |pin|
-    = content_tag :div, class: 'modal fade', id: "pin#{pin.id}", "aria-labelledby" => "signUpModalLabel", :role => "dialog", :tabindex => "-1" do
-      = content_tag :div, class: 'modal-dialog modal-lg' do
-        = content_tag :div, '', class: 'modal-content'
+    = content_tag :div, :class => 'modal fade', :id => "pin#{pin.id}", "aria-labelledby" => "signUpModalLabel", :role => "dialog", :tabindex => "-1" do
+      = content_tag :div, :class => 'modal-dialog modal-custom' do
+        = content_tag :div, '', :class => 'modal-content'
 
 :coffee
   window.album = #{@album.id}
