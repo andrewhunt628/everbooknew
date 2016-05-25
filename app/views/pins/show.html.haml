@@ -11,7 +11,8 @@
           .description
             %p.title= @pin.title
             %p.info
-              %span.fa.fa-clock-o= @pin.created_at
+              %span.fa.fa-clock-o
+              = @pin.created_at
 
             %p= @pin.description
             .hashtags
