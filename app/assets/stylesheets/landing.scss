@@ -61,13 +61,20 @@ body {
 .design-back .banner-text {
     color: white;
     margin-top: 15%;
+    margin-bottom: 15%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.3);
+    z-index:0;
+    padding-bottom: 15px;
 }
 .design-back .banner-text h1{
-    font-size: 48px;
+    text-shadow: 0 1.2px 0 black;
+    font-size: 52px;
     line-height: 48px;
 }
 .design-back .banner-text h5{
-    font-size: 18px;
+    text-shadow: 0 1.2px 0 black;
+    font-size: 19px;
     margin-top: 15px;
 }
 .signup-pane {
