@@ -1,3 +1,9 @@
+-#
+-# locals:
+-#    user
+-#    comment
+-#
+
 %table.comment
   %tr
     %td.icon
@@ -7,6 +13,6 @@
     %td.message
       %span.name= user.decorate.full_name
       %span.content
-        = comment.try(:text)
+        = comment.try :text
       %p.info
-        = comment.try(:created_at).try(:to_time)
+        = comment.try(:created_at).try :to_time

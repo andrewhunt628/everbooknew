@@ -1,11 +1,11 @@
 .modal-body
   .row
     .modal-picture.col-md-12
-      = image_tag @pin.image.url(:original), style: "width: 100%"
+      = image_tag @pin.image.url(:original), :style => 'width: 100%'
     .modal-panel.col-md-12
       .modal-description
-        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-          %span{"aria-hidden" => "true"} X
+        %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', :type => 'button'}
+          %span{'aria-hidden' => 'true'} X
 
         .col-md-12
           .description
@@ -25,8 +25,8 @@
               :width => 40, :height => 40, :class => 'img img-circle'
 
           .col-md-10
-            = form_for Comment.new, remote: true, html: {'data-type' => 'commentForm', id: "comment_for_pin#{@pin.id}"} do |f|
-              = f.hidden_field :pin_id, value: @pin.id
+            = form_for Comment.new, remote: true, :html => {'data-type' => 'commentForm', :id => "comment_for_pin#{@pin.id}"} do |f|
+              = f.hidden_field :pin_id, :value => @pin.id
               = f.text_area :text, :class => 'comment-box',
                 :placeholder => 'Add a comment'
 
