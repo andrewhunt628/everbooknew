@@ -40,7 +40,7 @@
           %a.dropdown-toggle{href: "#", 'data-toggle' => "dropdown", 'aria-haspopup' => "true", 'aria-expanded' => "false"}
             %span.avatar-mini
               = image_tag current_user.avatar(:thumb), width: 40, height: 40
-            %span.welcome Welcome #{current_user.try(:first_name)}
+            %span.welcome Welcome #{current_user.decorate.full_name}
             %span.caret
           %ul.dropdown-menu
             %li.responsive
