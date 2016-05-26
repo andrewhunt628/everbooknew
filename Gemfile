@@ -28,34 +28,34 @@ gem 'bootstrap-sass', '~> 3.3.5'
 gem 'simple_form'
 gem 'devise',           '~> 3.5.2'
 gem 'devise_invitable', '~> 1.5.2'
-gem "omniauth-google-oauth2"
+gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
-gem "koala" # Facebook Api
-gem "paperclip", "~> 4.3"
+gem 'koala' # Facebook Api
+gem 'paperclip', '~> 4.3'
 gem 'aws-sdk', '< 2.0'
 gem 'masonry-rails'
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
 gem 'acts-as-taggable-on', '~> 3.4'
-gem "jquery-validation-rails"
+gem 'jquery-validation-rails'
 
 gem 'momentjs-rails'
 
 #this is for google,facebook authorization
-gem "figaro"
+gem 'figaro'
 
 
 # Use spine-js as the JavaScript library
-gem "json2-rails"
+gem 'json2-rails'
 gem 'eco'
 gem 'underscore-rails'
 
 #For js-upload images
-gem "jquery-fileupload-rails"
+gem 'jquery-fileupload-rails'
 
-gem "nested_form"
+gem 'nested_form'
 
 #for facebook invitations
-gem "fb_graph2"
+gem 'fb_graph2'
 
 
 gem 'has_friendship', '0.1.3'
@@ -67,6 +67,8 @@ gem 'omnicontacts', '~> 0.3.7'
 gem 'rest-client', '~> 1.8'
 
 gem 'delayed_job_active_record'
+
+gem 'searchkick', '~> 1.3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -79,7 +81,7 @@ gem 'delayed_job_active_record'
 gem 'forgery' #when stop use fake data move this gem into :development, :test section
 
 group :production do
-  gem "rails_12factor"
+  gem 'rails_12factor'
 end
 
 gem 'letter_opener' #move to :development, :test section before first relase

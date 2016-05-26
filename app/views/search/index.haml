@@ -1,0 +1,48 @@
+.page
+
+  .cover
+    %h1= t('welcome')
+    %p= t('welcome_p')
+
+  #pins.transitions-enabled
+    .col-md-3.wrapper
+      = render :partial => 'shared/sidebar', :locals => {:tags => @tags}
+
+    .col-md-9
+      .panel.panel-default
+        .panel-body
+          = link_to 'PEOPLE', '#',
+            :class => 'tab-item active'
+
+
+
+    .col-md-9
+      - @users.each do |user|
+        - next if user.invited_user?
+
+        .user-container
+          = image_tag user.avatar.url
+
+          .name= user.full_name
+          .location= user.address
+
+          - if current_user.friends_with? user
+            = link_to 'ALREADY FRIENDS', '#', :disabled => true,
+              :class => 'btn btn-default btn-block friend-btn'
+
+          - elsif current_user.pending_friends.include? user
+            = link_to 'PENDING REQUEST', '#', :disabled => true,
+              :class => 'btn btn-default btn-block friend-btn'
+
+          - elsif current_user.requested_friends.include? user
+            = link_to 'CONFIRM FRIEND', friend_path(user),
+              :class => 'btn btn-default btn-block friend-btn'
+
+          - else
+            = link_to 'ADD TO FRIENDS', friends_path(:user_id => user),
+              :method => :post, :class => 'btn btn-default btn-block friend-btn'
+
+
+:coffee
+  new App.Explore el: $('.page')
+

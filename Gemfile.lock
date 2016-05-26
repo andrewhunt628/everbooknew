@@ -101,6 +101,14 @@ GEM
       eco-source
       execjs
     eco-source (1.1.0.rc.1)
+    elasticsearch (1.0.17)
+      elasticsearch-api (= 1.0.17)
+      elasticsearch-transport (= 1.0.17)
+    elasticsearch-api (1.0.17)
+      multi_json
+    elasticsearch-transport (1.0.17)
+      faraday
+      multi_json
     erubis (2.7.0)
     execjs (2.6.0)
     factory_girl (4.5.0)
@@ -321,6 +329,10 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    searchkick (1.3.0)
+      activemodel
+      elasticsearch (>= 1)
+      hashie
     shellany (0.0.1)
     simple_form (3.1.1)
       actionpack (~> 4.0)
@@ -405,6 +417,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  searchkick (~> 1.3.0)
   simple_form
   spring
   sqlite3
