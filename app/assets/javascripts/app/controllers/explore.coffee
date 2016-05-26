@@ -2,6 +2,7 @@ class App.Explore extends Spine.Controller
   elements:
     '.cover': 'cover'
     '#pins': 'pins'
+    '#sign_in_count': 'sign_in_count'
 
   events:
     'click .cover': 'removeCover'
@@ -9,7 +10,7 @@ class App.Explore extends Spine.Controller
 
   constructor: ->
     super
-    unless localStorage.getItem 'onboarding'
+    if (sign_in_count.value == '1')  && !localStorage.getItem('showedCover')
       $('body').addClass 'image-wall'
       @cover.fadeIn()
 
@@ -18,5 +19,5 @@ class App.Explore extends Spine.Controller
         itemSelector: '.box'
 
   removeCover: ->
-    localStorage.setItem 'onboarding', true
+    localStorage.setItem 'showedCover', true
     window.location.href = '/uploader'

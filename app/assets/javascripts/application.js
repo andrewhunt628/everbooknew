@@ -23,3 +23,10 @@
 
 //= require app
 //= require_tree .
+
+$(document).ready(function(){
+  console.log('hereee');
+  $('#sign_out').on('click', function(){
+    localStorage.clear();
+  });
+});
