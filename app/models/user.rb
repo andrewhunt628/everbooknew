@@ -199,7 +199,9 @@ class User < ActiveRecord::Base
         user.save!
       end
     else
-      user.update_attributes :avatar => URI.parse(auth.extra.raw_info.picture.sub('?sz=50','?sz=256'))
+      if auth.provider.eql? "google_oauth2"
+        user.update_attributes :avatar => URI.parse(auth.extra.raw_info.picture.sub('?sz=50','?sz=256'))
+      end
       user.delay.update_location! ip
     end
 
