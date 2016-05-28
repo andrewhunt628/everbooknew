@@ -1,0 +1,24 @@
+%br
+.col-md-4.col-md-offset-4
+  %h2.text-center Change your password
+  %br
+
+  = simple_form_for(resource, :as => resource_name,
+    :url => password_path(resource_name), :html => {:method => :put}) do |f|
+
+    = f.error_notification
+
+    = f.input :reset_password_token, as: :hidden
+    = f.full_error :reset_password_token
+
+    .form-group
+      = f.input :password, label: "New password", required: true, autofocus: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length)
+    .form-group
+      = f.input :password_confirmation, label: "Confirm your new password", required: true
+    .form-group
+      = f.button :submit, 'Change Password',
+        :class => 'btn btn-danger form-control'
+
+    .form-group
+      = link_to 'Log in', new_session_path(resource_name),
+        :class => 'btn btn-default form-control'
