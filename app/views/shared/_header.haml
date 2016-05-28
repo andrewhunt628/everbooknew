@@ -28,11 +28,11 @@
           = link_to "EDIT PROFILE", edit_user_registration_path
         %li.small-screen
           = link_to "CHANGE PASSWORD", security_change_password_user_path(current_user)
-        %li.small-screen
+        -# %li.small-screen
           = link_to "MANAGE PAYMENT METHODS", "#"
-        %li.small-screen
+        -# %li.small-screen
           = link_to "PURCHASE HISTORY", "#"
-        %li.small-screen
+        -# %li.small-screen
           = link_to "SETTINGS", "#"
         %li.small-screen
           = link_to "Sign Out", destroy_user_session_path, method: :delete
@@ -56,11 +56,12 @@
               = link_to "Edit Profile", edit_user_registration_path
             %li
               = link_to "Change Password", security_change_password_user_path(current_user)
-            %li
+
+            -# %li
               = link_to "Manage Payment Methods", "#"
-            %li
+            -# %li
               = link_to "Purchase History", "#"
-            %li
+            -# %li
               = link_to "Settings", "#"
             %li
               = link_to "Sign Out", destroy_user_session_path, method: :delete, id: "sign_out"
