@@ -48,7 +48,8 @@
                 .form-group
                   = f.hidden_field :remember_me, value: true
                   = f.button "Log in", class: 'btn btn-default btn-block login-btn'
-                = link_to "Forgot your password?", new_password_path(resource_name)
+
+                %a{:href => '#', 'data-toggle'=>"modal", 'data-target'=>"#forgotPasswordModal"} Forgot you password?
 
               .terms.col-sm-12.text-center
                 %h6= t('landing.terms')
@@ -79,6 +80,27 @@
           = f.button "Sign up", class: 'btn btn-danger signup-btn'
 
 
+
+#forgotPasswordModal.modal.fade{'aria-labelledby' => 'forgotPassowrdModalLabel', :role => 'dialog', :tabindex => '-1'}
+  .modal-dialog{:role => 'document'}
+    .modal-content
+      = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => {:method => :post }) do |f|
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span.text-everbook{"aria-hidden" => "true"} &#215;
+          %h3#signUpModalLabel.modal-title
+            %span Forgot your password?
+        .modal-body
+          .form-group
+            = f.text_field :email, {:type => 'email', :id => 'email_field', :class => 'form-control', :placeholder => 'Email', :required => true}
+
+        .modal-footer
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+          = f.button 'Send me reset password instructions',
+            :class => 'btn btn-danger signup-btn'
+
+
+
 :coffee
   $("document").ready ->
 
@@ -88,5 +110,3 @@
         return
 
       $("form#signup #user_password_confirmation").val($(e.target).find("#password_field").val())
-
-
