@@ -13,7 +13,7 @@ ActsAsTaggableOn.delimiter = ['#', ' ']
 
 ActsAsTaggableOn::Tag.class_eval do
 
-  searchkick autocomplete: ['name']
+  searchkick autocomplete: ['name'], settings: {number_of_shards: 0}
 
 
   scope :alphabetical, -> { order :name }

@@ -41,7 +41,7 @@
 
 class User < ActiveRecord::Base
 
-  searchkick autocomplete: ['first_name', 'last_name', 'email']
+  searchkick autocomplete: ['first_name', 'last_name', 'email'], settings: {number_of_shards: 1}
 
   TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_EMAIL_REGEX = /\Achange@me/
