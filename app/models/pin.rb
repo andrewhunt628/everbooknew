@@ -17,6 +17,10 @@
 #
 
 class Pin < ActiveRecord::Base
+
+  searchkick autocomplete: ['title']
+
+
   acts_as_taggable
 
   belongs_to :album

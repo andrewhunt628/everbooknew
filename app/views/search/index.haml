@@ -17,9 +17,13 @@
                 PEOPLE
                 %span.badge= @users.count
             %li{:role => 'presentation'}
-              %a{'aria-controls' => 'profile', 'data-toggle' => 'tab', :href => '#profile', :role => 'tab'}
+              %a{'aria-controls' => 'profile', 'data-toggle' => 'tab', :href => '#albums', :role => 'tab'}
                 ALBUMS
                 %span.badge= @albums.count
+            %li{:role => 'presentation'}
+              %a{'aria-controls' => 'profile', 'data-toggle' => 'tab', :href => '#photos', :role => 'tab'}
+                PHOTOS
+                %span.badge= @pins.count
 
 
 
@@ -53,7 +57,7 @@
 
 
 
-        #profile.tab-pane{:role => 'tabpanel'}
+        #albums.tab-pane{:role => 'tabpanel'}
           .albums
             .row
               - @albums.each do |album|
@@ -67,9 +71,37 @@
 
 
 
-        #messages.tab-pane{:role => 'tabpanel'} MESSAGES
-        #settings.tab-pane{:role => 'tabpanel'} SETTINGS
+        #photos.tab-pane{:role => 'tabpanel'}
+          #pins
+            - @pins.each do |pin|
+              .col-md-4
+                .box.panel.panel-default
+                  .panel-content
+                    .photo-wrap
+                      = link_to pin, 'data-toggle' => 'modal', 'data-target' => "#pin#{pin.id}" do
+                        = image_tag pin.image.url(:medium), class: 'image'
+                      - if pin.description? and pin.tag_list
+                        .panel-body
+                          - if pin.description?
+                            = raw pin.description
+                          - if pin.tag_list
+                            .hashtags
+                              = raw pin.tag_list.map {|t| link_to "##{t}", tag_path(t) }.join('  ')
+                    .footer
+                      %span.pull-right
+                        %span.fa.fa-comments-o
+                        = pin.comments.count
+                        -#%span.orange (+3)
+                      %a{href: "#"}
+                        %span.avatar-mini
+                          = image_tag pin.user.avatar, width: 30, height: 30
+                        %span.author
+                          = pin.user.decorate.full_name
 
+    - @pins.each do |pin|
+      = content_tag :div, class: 'modal fade', id: "pin#{pin.id}", "aria-labelledby" => "signUpModalLabel", :role => "dialog", :tabindex => "-1" do
+        = content_tag :div, class: 'modal-dialog modal-custom' do
+          = content_tag :div, '', class: 'modal-content'
 
 :coffee
   new App.Explore el: $('.page')
