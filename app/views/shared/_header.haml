@@ -12,7 +12,7 @@
         .input-group
           %span.input-group-addon.btn.logo
             %span.orange &nbsp;
-          = text_field_tag :query, nil, :placeholder => 'Search',
+          = text_field_tag :query, params[:query], :placeholder => 'Search',
             :class => 'form-control'
 
           %span.input-group-addon.btn

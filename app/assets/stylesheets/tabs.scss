@@ -18,3 +18,36 @@
 }
 
 
+
+.nav > li > a {
+  font-size: 14px;
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  color: #616161;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    color: #555555;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+    cursor: default;
+
+    border-bottom: solid 2px;
+    padding-bottom: 15px;
+    color: rgb(240, 83, 35);
+}
+
+
+.search-tab {
+  border: none !important;
+  padding: 0 !important;
+}
+
+.search-panel {
+  padding: 0px !important;
+}

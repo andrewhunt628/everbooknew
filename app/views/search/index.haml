@@ -10,39 +10,66 @@
 
     .col-md-9
       .panel.panel-default
-        .panel-body
-          = link_to 'PEOPLE', '#',
-            :class => 'tab-item active'
+        .panel-body.search-panel
+          %ul.nav.nav-tabs.search-tab{:role => 'tablist'}
+            %li.active{:role => 'presentation'}
+              %a{'aria-controls' => 'people', 'data-toggle' => 'tab', :href => '#people', :role => 'tab'}
+                PEOPLE
+                %span.badge= @users.count
+            %li{:role => 'presentation'}
+              %a{'aria-controls' => 'profile', 'data-toggle' => 'tab', :href => '#profile', :role => 'tab'}
+                ALBUMS
+                %span.badge= @albums.count
 
 
 
     .col-md-9
-      - @users.each do |user|
-        - next if user.invited_user?
+      .tab-content
+        #people.tab-pane.active{:role => 'tabpanel'}
+          - @users.each do |user|
+            - next if user.invited_user?
 
-        .user-container
-          = image_tag user.avatar.url
+            .user-container
+              = image_tag user.avatar.url
 
-          .name= user.full_name
-          .location= user.address
+              .name= user.full_name
+              .location= user.address
 
-          - if current_user.friends_with? user
-            = link_to 'ALREADY FRIENDS', '#', :disabled => true,
-              :class => 'btn btn-default btn-block friend-btn'
+              - if current_user.friends_with? user
+                = link_to 'ALREADY FRIENDS', '#', :disabled => true,
+                  :class => 'btn btn-default btn-block friend-btn'
 
-          - elsif current_user.pending_friends.include? user
-            = link_to 'PENDING REQUEST', '#', :disabled => true,
-              :class => 'btn btn-default btn-block friend-btn'
+              - elsif current_user.pending_friends.include? user
+                = link_to 'PENDING REQUEST', '#', :disabled => true,
+                  :class => 'btn btn-default btn-block friend-btn'
 
-          - elsif current_user.requested_friends.include? user
-            = link_to 'CONFIRM FRIEND', friend_path(user),
-              :class => 'btn btn-default btn-block friend-btn'
+              - elsif current_user.requested_friends.include? user
+                = link_to 'CONFIRM FRIEND', friend_path(user),
+                  :class => 'btn btn-default btn-block friend-btn'
 
-          - else
-            = link_to 'ADD TO FRIENDS', friends_path(:user_id => user),
-              :method => :post, :class => 'btn btn-default btn-block friend-btn'
+              - else
+                = link_to 'ADD TO FRIENDS', friends_path(:user_id => user),
+                  :method => :post, :class => 'btn btn-default btn-block friend-btn'
+
+
+
+        #profile.tab-pane{:role => 'tabpanel'}
+          .albums
+            .row
+              - @albums.each do |album|
+                .col-md-6
+                  .media
+                    .media-left
+                      = image_tag album.cover.image.url(:album_cover)
+                    .media-body
+                      %h4.media-heading= album.title
+                      .media-middle= album.description
+
+
+
+        #messages.tab-pane{:role => 'tabpanel'} MESSAGES
+        #settings.tab-pane{:role => 'tabpanel'} SETTINGS
 
 
 :coffee
   new App.Explore el: $('.page')
-

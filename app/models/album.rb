@@ -11,6 +11,10 @@
 #
 
 class Album < ActiveRecord::Base
+
+  searchkick
+
+
   acts_as_taggable
 
   belongs_to :user

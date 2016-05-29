@@ -4,7 +4,7 @@ class AlbumsController < ApplicationController
   # GET /albums
   # GET /albums.json
   def index
-    @albums = Album.where(user_id: current_user.family_ids + [current_user.id])
+    @albums = Album.where(:user_id => current_user.friend_ids + [current_user.id])
 
     respond_to do |format|
       format.html
