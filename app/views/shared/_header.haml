@@ -15,6 +15,7 @@
           = text_field_tag :query, params[:query], :placeholder => 'Search', :id => 'js-search-field',
             :class => 'form-control', :autocomplete => 'off'
 
+          = submit_tag 'search', :style => 'display: none'
           %span.input-group-addon.btn
             %span.fa.fa-search.orange
       %ul.nav.navbar-nav.navbar-left
