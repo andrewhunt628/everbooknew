@@ -16,4 +16,10 @@ class SearchController < ApplicationController
   end
 
 
+
+  def autocomplete
+    render :json => User.search(params[:query], :autocomplete => true, :limit => 10).map(&:first_name)
+  end
+
+
 end
