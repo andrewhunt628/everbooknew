@@ -37,7 +37,7 @@
         #people.tab-pane.active{:role => 'tabpanel'}
           - @users.each do |user|
             - next if user.invited_user?
-
+            - next if user == current_user
             .user-container
               = image_tag user.avatar.url
 
