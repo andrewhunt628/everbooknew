@@ -19,6 +19,7 @@ class SearchController < ApplicationController
               :where => {:user_id => current_user.friend_ids + [current_user.id]}
             )
 
+    @hashtags = @tags.where(:id => ActsAsTaggableOn::Tag.search(query).map(&:id))
 
   end
 
@@ -46,8 +47,16 @@ class SearchController < ApplicationController
             :where => {:user_id => current_user.friend_ids + [current_user.id]}
           ).map(&:title)
 
+    hashtags = current_user.owned_tags.alphabetical.
+                where(
+                  :id => ActsAsTaggableOn::Tag.search(
+                          params[:query],
+                          :limit => 10,
+                          :autocomplete => true
+                        ).map(&:id)
+                ).map(&:name)
 
-    render :json => (users + albums + pins)
+    render :json => (users + albums + pins + hashtags)
   end
 
 

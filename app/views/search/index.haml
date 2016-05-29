@@ -17,13 +17,18 @@
                 PEOPLE
                 %span.badge= @users.count
             %li{:role => 'presentation'}
-              %a{'aria-controls' => 'profile', 'data-toggle' => 'tab', :href => '#albums', :role => 'tab'}
+              %a{'aria-controls' => 'albums', 'data-toggle' => 'tab', :href => '#albums', :role => 'tab'}
                 ALBUMS
                 %span.badge= @albums.count
             %li{:role => 'presentation'}
-              %a{'aria-controls' => 'profile', 'data-toggle' => 'tab', :href => '#photos', :role => 'tab'}
+              %a{'aria-controls' => 'photos', 'data-toggle' => 'tab', :href => '#photos', :role => 'tab'}
                 PHOTOS
                 %span.badge= @pins.count
+
+            %li{:role => 'presentation'}
+              %a{'aria-controls' => 'hashtags', 'data-toggle' => 'tab', :href => '#hashtags', :role => 'tab'}
+                HASHTAGS
+                %span.badge= @hashtags.count
 
 
 
@@ -97,6 +102,17 @@
                           = image_tag pin.user.avatar, width: 30, height: 30
                         %span.author
                           = pin.user.decorate.full_name
+
+        #hashtags.tab-pane{:role => 'tabpanel'}
+          .hashtags-container
+            %ul
+              - @hashtags.each do |tag|
+                %li
+                  .hashtag{href: "#"}
+                    = link_to user_tag_path(current_user, tag.name) do
+                      %h4 ##{tag}
+
+
 
     - @pins.each do |pin|
       = content_tag :div, class: 'modal fade', id: "pin#{pin.id}", "aria-labelledby" => "signUpModalLabel", :role => "dialog", :tabindex => "-1" do

@@ -37,7 +37,7 @@
 
   - @pins.each do |pin|
     = content_tag :div, class: 'modal fade', id: "pin#{pin.id}", "aria-labelledby" => "signUpModalLabel", :role => "dialog", :tabindex => "-1" do
-      = content_tag :div, class: 'modal-dialog modal-lg' do
+      = content_tag :div, class: 'modal-dialog modal-custom' do
         = content_tag :div, '', class: 'modal-content'
 
 :coffee
