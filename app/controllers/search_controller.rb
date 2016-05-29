@@ -7,7 +7,7 @@ class SearchController < ApplicationController
 
     @tags = current_user.owned_tags.alphabetical
 
-    @users = UserDecorator.decorate_collection(User.search(query))
+    @users = UserDecorator.decorate_collection(User.search(query).reject { |user| user.invited_user? })
 
     @albums = Album.search(
                 query,
@@ -30,7 +30,7 @@ class SearchController < ApplicationController
               params[:query],
               :limit => 10,
               :autocomplete => true
-            ).map(&:first_name)
+            ).reject { |user| user.invited_user? }.map(&:first_name)
 
     albums = Album.search(
               params[:query],
