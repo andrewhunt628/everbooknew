@@ -1,5 +1,6 @@
 class SearchController < ApplicationController
 
+  DEFAULT_AUTOCOMPLETE_OPTIONS = {:limit => 10, :autocomplete => true}
 
   def index
     @tags = current_user.owned_tags.alphabetical
@@ -18,10 +19,10 @@ class SearchController < ApplicationController
 
 
   def autocomplete
-    render :json => User.search(params[:query],{
-      :limit => 10,
-      :autocomplete => true
-    }).map(&:first_name)
+    users = User.search(params[:query], DEFAULT_AUTOCOMPLETE_OPTIONS).map(&:first_name)
+    albums = Album.search(params[:query], DEFAULT_AUTOCOMPLETE_OPTIONS).map(&:title)
+
+    render :json => (users + albums)
   end
 
 

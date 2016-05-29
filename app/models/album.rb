@@ -12,8 +12,8 @@
 
 class Album < ActiveRecord::Base
 
-  searchkick
-
+  searchkick autocomplete: ['title']
+  
 
   acts_as_taggable
 
