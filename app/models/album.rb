@@ -12,9 +12,6 @@
 
 class Album < ActiveRecord::Base
 
-  searchkick autocomplete: ['title'], settings: {number_of_shards: 1}
-
-
   acts_as_taggable
 
   belongs_to :user

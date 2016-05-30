@@ -9,17 +9,24 @@ class SearchController < ApplicationController
 
     @users = UserDecorator.decorate_collection(User.search(query).reject { |user| user.invited_user? }).compact
 
-    @albums = Album.search(
-                query,
-                :where => {:user_id => current_user.friend_ids + [current_user.id]}
-              )
-
     @pins = Pin.search(
               query,
-              :where => {:user_id => current_user.friend_ids + [current_user.id]}
+              :where => {:user_id => current_user.friend_ids + [current_user.id]},
+              :limit => 10,
+              :autocomplete => true
             )
 
-    @hashtags = @tags.where(:id => ActsAsTaggableOn::Tag.search(query).map(&:id))
+    @albums = @pins.map(&:album).uniq
+
+    @hashtags = current_user.owned_tags.alphabetical.
+                  where(
+                    :id => Pin.search(
+                            params[:query],
+                            :limit => 10,
+                            :autocomplete => true
+                          ).map(&:tags).flatten.uniq.map(&:id)
+                  )
+
 
   end
 
@@ -32,12 +39,12 @@ class SearchController < ApplicationController
               :autocomplete => true
             ).reject { |user| user.invited_user? }.map(&:first_name).compact
 
-    albums = Album.search(
+    albums = Pin.search(
               params[:query],
               :limit => 10,
               :autocomplete => true,
               :where => {:user_id => current_user.friend_ids + [current_user.id]}
-            ).map(&:title)
+            ).map(&:album).uniq.map(&:title)
 
 
     pins = Pin.search(
@@ -49,11 +56,11 @@ class SearchController < ApplicationController
 
     hashtags = current_user.owned_tags.alphabetical.
                 where(
-                  :id => ActsAsTaggableOn::Tag.search(
+                  :id => Pin.search(
                           params[:query],
                           :limit => 10,
                           :autocomplete => true
-                        ).map(&:id)
+                        ).map(&:tags).flatten.uniq.map(&:id)
                 ).map(&:name)
 
     render :json => (users + albums + pins + hashtags)

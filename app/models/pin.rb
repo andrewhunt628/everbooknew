@@ -18,7 +18,7 @@
 
 class Pin < ActiveRecord::Base
 
-  searchkick autocomplete: ['title'], settings: {number_of_shards: 1}
+  searchkick autocomplete: ['title', 'album_name', 'tag_name'], settings: {number_of_shards: 1}
 
 
   acts_as_taggable
@@ -43,6 +43,17 @@ class Pin < ActiveRecord::Base
   validates :image, presence: true
 
   scope :by_latest, -> { order :created_at => :desc }
+
+
+  def search_data
+    {
+      :title => title,
+      :album_name => album.title,
+      tag_name: tags.map(&:name),
+      :user_id => user_id,
+      :album_id => album_id
+    }
+  end
 
   def text_marks=(value)
     value = value.to_s.split(",").map(&:squish).uniq unless value.instance_of?(Array)
