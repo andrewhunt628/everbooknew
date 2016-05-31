@@ -46,12 +46,13 @@ class Pin < ActiveRecord::Base
 
 
   def search_data
+    hashtags = self.tags ? self.tags.map(&:name) : nil
     {
-      :title => title,
-      :album_name => album.title,
-      tag_name: tags.map(&:name),
-      :user_id => user_id,
-      :album_id => album_id
+      :title => self.try(:title),
+      :album_name => self.try(:album).try(:title),
+      tag_name: hashtags,
+      :user_id => self.try(:user_id),
+      :album_id => self.try(:album_id)
     }
   end
 
