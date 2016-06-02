@@ -16,7 +16,7 @@ class FriendshipsController < ApplicationController
 
     if current_user.friend_request(invitee)
       FriendshipNotifications.new_invitation(current_user, invitee, url).deliver_now
-      flash[:notice] = "An invite was sent to #{invitee.email}"
+      flash[:notice] = "Successfully sent invite"
     else
       flash[:notice] = "Sorry! You can't invite that user!"
     end
