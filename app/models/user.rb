@@ -73,7 +73,7 @@ class User < ActiveRecord::Base
 
 
   has_attached_file :avatar,
-                    :default_url => "/avatars/avatar#{rand(3)+1}.jpg",
+                    :default_url => "/avatars/default.png",
                     :styles => {
                       :thumb => "50x50#",
                       :small  => "150x150>",
