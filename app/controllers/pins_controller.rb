@@ -42,14 +42,14 @@ class PinsController < ApplicationController
   end
 
   def edit
-
+    @pin = Pin.find params[:id]
   end
 
   def update
     respond_to do |format|
       if @pin.update(pin_params)
         current_user.tag @pin, :on => :tags, :with => params[:pin][:tag_list]
-        format.html { redirect_to @pin, notice: "Pin was Successfully updated!" }
+        format.html { redirect_to :back, notice: "Pin was Successfully updated!" }
         format.json { render json: {status: :ok, location: @pin}}
       else
         format.html { render 'edit' }
@@ -80,7 +80,7 @@ class PinsController < ApplicationController
   private
 
     def pin_params
-      @pin_params = params.require(:pin).permit(:title, :description, :image, :text_marks, :album_id, :person_ids => [])
+      @pin_params = params.require(:pin).permit(:title, :description, :image, :text_marks, :album_id, :tag_list, :person_ids => [], :tag_list => [])
       @pin_params[:text_marks] = @pin_params[:text_marks].to_s.split(",").map(&:squish)
       @pin_params.merge(user_id: current_user.id)
     end

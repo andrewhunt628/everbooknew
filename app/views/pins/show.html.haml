@@ -8,6 +8,10 @@
           %span{'aria-hidden' => 'true'} X
 
         .col-md-12
+          = link_to [:edit, @pin] do
+            %strong EDIT
+            %span.glyphicon.glyphicon-pencil
+
           .description
             %p.title= @pin.title
             %p.info
