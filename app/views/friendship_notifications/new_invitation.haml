@@ -11,7 +11,7 @@
 
 
   .body{:style => 'padding-top: 80px; display: block; text-align: center;'}
-    - if Rails.env.development?
+    - if Rails.env.development? || (inviter.avatar.url == '/avatars/default.png')
       = image_tag "#{@base_url}/#{inviter.avatar.url}",
         :style => 'border-radius:50%; width: 80px; height: 80px;'
     - else
