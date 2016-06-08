@@ -9,5 +9,6 @@
 
 %br
 
-%h3= link_to 'Invite Gmail Contacts', '/contacts/gmail'
-/ %h3= link_to 'Invite Facebook Friends', '#'
+- unless Rails.env.production?
+  %h3= link_to 'Invite Gmail Contacts', '/contacts/gmail'
+  / %h3= link_to 'Invite Facebook Friends', '#'

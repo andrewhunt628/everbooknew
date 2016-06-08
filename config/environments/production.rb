@@ -79,19 +79,20 @@ Rails.application.configure do
   # config.action_mailer.delivery_method = :letter_opener
 
   # for devise
-  config.action_mailer.default_url_options = { host: 'everbook.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'kidio-production.herokuapp.com' }
   # mailer config
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default_options = {from: ENV["EMAIL_ACCOUNT"]}
+
   config.action_mailer.smtp_settings = {
-    address:              'smtp.gmail.com',
-    port:                 587,
-    domain:               'gmail.com',
-    user_name:            ENV["EMAIL_ACCOUNT"],
-    password:             ENV["EMAIL_PASSWORD"],
-    authentication:       'plain',
-    enable_starttls_auto: true  
+    :address              => 'smtp.sendgrid.net',
+    :port                 => 587,
+    :domain               => 'kidio.org',
+    :user_name            => 'andrewhunt628',
+    :password             => 'jamtemp20@',
+    :authentication       => :plain
   }
+
 
   config.paperclip_defaults = {
       storage: :s3,
